@@ -1,0 +1,90 @@
+html,body {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+#logol img {
+	
+            width:250px;
+            height:250px;
+}
+
+
+
+#container {
+	width: 1400px;
+	margin: 0px auto;
+}
+
+
+h1 { 
+	text-align: center;
+	margin-top: 0px;
+}
+h4 {text-align: center;
+}
+h2 {text-align: center;
+	color: red;
+}
+h3 {text-align: center;
+}
+
+#lexus img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+
+#amguniq img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+#modena img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+#amg img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+#viper img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+#subaru img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+#charger img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+
+#pontiac img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+#tahoe img {
+	width: 700px;
+	float: left;
+	border-radius: 20px;
+	margin-right: 10px;
+}
+p { 
+	color: red;
+}
