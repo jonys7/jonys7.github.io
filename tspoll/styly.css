@@ -1,0 +1,90 @@
+body, html {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+	background: url(images/pozadi1.jpg);
+	height: 100vh;
+}
+.container {
+	width: 1000px;
+	margin: 0 auto;
+}
+h1 {
+	text-align: center;
+	margin-top: 100px;
+	}
+h2 {
+	text-align: center;
+	margin-top: 100px;
+	}
+h4{
+	width: 1000px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;
+	}
+
+h3{
+	text-align: center;
+	margin-top: 50px;
+	}
+
+/* Navigace */
+nav {
+	background: black;
+}
+
+nav ul {
+	width: 1020px;
+	margin: 0px auto;
+}
+
+nav ul li {
+	width: 250px;
+	list-style-type: none;
+	float: left;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+}
+
+nav ul li a {
+	color: white;
+	text-decoration: none;
+}
+
+nav ul li a:hover {
+	border-bottom: 2px solid #95ff00 ;
+}
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* Logo */
+.logopng {
+	background: #00980f;
+}
+
+.logopng img {
+	display: block;
+	margin: 0px auto;
+	position: relative;
+	top: 100px;
+}
+.prodej img {
+	display: block;
+	margin: 0px auto;
+	position: relative;
+	top: 50px;
+	width: 500px;
+	border-radius: 20px;
+}
+.kontakt img {
+	display: block;
+	margin: 0px auto;
+	position: relative;
+	top: 50px;
+}
