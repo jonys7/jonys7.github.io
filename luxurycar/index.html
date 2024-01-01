@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css" href="styly.css">
+	<title>Prodej | Luxury Car</title>
+</head>
+    <header class="headerprodej">
+    <div id="uvod" class="logoimg">
+             <img src="images/logo.png">
+             </div>
+        
+        
+        
+        
+        
+        <div class="menu-hlavni">
+    <label>
+		<input type="checkbox">
+		<div class="toggle">
+			<span class="top_line common"></span>
+			<span class="middle_line common"></span>
+			<span class="bottom_line common"></span>
+			
+		</div>
+		<div class="slide">
+			<div class="menu"><h1>MENU</h1></div>
+			<ul>
+                <li><a href="index.html"><i class="fas fa-car"></i>Autoprodejna</a></li>
+				<li><a href="pujcovna.html"><i class="fas fa-car"></i>Autopůjčovna</a></li>
+                <li><a href="prodej.html"><i class="fa-sharp fa-solid fa-coins"></i>Prodej</a></li>
+                <li><a href="kontakt.html"><i class="fa fa-address-card"></i>Kontakt</a></li>
+            </ul>
+		</div>
+     
+		
+	</label>
+    </div>
+    </header>
+
+<body>
+
+    <div class="container">
+	
+	<input type="radio" id="i1" name="images" checked />
+	<input type="radio" id="i2" name="images" />
+	<input type="radio" id="i3" name="images" />
+	<input type="radio" id="i4" name="images" />
+	<input type="radio" id="i5" name="images" />	
+	
+	<div class="slide_img" id="one">			
+			
+			<img src="images/18641.png">
+			
+				<label class="prev" for="i5"><span>&#x2039;</span></label>
+				<label class="next" for="i2"><span>&#x203a;</span></label>	
+		
+	</div>
+	
+	<div class="slide_img" id="two">
+		
+			<img src="images/neni.jpg" >
+			
+				<label class="prev" for="i1"><span>&#x2039;</span></label>
+				<label class="next" for="i3"><span>&#x203a;</span></label>
+		
+	</div>
+			
+	<div class="slide_img" id="three">
+			<img src="images/neni.jpg">	
+			
+				<label class="prev" for="i2"><span>&#x2039;</span></label>
+				<label class="next" for="i4"><span>&#x203a;</span></label>
+	</div>
+
+	<div class="slide_img" id="four">
+			<img src="images/neni.jpg">	
+			
+				<label class="prev" for="i3"><span>&#x2039;</span></label>
+				<label class="next" for="i5"><span>&#x203a;</span></label>
+	</div>
+
+	<div class="slide_img" id="five">
+			<img src="images/neni.jpg">	
+			
+				<label class="prev" for="i4"><span>&#x2039;</span></label>
+				<label class="next" for="i1"><span>&#x203a;</span></label>
+
+	</div>
+
+	<div id="nav_slide">
+		<label for="i1" class="dots" id="dot1"></label>
+		<label for="i2" class="dots" id="dot2"></label>
+		<label for="i3" class="dots" id="dot3"></label>
+		<label for="i4" class="dots" id="dot4"></label>
+		<label for="i5" class="dots" id="dot5"></label>
+	</div>
+		
+</div>
+    
+    
+    <div class="table-container">
+     <h5 class="heading">Nabídka vozů</h5>
+        <table class="table">
+        <thead>
+            <tr>
+             <th>VIN</th>
+             <th>Název</th>
+             <th>Úpravy</th>
+             <th>Cena</th>
+             <th>Polep</th>
+             <th>Kontakt</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                     <td data-label="VIN">18461</td>
+                    <td data-label="Název" >2009 Chevrolet Corvette C6</td>
+                    <td data-label="Úpravy">Základní</td>
+                    <td data-label="Cena">6.000.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ano</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                     <td data-label="VIN">16102</td>
+                    <td data-label="Název" >2010 Porsche Cayman S</td>
+                    <td data-label="Úpravy">Základní</td>
+                    <td data-label="Cena">2.400.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                     <td data-label="VIN">10898</td>
+                    <td data-label="Název" >2018 Dodge Challenger Hellcat</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">1.700.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">20725</td>
+                    <td data-label="Název" >2008 Bentley Arnage</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">4.500.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">18249</td>
+                    <td data-label="Název" >2010 Ford Shelby GT350</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">980.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">15893</td>
+                    <td data-label="Název" >2010 Subaru Impreza Hatchback WRX STi</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">1.400.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">12773</td>
+                    <td data-label="Název" >2018 Dodge Charger 5.7 V8</td>
+                    <td data-label="Úpravy">Lepší základ</td>
+                    <td data-label="Cena">1.050.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">19879</td>
+                    <td data-label="Název" >2010 Ford Shelby GT500</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">1.150.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">17333</td>
+                    <td data-label="Název" >2012 Chevrolet Camaro 7.0 V8</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">750.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">6551</td>
+                    <td data-label="Název" >2016 Range Rover Evoque</td>
+                    <td data-label="Úpravy">Základní</td>
+                    <td data-label="Cena">1.500.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">14314</td>
+                    <td data-label="Název" >2016 Dodge Charger 3.6 V6</td>
+                    <td data-label="Úpravy">Lepší základ</td>
+                    <td data-label="Cena">880.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">20899</td>
+                    <td data-label="Název" >2011 BMW 535i xDrive</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">1.500.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">16145</td>
+                    <td data-label="Název" >2007 BMW M6</td>
+                    <td data-label="Úpravy">Základní</td>
+                    <td data-label="Cena">1.800.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">20725</td>
+                    <td data-label="Název" >2008 Bentley Arnage</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">4.500.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">14850</td>
+                    <td data-label="Název" >1970 Dodge Challenger 7.2V8</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">2.000.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">8066</td>
+                    <td data-label="Název" >2018 Dodge Charger 5.7 V8</td>
+                    <td data-label="Úpravy">Lepší základ</td>
+                    <td data-label="Cena">1.050.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">15160</td>
+                    <td data-label="Název" >2010 Subaru Impreza Hatchback WRX STi</td>
+                    <td data-label="Úpravy">Lepší základ</td>
+                    <td data-label="Cena">780.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">21019</td>
+                    <td data-label="Název" >2003 BMW 540i</td>
+                    <td data-label="Úpravy">Základní</td>
+                    <td data-label="Cena">200.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">21018</td>
+                    <td data-label="Název" >2003 BMW 540i</td>
+                    <td data-label="Úpravy">Základní</td>
+                    <td data-label="Cena">200.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">17070</td>
+                    <td data-label="Název" >2004 Mercedes-Benz C32 AMG</td>
+                    <td data-label="Úpravy">Kompletní</td>
+                    <td data-label="Cena">600.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+                <tr>
+                    <td data-label="VIN">1466</td>
+                    <td data-label="Název" >1998 Mercedes-Benz E200K</td>
+                    <td data-label="Úpravy">Žádné</td>
+                    <td data-label="Cena">950.000,-</td>
+                    <td data-label="Polep"><span class="text_open">Ne</span></td>
+                    <td data-label="#"><a href="kontakt.html" class="btn">Dát vědět</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    
+</body>
+    <footer>
+        <a class="gotopbtn" href="#uvod"> <i class="fa-solid fa-circle-chevron-up"></i></a>
+       <br>
+        <div class="footer">
+            <p>&copy; 2023 Všechna práva vyhrazena</p>
+        </div>
+    </footer>
+</html>
