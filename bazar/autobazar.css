@@ -6,6 +6,9 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+h9{
+    font-size: 11px;
+}
 
 .slide {
     height: 100%;
