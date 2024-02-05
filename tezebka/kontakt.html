@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Website HTML and CSS | CodingNepal</title>
+    <link rel="stylesheet" href="styly.css">
+    <!-- Google Fonts Links For Icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body style="background-image: url(img/kontakt.jpg)">
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <header>
+      <nav class="navbar">
+        <a class="logo" href="index.html"><i class="fa-solid fa-tree"></i>T.Spol<span>.</span></a>
+        <ul class="menu-links">
+          <span id="close-menu-btn" class="material-symbols-outlined">close</span>
+          <li><a href="index.html">Domů</a></li>
+          <li><a href="prodej.html">Prodej</a></li>
+          <li><a href="pozice.html">Pozice</a></li>
+          <li><a href="kontakt.html">Kontakty</a></li>
+            <div class="test">
+                <td data-label="#"><a href="https://discord.gg/T4BEMPaJhV" class="btn" target="_top"><ion-icon name="logo-discord"></ion-icon></a></td>
+            </div>
+        </ul>
+        <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
+      </nav>
+    </header>
+
+    <section class="hero-section">
+      <div class="content">
+        <h2>Kontaktuj nás...</h2>
+        <p>
+         <p style="color: #079d17"><strong>Momiji Kunoichi</strong></p>
+          <i class="fa-solid fa-phone"> 571-311</i><br>
+          <i class="fa-solid fa-camera-retro"><strong> @momi</strong></i><br>
+          <i class="fa-regular fa-envelope"><strong> momiji.kunoichi@post.ic</strong></i>
+      </div>
+    </section>
+
+    <script>
+      const header = document.querySelector("header");
+      const hamburgerBtn = document.querySelector("#hamburger-btn");
+      const closeMenuBtn = document.querySelector("#close-menu-btn");
+
+      // Toggle mobile menu on hamburger button click
+      hamburgerBtn.addEventListener("click", () => header.classList.toggle("show-mobile-menu"));
+
+      // Close mobile menu on close button click
+      closeMenuBtn.addEventListener("click", () => hamburgerBtn.click());
+    </script>
+    
+  </body>
+</html>
