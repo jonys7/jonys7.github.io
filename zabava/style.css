@@ -6,6 +6,9 @@ body{
     font-family: Poppins;
     font-size: 12px;
 }
+p{
+    font-size: 15px
+}
 a{
     text-decoration: none;
 }
