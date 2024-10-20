@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&display=swap');
+
+
+:root{
+    --maincolor:#850f81;
+    --seccolor:#58127f;
+    --thirdclr:#651197;
+}
+
+body{
+    background: url(images/pozadi.png);
+    background-position: center;
+    background-size: cover;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    transition: .2s;
+    
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+
+}
+html{
+    font-size: 62.5%;
+    }
+.header{
+    padding: 1rem 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+   
+    
+}
+.header img{
+    width: 50px;
+}
+.navbar a{
+    font-size: 18px;
+    margin-left: 1.5rem;
+    color: white;
+    position: relative;
+    
+}
+.icons div{
+    font-size: 2rem;
+    margin-right: 1rem;
+    color: white;
+    display: none;
+}
+.icons a{
+    padding: 1rem;
+    background: white;
+    color: black;
+    font-size: 18px;
+}
+.icons a:hover{
+    background: none;
+    border: 1px solid white;
+    transition: 0.5s;
+    color: white;
+}
+.navbar a:after{
+    content: '';
+ 
+    width: 0;
+    height: 3px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+    transition: 0.5s;
+    
+}
+.navbar a:hover:after{
+    content: '';
+    background: white;
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+    
+}
+.navbar.active{
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+#menubar{
+    display: none;
+}
+.home{
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+}
+.main-home{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.main-content{
+    flex: 1 1 45rem;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.main-image img{
+    width: 80%;
+}
+.main-content h1{
+    font-size: 80px;
+    color: white;
+}
+.main-content h2{
+    font-size: 40px;
+    padding: 1rem 0;
+    color: white;
+}
+.main-content p{
+    font-size: 1.5rem;
+    color: white;
+}
+.security-image img{
+    width: 100%;
+}
+.main-security{
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+}
+.main-inner-security{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 25px;
+    border: 1px solid rgb(116, 111, 111);
+    padding: 6rem 0;
+    background-image: linear-gradient(180deg, rgba(255,0,0,0.1),rgba(255,255,255,0.4));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.security-icon{
+    flex: 1 1 300px;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+.inner-security img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin: 0 auto;
+    text-align: center;
+    padding: .5rem;
+    transition: 0.5s;
+}
+.inner-security img:hover{
+    box-shadow: inset 0 0 10px #e7bbbb;
+    cursor: pointer;
+    transform: translateY(10px);
+}
+.content-security{
+    padding: 1rem;
+
+
+}
+.content-security h2{
+    font-size: 25px;
+    color: white;
+    padding: 1rem 0;
+}
+.content-security p{
+    font-size: 1.5rem;
+    color: white;
+    padding: .5rem 0;
+}
+.main-security-mode{
+    padding: 5rem 7%;
+}
+.main-security-mode .mode-heading{
+    color: white;
+    text-align: center;
+    font-size: 50px;
+    letter-spacing: 5px;
+    font-weight: 600;
+}
+.main-inner-mode{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 3rem;
+    gap: 100px;
+}
+.inner-security-mode{
+    flex: 1 1 300px;
+    flex-wrap: wrap;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 25px 0;
+}
+.inner-security-mode{
+    align-items: center;
+    text-align: center;
+    background-image: linear-gradient(180deg, rgba(101, 17, 151),rgba(255,255,255,0.4));
+    border: 1px solid white;
+    margin: 1rem;
+    padding: 3rem 1rem;
+
+
+}
+.inner-security-mode:hover{
+    box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 40px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(255, 255, 255, 0.09) 0px -3px 5px;
+    cursor: pointer;
+}
+.inner-security-mode img{
+    width: 150px;
+    height: 150px;
+   
+}
+.inner-mode-content h1{
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    padding: 1rem 0;
+}
+.inner-mode-content p{
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin-bottom: 15px;
+}
+.inner-mode-content a{
+    font-size: 1.5rem;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+}
+
+.main-smart-home{
+    padding: 4rem 7%;
+}
+.inner-smart-home{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.inner-content-smart{
+    flex: 1 1 45rem;
+    flex-wrap: wrap;
+}
+.inner-content-smart img{
+    width: 100%;
+}
+.inner-content-smart h1{
+    color: white;
+    font-size: 35px;
+    letter-spacing: 5px;
+}
+.inner-content-smart p{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 1rem 0;
+}
+.inner-content-smart{
+    padding: 1.5rem;
+}
+
+.myphone{
+    width: 50% !important;
+    margin-left: 100px;
+}
+.mypadding{
+    padding: 2rem 0;
+}
+.main-about{
+    padding: 2rem 7%;
+}
+.main-inner-about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.aboutus-content{
+    flex: 1 1 45rem;
+}
+
+.aboutus-content h1{
+    color: white;
+    font-size: 60px;
+    padding-bottom: 2rem;
+}
+.aboutus-content p{
+    color: white;
+    font-size: 16px;
+   line-height: 2.5rem;
+}
+.aboutus-img img{
+    width: 80%;
+    margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:767px) {
+    html{
+        font-size: 55%;
+    }
+
+    #menubar{
+        display: initial;
+    }
+    .navbar{
+        position: absolute;
+        top: 15%;
+        width: 100%;
+        height: 100vh;
+        left: 0;
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+        background: #850f81;
+    }
+    .navbar a{
+        display: block;
+        font-size: 3rem;
+        font-weight: bolder;
+        margin: 1rem;
+        padding: 1rem;
+        color: black;
+    }
+    
+    .header{
+        padding: 2rem;
+    }
+    .inner-security{
+        padding: 2rem;
+    }
+    .inner-content-smart img{
+        padding-bottom: 3rem;
+    }
+}
+
+
+
+
+
+
+
+
+
