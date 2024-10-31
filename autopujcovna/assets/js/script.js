@@ -23,3 +23,10 @@ previewBox.forEach(close =>{
 });
 
 
+
+
+
+
+
+
+
