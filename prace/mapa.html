@@ -1,0 +1,61 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>mapy.ic</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <style type="text/css">
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0
+        }
+        #map-canvas {
+            background: url('https://artic.leosight.cz/design/mapa/tiles/water.png') !important;
+        }
+    </style>
+    
+</head>
+<body>
+<div id="map-canvas"></div>
+
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyAKxttnEDzIas4LYII6chLLnUHbuUApDrM"></script>
+<script src="https://artic.leosight.cz/design/mapa/js/SanMap.min.js"></script>
+<script>
+    var currentSearch = window.location.search;
+
+    var mapType = new SanMapType(1, 3, function (zoom, x, y) {
+        return x == -1 && y == -1 ? "https://artic.leosight.cz/design/mapa/tiles/map.outer.png" : "https://artic.leosight.cz/design/mapa/tiles/map." + zoom + "." + x + "." + y + ".png";
+    });
+
+    var map = SanMap.createMap(document.getElementById('map-canvas'),
+        {'LOKACE.IC': mapType}, -1, null, false, 'LOKACE.IC');
+
+    map.setOptions({scrollwheel:true});
+
+
+
+    // ---------- Těžebka ----------
+    var allin = new google.maps.InfoWindow({
+        content: "" +
+            "<strong>Těžební Společnost</strong><br>" +
+            "Vydělávej až 70.000,- za 11 minut práce!<br>" 
+    });
+    var allinMarker = new google.maps.Marker({
+        position: {lat: -5.04765625, lng: +8.023515625},
+        map: map,
+        title: "Těžební Společnost",
+        icon: "assets/images/symbol.png"
+    });
+    allinMarker.addListener("click", function() {
+        allin.open(allin, allinMarker);
+    });
+
+    if(currentSearch.includes("?loc=allin")) {
+        allin.open(allin, allinMarker);
+    }
+
+
+
+</script>
+</body>
