@@ -154,7 +154,18 @@ section .main .button:hover i{
     transform: translateX(6px);
 }
 
+.video-wrap {
+  z-index: -100;
+}
 
+.custom-video {
+  position: absolute;
+  top: 240px;
+  left: 1200px;
+  object-fit: cover;
+  width: 28%;
+  height: 40%;
+}
 
 /*Products*/
 
