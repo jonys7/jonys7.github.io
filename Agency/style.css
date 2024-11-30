@@ -127,8 +127,8 @@ section .main .main_content .main_text p{
 section .main .main_content .main_image img{
     width: 650px;
     position: relative;
-    left: 0px;
-    top: 155px;
+    left: 2px;
+    top: 130px;
 }
 
 section .main .button{
