@@ -95,6 +95,13 @@ html{
 #menubar{
     display: none;
 }
+h3 {
+    text-decoration: line-through;
+}
+h4 {
+    font-size: 13px;
+    color: darkgrey;
+}
 .home{
     padding-left: 8%;
     padding-right: 8%;
@@ -315,28 +322,6 @@ html{
     width: 80%;
     margin-top: 30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
