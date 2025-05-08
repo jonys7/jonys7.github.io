@@ -48,6 +48,104 @@ body {
   font-family: var(--body-font-family); 
 }
 
+/*---------------------
+  Events
+-----------------------*/
+
+.event {
+	padding-bottom: 60px;
+}
+
+.event .section-title {
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.event .section-title:after {
+	position: absolute;
+	right: 46px;
+	top: 25px;
+	height: 2px;
+	width: 775px;
+	background: rgba(225, 225, 225, 0.3);
+	content: "";
+	z-index: -1;
+}
+
+.event__slider .col-lg-4 {
+	max-width: 100%;
+}
+
+.event__slider.owl-carousel .owl-stage-outer {
+	padding-top: 30px;
+	padding-bottom: 40px;
+}
+
+.event__slider.owl-carousel .owl-nav {
+	position: absolute;
+	right: 15px;
+	top: -50px;
+}
+
+.event__slider.owl-carousel .owl-nav button {
+	font-size: 22px;
+	color: #111111;
+	opacity: 0.5;
+	margin-right: 10px;
+}
+
+.event__slider.owl-carousel .owl-nav button:last-child {
+	margin-right: 0;
+}
+
+.event__item {
+	-webkit-box-shadow: 0px 3px 15px rgba(22, 41, 124, 0.1);
+	box-shadow: 0px 3px 15px rgba(22, 41, 124, 0.1);
+}
+
+.event__item__pic {
+	height: 360px;
+	position: relative;
+}
+
+.event__item__pic .tag-date {
+	position: absolute;
+	left: 0;
+	bottom: -21px;
+	width: 100%;
+	text-align: center;
+}
+
+.event__item__pic .tag-date span {
+	font-size: 15px;
+	color: #ffffff;
+	display: inline-block;
+	background: #5c00ce;
+	padding: 12px 8px 9px 20px;
+}
+
+.event__item__text {
+	text-align: center;
+	padding: 45px 10px 25px;
+}
+
+.event__item__text h4 {
+	font-size: 26px;
+	font-weight: 700;
+	color: #111111;
+	margin-bottom: 10px;
+}
+
+.event__item__text p {
+	color: #888888;
+	margin-bottom: 0;
+}
+
+.event__item__text p i {
+	color: #5c00ce;
+	margin-right: 8px;
+	font-size: 17px;
+}
 
 /*---------------------------------------
   TYPOGRAPHY               
@@ -685,8 +783,21 @@ strong {
   border-bottom-color: transparent;
 }
 
-.schedule-table th + td {
+.schedule-table td {
   border-bottom: 0;
+    padding: 250px 50px;
+}
+.schedule-table h3 {
+  font-size: 20px;
+ margin-top: 10px;
+}
+.schedule-table h4 {
+  font-size: 20px;
+ margin-top: -180px;
+}
+.schedule-table h5 {
+  font-size: 20px;
+ margin-top: 10px;
 }
 
 .schedule-table thead th:last-child {
@@ -694,15 +805,15 @@ strong {
 }
 
 .schedule-table .pop-background-image {
-  background-image: url('../images/image.png');
+  background-image: url('../images/volny.png');
 }
 
 .schedule-table .rock-background-image {
-  background-image: url('../images/image.png');
+  background-image: url('../images/party.png');
 }
 
 .schedule-table .country-background-image {
-  background-image: url('../images/image.png');
+  background-image: url('../images/volna.png');
 }
 
 .table-background-image-wrap {
