@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vykup</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1>Vykup.ic</h1>
+            <h2>Kontakt : 424-230 pouze SMS</h2>
+            <div class="input-group">
+                <input type="search" placeholder="Vyhledat...">
+                <img src="images/search.png" alt="">
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Předmět <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Surovina <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Výroba (Stanice) <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Výroba (Firma) <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Status <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Cena <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> 1 </td>
+                        <td> <img src="https://i.imgur.com/GyUwgks.png" alt="">SOS Náramek</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$250.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 2 </td>
+                        <td> <img src="https://i.imgur.com/qnQzuft.png" alt="">
+                        Helma na chopper</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$30.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 3 </td>
+                        <td> <img src="https://i.imgur.com/edepTBS.png" alt="">
+                        Plynová maska</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$70.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 4 </td>
+                        <td> <img src="https://i.imgur.com/KkFP3vY.png" alt="">
+                        Vysílačka M2</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$300.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 5 </td>
+                        <td> <img src="https://i.imgur.com/ZrgNdKi.png" alt="">
+                        Chytré hodinky</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$60.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 6 </td>
+                        <td> <img src="https://i.imgur.com/Cm0gP0T.png" alt="">
+                        Parfém</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$40.000,- </strong></td>
+                    </tr>
+                     <tr>
+                        <td> 7 </td>
+                        <td> <img src="https://i.imgur.com/RtNNwE4.png" alt="">
+                        Deodorant</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$30.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 8 </td>
+                        <td> <img src="https://i.imgur.com/sh3Bz4A.png" alt="">
+                        Brýle černé Aviators</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$30.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 9 </td>
+                        <td> <img src="https://i.imgur.com/P7TX59x.png" alt="">
+                        Neprůstřelná vesta</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$100.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 10 </td>
+                        <td> <img src="https://i.imgur.com/P7TX59x.png" alt="">
+                        Neprůstřelná vesta (custom)</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$250.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 11 </td>
+                        <td> <img src="https://i.imgur.com/c2DMV9N.png" alt="">
+                        Zlaté hodinky</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$50.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 12 </td>
+                        <td> <img src="https://i.imgur.com/CvdICz2.png" alt="">
+                        Klíč k bedně</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$30.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 13 </td>
+                        <td> <img src="https://i.imgur.com/Ood3vVE.png" alt="">
+                        Potápěčská výbava</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$20.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 14 </td>
+                        <td> <img src="https://i.imgur.com/sHoFuVE.png" alt="">
+                        Kamerový systém</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$300.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 15 </td>
+                        <td> <img src="https://i.imgur.com/eyPU4GA.png" alt="">
+                        Alarm do domácnosti</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$100.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 16 </td>
+                        <td> <img src="https://i.imgur.com/O5rRWXL.png" alt="">
+                        Bezpečnostní zámek</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$500.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 17 </td>
+                        <td> <img src="https://i.imgur.com/TMZVAzc.png" alt="">
+                        Bedna (Fox Crate)</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status cancelled">Nevykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 18 </td>
+                        <td> <img src="https://i.imgur.com/TMZVAzc.png" alt="">
+                        Bedna (Legendary Crate)</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status cancelled">Nevykupujeme</p>
+                        </td>
+                        <td> <strong>$10.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 19 </td>
+                        <td> <img src="https://i.imgur.com/TMZVAzc.png" alt="">
+                        Bedna (Vánoční)</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status cancelled">Nevykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 20 </td>
+                        <td> <img src="https://i.imgur.com/meJOKV2.png" alt="">
+                        Baseballový míček</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$40.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 21 </td>
+                        <td> <img src="https://i.imgur.com/JQoFTxV.png" alt="">
+                        Žvýkací tabák</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 22 </td>
+                        <td> <img src="" alt="">
+                        Sklo</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$110.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 23 </td>
+                        <td> <img src="" alt="">
+                        Alkohol tester</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$500.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 24 </td>
+                        <td> <img src="https://i.imgur.com/g83fnlu.png" alt="">
+                        Pepřový sprej</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$30.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 25 </td>
+                        <td> <img src="https://i.imgur.com/1gglZAS.png" alt="">
+                        Dýmovnice</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$25.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 26 </td>
+                        <td> <img src="https://i.imgur.com/JDafPg7.png" alt="">
+                        Světlice</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$25.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 27 </td>
+                        <td> <img src="https://i.imgur.com/xc7rTxe.png" alt="">
+                        Hokejová maska</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$20.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 28 </td>
+                        <td> <img src="https://i.imgur.com/xc7rTxe.png" alt="">
+                        Hokejová maska (custom)</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$50.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 29 </td>
+                        <td> <img src="https://i.imgur.com/gL0Z0Ds.png" alt="">
+                        Papoušek</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$350.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 30 </td>
+                        <td> <img src="https://i.imgur.com/XIkjoMP.png" alt="">
+                        Kovbojský klobouk</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$25.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 31 </td>
+                        <td> <img src="https://i.imgur.com/GfqpAdE.png" alt="">
+                        Polní láhev</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$20.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 32 </td>
+                        <td> <img src="https://i.imgur.com/t9hQOD2.png" alt="">
+                        Motorová pila</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$25.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 33 </td>
+                        <td> <img src="https://i.imgur.com/tiLMmWo.png" alt="">
+                        Teleskopický obušek</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$3.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 32 </td>
+                        <td> <img src="https://i.imgur.com/Ffw1RVW.png" alt="">
+                        Boxer</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$3.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 32 </td>
+                        <td> <img src="https://i.imgur.com/SHP7G7d.png" alt="">
+                        Taser - Výboj</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$20.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 33 </td>
+                        <td> <img src="" alt="">
+                        Taser</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$40.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 34 </td>
+                        <td> <img src="https://i.imgur.com/KcMQNbd.png" alt="">
+                        Termální vrtačka</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$150.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 35 </td>
+                        <td> <img src="https://i.imgur.com/RCM83mE.png" alt="">
+                        Vojenský batoh</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$500.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 36 </td>
+                        <td> <img src="https://i.imgur.com/4ZIkX2K.png" alt="">
+                        Hnědý šátek</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status cancelled">Nevykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 37 </td>
+                        <td> <img src="https://i.imgur.com/lX5W4BL.png" alt="">
+                        Fialový šátek</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 38 </td>
+                        <td> <img src="https://i.imgur.com/jnFnSUr.png" alt="">
+                        Zelený šátek</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status cancelled">Nevykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 39 </td>
+                        <td> <img src="https://i.imgur.com/UN9nSzB.png" alt="">
+                        Žlutý šátek</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 40 </td>
+                        <td> <img src="https://i.imgur.com/4np2IkK.png" alt="">
+                        Oranžový šátek</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status cancelled">Nevykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 40 </td>
+                        <td> <img src="https://i.imgur.com/JKZSQaQ.png" alt="">
+                        Černý šátek</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$50.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 41 </td>
+                        <td> <img src="https://i.imgur.com/JKZSQaQ.png" alt="">
+                        Šátek (custom)</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$80.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 42 </td>
+                        <td> <img src="https://i.imgur.com/SLILZ8R.png" alt="">
+                        Balíček glowsticků</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$5.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 43 </td>
+                        <td> <img src="https://i.imgur.com/XcPAJ33.png" alt="">
+                        Brandy Vértigo</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$25.000,- </strong></td>
+                    </tr>
+                    <tr>
+                        <td> 44 </td>
+                        <td> <img src="https://i.imgur.com/6OwEw3g.png" alt="">
+                        Tequila Muerto</td>
+                        <td>Ne</td>
+                        <td>Ne</td>
+                        <td>Ano</td>
+                        <td>
+                            <p class="status delivered">Vykupujeme</p>
+                        </td>
+                        <td> <strong>$25.000,- </strong></td>
+                    </tr>
+                    
+                    
+                    
+                </tbody>
+            </table>
+        </section>
+        
+        
+    </main>
+    <script src="script.js"></script>
+
+</body>
+    
+
+</html>
