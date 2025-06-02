@@ -35,36 +35,40 @@ body .footer_main iframe{
     justify-content: space-around;
 }
 
-body .footer_main .tag{
-    margin: 10px 0;
+body .footer_main .taga{
+    text-align: center;
+    border: 2px solid white;
+    margin: 10px;
 }
 
-body .footer_main .tag .center{
+body .footer_main .taga .center{
+    
     text-align: center;
 }
 
-body .footer_main .tag h1{
+body .footer_main .taga h1{
     text-align: center;
     font-size: 25px;
     margin: 25px 0;
     color: #f8bb9e;
 }
 
-body .footer_main .tag a{
+body .footer_main .taga a{
     text-align: center;
     display: block;
     color: black;
     text-decoration: none;
-    margin: 9px 0;
+    margin: 9px 10px;
+    
 }
 
-body .footer_main .tag a i{
+body .footer_main .taga a i{
     text-align: center;
-    padding: 0 10px;
-    transition: 0.3;
+    padding: 0px 10px;
+    transition: 0.5;
 }
 
-body .footer_main .tag a i:hover{
+body .footer_main .taga a:hover{
     color: #c72092;
 }
 
