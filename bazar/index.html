@@ -239,6 +239,9 @@
   <header><h1>Aktuální nabídka vozů</h1></header>
 
   <section class="filter-card" aria-label="Filtr vozidel">
+      <label for="name-search">Hledat podle názvu:</label>
+<input type="text" id="name-search" placeholder="Zadejte název vozu" />
+
     <label for="manufacturer-select">Úpravy:</label>
     <select id="manufacturer-select">
       <option value="all">Vše</option>
@@ -517,18 +520,7 @@
         images:["https://i.imgur.com/VtAsQwP.png",
                "https://i.imgur.com/LqPxo0i.png"]
       },
-        {
-        id:1,name:"Ford Taurus SHO",
-          manufacturer:"Protokol",
-          year:2011,
-          vin:25915,
-          price:500000,
-          type:"osobní",
-        description:"",
-         contact:{phone:"111-222",email:"liza.maurene@post.ic"},
-        images:["https://i.imgur.com/9ABgcYW.png",
-               "https://i.imgur.com/I9bfLxw.png"]
-      },
+        
          {
         id:1,name:"Alfa Romeo Guilia Quadrifoglio",
           manufacturer:"Protokol",
@@ -721,6 +713,7 @@
     const carouselImage = document.getElementById('carousel-image');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
+    const nameSearch = document.getElementById('name-search');
 
     let filtered = [];
     let current = null;
@@ -777,26 +770,29 @@
       countInfo.textContent = `Nalezeno vozidel: ${list.length}`;
     }
 
-    function filterAndSort(){
-      const man = manufacturerSelect.value;
-      const typ = typeSelect.value;
-      const vinF = parseInt(vinFrom.value,10);
-      const vinT = parseInt(vinTo.value,10);
-      const sp = sortPrice.value;
+function filterAndSort(){
+  const man = manufacturerSelect.value;
+  const typ = typeSelect.value;
+  const vinF = parseInt(vinFrom.value,10);
+  const vinT = parseInt(vinTo.value,10);
+  const sp = sortPrice.value;
+  const name = nameSearch.value.trim().toLowerCase();
 
-      filtered = vehicles.filter(v => {
-        if(man!=='all' && v.manufacturer!==man) return false;
-        if(typ!=='all' && v.type!==typ) return false;
-        if(!isNaN(vinF) && v.vin < vinF) return false;
-        if(!isNaN(vinT) && v.vin > vinT) return false;
-        return true;
-      });
+  filtered = vehicles.filter(v => {
+    if(man !== 'all' && v.manufacturer !== man) return false;
+    if(typ !== 'all' && v.type !== typ) return false;
+    if(!isNaN(vinF) && v.vin < vinF) return false;
+    if(!isNaN(vinT) && v.vin > vinT) return false;
+    if(name && !v.name.toLowerCase().includes(name)) return false;  // přidaný filtr podle názvu
+    return true;
+  });
 
-      if(sp==='asc') filtered.sort((a,b)=>a.price-b.price);
-      else if(sp==='desc') filtered.sort((a,b)=>b.price-a.price);
+  if(sp === 'asc') filtered.sort((a,b) => a.price - b.price);
+  else if(sp === 'desc') filtered.sort((a,b) => b.price - a.price);
 
-      renderCards(filtered);
-    }
+  renderCards(filtered);
+}
+
 
     function openModal(v) {
   current = v;
@@ -858,9 +854,10 @@
       if(e.key==='ArrowRight' && modal.classList.contains('show')) nextBtn.click();
     });
 
-    [manufacturerSelect, typeSelect, vinFrom, vinTo, sortPrice].forEach(el => {
-      el.addEventListener('input', filterAndSort);
-    });
+   [nameSearch, manufacturerSelect, typeSelect, vinFrom, vinTo, sortPrice].forEach(el => {
+  el.addEventListener('input', filterAndSort);
+});
+
 
     window.addEventListener('load', () => filterAndSort());
   </script>
