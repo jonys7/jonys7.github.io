@@ -5,6 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Turnaj Přihlášení</title>
   <style>
+        .site-footer {
+    background-color: #111;
+    color: #ff8c00;
+    padding: 20px 0;
+    margin-top: 50px;
+    border-top: 1px solid #ff8c00;
+    box-shadow: inset 0 5px 10px rgba(255, 140, 0, 0.1);
+  }
+
+  .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .footer-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #ccc;
+  }
+
+  .footer-links {
+    margin-top: 10px;
+  }
+
+  .footer-links a {
+    color: #ff8c00;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #ff8c00;
+  }
+
+  @media (max-width: 600px) {
+    .footer-links a {
+      display: block;
+      margin: 8px 0;
+    }
+  }
     body {
       background-color: #0d0d0d;
       color: white;
@@ -744,4 +790,11 @@
 
 
 </body>
+    <footer class="site-footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Kulečníkový turnaj. Firma B.A.R. [434] </p>
+    <div class="footer-links">
+    </div>
+  </div>
+</footer>
 </html>
