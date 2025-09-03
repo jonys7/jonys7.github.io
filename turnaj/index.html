@@ -184,6 +184,122 @@
   </style>
 </head>
 <body>
+ 
+<!-- Ikona admina vpravo nahoře -->
+<div id="adminIcon" style="
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background: #ff8c00;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px #ff8c00cc;
+  z-index: 1001;
+">
+  <!-- Můžeš tu dát SVG ikonku, tady jednoduchý "A" -->
+  <span style="color: white; font-weight: bold; font-size: 20px; user-select:none;">A</span>
+</div>
+
+<!-- Modal okno -->
+<div id="adminModal" style="
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+">
+  <div style="
+    background: #222;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 0 20px #ff8c00cc;
+    color: white;
+    position: relative;
+  ">
+    <button id="closeModalBtn" style="
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: #ff8c00;
+      font-size: 22px;
+      cursor: pointer;
+    ">&times;</button>
+    
+    <h2 style="color:#ff8c00; text-align:center; margin-bottom: 20px;">Admin přihlášení</h2>
+    
+    <form id="adminLoginForm">
+      <input type="email" id="adminEmail" placeholder="Email" required style="
+        width: 100%; padding: 10px; margin-bottom: 15px;
+        border: none; border-radius: 6px; font-size: 16px;
+      ">
+      <input type="password" id="adminPassword" placeholder="Heslo" required style="
+        width: 100%; padding: 10px; margin-bottom: 15px;
+        border: none; border-radius: 6px; font-size: 16px;
+      ">
+      <button type="submit" style="
+        width: 100%;
+        padding: 12px;
+        background: #ff8c00;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      ">Přihlásit se</button>
+    </form>
+
+    <p id="adminStatus" style="margin: 15px 0 0; text-align: center;"></p>
+    
+    <button id="adminLogoutBtn" style="
+      display: none;
+      margin: 20px auto 0;
+      padding: 10px 25px;
+      background: #ff4d4d;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+    ">Odhlásit se</button>
+  </div>
+</div>
+
+<script>
+  // Otevření modalu po kliknutí na ikonu admina
+  const adminIcon = document.getElementById('adminIcon');
+  const adminModal = document.getElementById('adminModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  adminIcon.addEventListener('click', () => {
+    adminModal.style.display = 'flex';
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    adminModal.style.display = 'none';
+  });
+
+  // Zavření modalu i kliknutím mimo box
+  adminModal.addEventListener('click', (e) => {
+    if(e.target === adminModal) {
+      adminModal.style.display = 'none';
+    }
+  });
+</script>
+
   <div class="upcoming-tournament">
     <h2>Nadcházející turnaj</h2>
     <p><strong>Datum:</strong> 4.9.2025</p>
@@ -192,6 +308,7 @@
     <p><strong>Přesnou lokaci</strong> na webu bar.ic</p>
     <p><strong>Dotazy?</strong> Pouze SMS 111-222</p>
   </div>
+    
     
 
   <h1>Přidat hráče do turnaje</h1>
@@ -418,6 +535,13 @@
     getDocs
   } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
   // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyB6HTymR3PkcJHjECmbe3SkcrmULWjmkgo",
@@ -431,7 +555,61 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  const auth = getAuth(app);
 
+  // Admin přihlášení - elementy
+  const adminLoginForm = document.getElementById('adminLoginForm');
+  const adminEmail = document.getElementById('adminEmail');
+  const adminPassword = document.getElementById('adminPassword');
+  const adminStatus = document.getElementById('adminStatus');
+
+  // Nové tlačítko pro odhlášení admina - přidej toto tlačítko i do HTML
+  const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+
+  adminLoginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    adminStatus.textContent = '';
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, adminEmail.value, adminPassword.value);
+      adminStatus.style.color = '#28a745';
+      adminStatus.textContent = 'Přihlášení úspěšné!';
+      adminEmail.value = '';
+      adminPassword.value = '';
+    } catch (error) {
+      adminStatus.style.color = '#ff4d4d';
+      adminStatus.textContent = 'Chyba přihlášení: ' + error.message;
+    }
+  });
+
+  // Odhlášení admina
+  adminLogoutBtn.addEventListener('click', async () => {
+    try {
+      await signOut(auth);
+      showMessage('Úspěšně odhlášeno', '#17a2b8'); // modrá barva zprávy
+    } catch (error) {
+      alert('Chyba při odhlašování: ' + error.message);
+    }
+  });
+
+  // Sledujeme stav přihlášení
+  let currentUser = null;  // uložíme si přihlášeného admina (nebo null)
+  onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    if (user) {
+      adminStatus.style.color = '#28a745';
+      adminStatus.textContent = `Přihlášen jako: ${user.email}`;
+      adminLoginForm.style.display = 'none';
+      adminLogoutBtn.style.display = 'inline-block'; // zobrazit tlačítko odhlášení
+    } else {
+      adminStatus.style.color = 'black';
+      adminStatus.textContent = 'Nejste přihlášen';
+      adminLoginForm.style.display = 'block';
+      adminLogoutBtn.style.display = 'none'; // skrýt tlačítko odhlášení
+    }
+    renderPlayers(); // aktualizujeme tlačítka po změně stavu přihlášení
+  });
+
+  // Zbytek tvého kódu pro práci s hráči
   const form = document.getElementById('addPlayerForm');
   const playerNameInput = document.getElementById('playerName');
   const playersTableBody = document.querySelector('#playersTable tbody');
@@ -469,7 +647,6 @@
     }, 3000);
   }
 
-  // Přidání hráče do turnaje
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let name = playerNameInput.value.trim();
@@ -502,7 +679,6 @@
       .join(' ');
 
     try {
-      // Zkontrolujeme, zda uživatel nemá přihlášené jméno
       const snapshot = await getDocs(query(playersCollection, where("userId", "==", userId)));
       if (!snapshot.empty) {
         alert('Už máte přihlášeného hráče. Nelze přidat více.');
@@ -518,42 +694,54 @@
     }
   });
 
-  // Zobrazování hráčů a aktualizace počtu
   const qPlayers = query(playersCollection);
-  onSnapshot(qPlayers, (snapshot) => {
-    playersTableBody.innerHTML = '';
-    playerCountSpan.textContent = `(${snapshot.size})`;
 
-    snapshot.forEach(docSnap => {
-      const data = docSnap.data();
-      const row = document.createElement('tr');
+  // Funkce pro vykreslení hráčů - voláme ji z onSnapshot i onAuthStateChanged
+  function renderPlayers() {
+    onSnapshot(qPlayers, (snapshot) => {
+      playersTableBody.innerHTML = '';
+      playerCountSpan.textContent = `(${snapshot.size})`;
 
-      const nameCell = document.createElement('td');
-      nameCell.textContent = data.name;
-      row.appendChild(nameCell);
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const row = document.createElement('tr');
 
-      const actionCell = document.createElement('td');
-      if (data.userId === userId) {
-        const btnDelete = document.createElement('button');
-        btnDelete.textContent = 'Stornovat';
-        btnDelete.classList.add('btn-delete');
-        btnDelete.addEventListener('click', async () => {
-          if (confirm(`Opravdu chcete stornovat hráče ${data.name}?`)) {
-            try {
-              await deleteDoc(doc(db, 'turnaj_hraci', docSnap.id));
-              showMessage('Hráč úspěšně odebrán', '#dc3545'); // Červená zpráva
-            } catch (error) {
-              alert('Chyba při mazání: ' + error.message);
+        const nameCell = document.createElement('td');
+        nameCell.textContent = data.name;
+        row.appendChild(nameCell);
+
+        const actionCell = document.createElement('td');
+
+        // Pokud je admin přihlášený, může smazat kohokoliv
+        // Jinak může mazat jen svého hráče
+        if (currentUser || data.userId === userId) {
+          const btnDelete = document.createElement('button');
+          btnDelete.textContent = currentUser ? 'Odebrat (admin)' : 'Stornovat';
+          btnDelete.classList.add('btn-delete');
+          btnDelete.addEventListener('click', async () => {
+            if (confirm(`Opravdu chcete odebrat hráče ${data.name}?`)) {
+              try {
+                await deleteDoc(doc(db, 'turnaj_hraci', docSnap.id));
+                showMessage('Hráč úspěšně odebrán', '#dc3545');
+              } catch (error) {
+                alert('Chyba při mazání: ' + error.message);
+              }
             }
-          }
-        });
-        actionCell.appendChild(btnDelete);
-      }
-      row.appendChild(actionCell);
+          });
+          actionCell.appendChild(btnDelete);
+        }
 
-      playersTableBody.appendChild(row);
+        row.appendChild(actionCell);
+        playersTableBody.appendChild(row);
+      });
     });
-  });
+  }
+
+  // Poprvé zavoláme renderPlayers, aby se zobrazili hráči
+  renderPlayers();
+
 </script>
+
+
 </body>
 </html>
