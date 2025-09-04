@@ -39,7 +39,7 @@
       position: sticky;
       top: 20px;
       left: 0;
-      width: 280px; 
+      width: 280px;
       background-color: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -298,6 +298,15 @@
     const $ = sel => document.querySelector(sel);
     let currentUser = null;
 
+    const BAD_WORDS = [
+      "blbec", "kráva", "debil", "kokot", "piča", "čurák", 
+      "debilní", "hovno", "kurva", "mrdka", "sráč", "píčus", 
+      "čuráček", "fak", "votrok", "dement", "zmetek", "kunda", 
+      "blbeček", "dementní", "hovádko", "kripl", "kretén", "pitomec", 
+      "prdel", "zkurvený", "kurvítko", "mrd", "debilismus", "sodoma", 
+      "pedofil", "křivák", "plivanec", "zloděj", "lopata", "zmrd"
+    ];
+
     function getUserId() {
       let userId = localStorage.getItem("userId");
       if (!userId) {
@@ -358,6 +367,12 @@
       if (!title || !desc) return alert("Vyplňte název a popis!");
       if (title.length > 50) return alert("Název je příliš dlouhý!");
       if (desc.length > 250) return alert("Popis je příliš dlouhý!");
+
+      // Kontrola proti vulgarismům
+      const lower = (title + " " + desc).toLowerCase();
+      if (BAD_WORDS.some(bad => lower.includes(bad))) {
+        return alert("Text obsahuje vulgarismus!");
+      }
 
       const adsRef = ref(db, "ads");
       const snap = await get(adsRef);
@@ -428,12 +443,12 @@
 
           const controls = div.querySelector(".controls");
 
-          const userId = getUserId(); // Získání uživatelského ID z localStorage
-          if (userId === ad.author || currentUser?.uid === ADMIN_UID) { // Kontrola admina a autora
+          const userId = getUserId(); 
+          if (userId === ad.author || currentUser?.uid === ADMIN_UID) { 
             const del = document.createElement("button");
             del.textContent = "Smazat";
             del.className = "btn secondary";
-            del.onclick = () => remove(ref(db, "ads/" + ad.id)); // Odstraní inzerát z databáze
+            del.onclick = () => remove(ref(db, "ads/" + ad.id)); 
             controls.appendChild(del);
           }
 
