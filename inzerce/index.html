@@ -91,15 +91,16 @@
     .content {
       flex: 1;
     }
-.ad .contact {
-  font-size: 14px;
-  color: #555;
-  margin-top: 10px;
-}
 
-.ad .contact strong {
-  color: #0a7;
-}
+    .ad .contact {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .ad .contact strong {
+      color: #0a7;
+    }
 
     .card {
       background: #fff;
@@ -201,31 +202,32 @@
     .controls {
       margin-top: 8px;
     }
-      .footer-bottom {
-  text-align: center;
-  font-size: 16px;
-  color: #fff;
-  background-color: #111; /* Tmavé pozadí pro lepší kontrast */
-  padding: 20px 0; /* Větší padding pro lepší vzhled */
-  border-top: 2px solid #0a7; /* Tenká čára v barvě pro oddělení */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Jemný stín pro zvýraznění */
-  border-radius: 8px; /* Zaoblené rohy pro moderní vzhled */
-  margin-top: 40px; /* Větší vzdálenost od ostatního obsahu */
-}
 
-.footer-bottom p {
-  margin: 0;
-  font-weight: bold; /* Tučný text pro lepší čitelnost */
-}
+    .footer-bottom {
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+      background-color: #111; /* Tmavé pozadí pro lepší kontrast */
+      padding: 20px 0; /* Větší padding pro lepší vzhled */
+      border-top: 2px solid #0a7; /* Tenká čára v barvě pro oddělení */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Jemný stín pro zvýraznění */
+      border-radius: 8px; /* Zaoblené rohy pro moderní vzhled */
+      margin-top: 40px; /* Větší vzdálenost od ostatního obsahu */
+    }
 
-.footer-bottom p a {
-  color: #0a7; /* Odkazy v barvě pro zvýraznění */
-  text-decoration: none;
-}
+    .footer-bottom p {
+      margin: 0;
+      font-weight: bold; /* Tučný text pro lepší čitelnost */
+    }
 
-.footer-bottom p a:hover {
-  text-decoration: underline; /* Podtržení odkazu při najetí myší */
-}
+    .footer-bottom p a {
+      color: #0a7; /* Odkazy v barvě pro zvýraznění */
+      text-decoration: none;
+    }
+
+    .footer-bottom p a:hover {
+      text-decoration: underline; /* Podtržení odkazu při najetí myší */
+    }
 
   </style>
 </head>
@@ -245,7 +247,8 @@
     <div class="left-sidebar">
       <div class="rules">
         <h2>Pravidla</h2>
-        <ul><li>Prosíme o dodržovaní pravidel, stránka je tu pro Vás.</li>
+        <ul>
+          <li>Prosíme o dodržování pravidel, stránka je tu pro Vás.</li>
           <li>Inzerce musí být slušná a bez vulgarismů.</li>
           <li>Každý uživatel může přidat maximálně 3 inzeráty.</li>
           <li>Fotografie musí být slušné, nesmí obsahovat nahotu ani jiné nepřijatelnosti.</li>
@@ -258,17 +261,16 @@
     <!-- Hlavní obsah -->
     <div class="content">
       <div class="card">
-  <h2>Přidat inzerát</h2>
-  <div class="grid">
-    <input id="adTitle" placeholder="Název (max 50 znaků)" maxlength="50" />
-    <textarea id="adDesc" placeholder="Popis (max 250 znaků)" maxlength="250"></textarea>
-    <input id="adPrice" type="number" placeholder="Cena (Kč)" />
-    <input id="adPhoto" placeholder="URL fotografie" />
-    <input id="adContact" placeholder="Kontakt (telefon nebo email)" />
-    <button id="addBtn" class="btn">Vložit inzerát</button>
-  </div>
-</div>
-
+        <h2>Přidat inzerát</h2>
+        <div class="grid">
+          <input id="adTitle" placeholder="Název (max 50 znaků)" maxlength="50" />
+          <textarea id="adDesc" placeholder="Popis (max 250 znaků)" maxlength="250"></textarea>
+          <input id="adPrice" type="number" placeholder="Cena (Kč)" />
+          <input id="adPhoto" placeholder="URL fotografie" />
+          <input id="adContact" placeholder="Kontakt (telefon nebo email)" />
+          <button id="addBtn" class="btn">Vložit inzerát</button>
+        </div>
+      </div>
 
       <div class="card">
         <h2>Seznam inzerátů</h2>
@@ -279,22 +281,8 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-    import { 
-      getAuth, 
-      signInWithEmailAndPassword, 
-      signOut, 
-      onAuthStateChanged 
-    } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
-    import { 
-      getDatabase, 
-      ref, 
-      set, 
-      push, 
-      onValue, 
-      remove, 
-      get, 
-      update 
-    } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+    import { getDatabase, ref, set, push, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyD5IIzLrx74Nvj8VbpcjBRLxBybQ4kVYXc",
@@ -315,18 +303,19 @@
     const $ = sel => document.querySelector(sel);
     let currentUser = null;
     const BAD_WORDS = [
-  "blbec", "kráva", "debil", "kokot", "piča", "čurák", 
-  "debilní", "hovno", "kurva", "mrdka", "sráč", "píčus", 
-  "čuráček", "fak", "votrok", "dement", "zmetek", "kunda", 
-  "blbeček", "dementní", "hovádko", "kripl", "kretén", "pitomec", 
-  "prdel", "zkurvený", "kurvítko", "mrd", "debilismus", "sodoma", 
-  "pedofil", "křivák", "plivanec", "zloděj", "lopata", "zmrd"
-];
+      "blbec", "kráva", "debil", "kokot", "piča", "čurák", 
+      "debilní", "hovno", "kurva", "mrdka", "sráč", "píčus", 
+      "čuráček", "fak", "votrok", "dement", "zmetek", "kunda", 
+      "blbeček", "dementní", "hovádko", "kripl", "kretén", "pitomec", 
+      "prdel", "zkurvený", "kurvítko", "mrd", "debilismus", "sodoma", 
+      "pedofil", "křivák", "plivanec", "zloděj", "lopata", "zmrd"
+    ];
+
     function getUserId() {
       let userId = localStorage.getItem("userId");
       if (!userId) {
-        userId = "user-" + Date.now();
-        localStorage.setItem("userId", userId);
+        userId = "user-" + Date.now();  // Unikátní ID na základě aktuálního času
+        localStorage.setItem("userId", userId);  // Uložení do localStorage
       }
       return userId;
     }
@@ -371,115 +360,108 @@
     });
 
     $("#addBtn").onclick = async () => {
-  const title = $("#adTitle").value.trim();
-  const desc = $("#adDesc").value.trim();
-  const price = $("#adPrice").value.trim();
-  const photo = $("#adPhoto").value.trim();
-  const contact = $("#adContact").value.trim(); // Získáme kontakt
-
-  if (!title || !desc) return alert("Vyplňte název a popis!");
-  if (title.length > 50) return alert("Název je příliš dlouhý!");
-  if (desc.length > 250) return alert("Popis je příliš dlouhý!");
-  
-  const lower = (title + " " + desc).toLowerCase();
-  if (BAD_WORDS.some(bad => lower.includes(bad))) {
-    return alert("Text obsahuje vulgarismus!");
-  }
-
-  const adsRef = ref(db, "ads");
-  const snap = await get(adsRef);
-  let ads = snap.val() || {};
-  const author = currentUser ? currentUser.email : "Anonymní";
-  const userAds = Object.values(ads).filter(a => a.author === author);
-  if (userAds.length >= 3) return alert("Můžete mít maximálně 3 inzeráty.");
-
-  // Formátování ceny
-  const formattedPrice = price ? parseFloat(price).toLocaleString('cs-CZ') : "";
-
-  const newAdRef = push(adsRef);
-  const now = new Date();
-  const dateStr = now.toLocaleDateString("cs-CZ") + " " + now.toLocaleTimeString("cs-CZ");
-
-  set(newAdRef, {
-    id: newAdRef.key,
-    title,
-    desc,
-    price: formattedPrice,
-    photo,
-    contact, // Uložení kontaktu
-    author,
-    created: Date.now(),
-    createdAt: dateStr
-  });
-
-  $("#adTitle").value = "";
-  $("#adDesc").value = "";
-  $("#adPrice").value = "";
-  $("#adPhoto").value = "";
-  $("#adContact").value = ""; // Vyprázdníme pole pro kontakt
-};
-
-
-function renderAds() {
-  const adsRef = ref(db, "ads");
-  onValue(adsRef, snap => {
-    const list = $("#adsList");
-    list.innerHTML = "";
-    const ads = snap.val() || {};
-    const now = Date.now();
-    const TWO_DAYS = 1000 * 60 * 60 * 24 * 2;
-
-    Object.values(ads).forEach(ad => {
-      if (ad.created && now - ad.created > TWO_DAYS) {
-        if (currentUser && currentUser.uid === ADMIN_UID) {
-          remove(ref(db, "ads/" + ad.id));
-        }
-        return;
-      }
-
-      const div = document.createElement("div");
-      div.className = "ad";
-      div.innerHTML = `
-        <img src="${ad.photo || ""}" alt=""/>
-        <div>
-          <h3>${ad.title}</h3>
-          <div class="price">${ad.price ? ad.price + " Kč" : ""}</div>
-          <div class="muted">${ad.desc}</div>
-          <div class="contact"><strong>Kontakt:</strong> ${ad.contact || "Není uvedeno"}</div> <!-- Zobrazení kontaktu -->
-          <div class="controls"></div>
-        </div>
-        <div class="info">
-          <div>Autor: ${ad.author || "Anonymní"}</div>
-          <div>Vloženo: ${ad.createdAt || ""}</div>
-        </div>
-      `;
-
-      const controls = div.querySelector(".controls");
-      if (currentUser && currentUser.uid === ADMIN_UID) {
-        const del = document.createElement("button");
-        del.textContent = "Smazat (admin)";
-        del.className = "btn secondary";
-        del.onclick = () => remove(ref(db, "ads/" + ad.id));
-        controls.appendChild(del);
-      }
+      const title = $("#adTitle").value.trim();
+      const desc = $("#adDesc").value.trim();
+      const price = $("#adPrice").value.trim();
+      const photo = $("#adPhoto").value.trim();
+      const contact = $("#adContact").value.trim();
 
       const userId = getUserId();
-      if (userId === ad.author || ad.author === "Anonymní") {
-        const delOwn = document.createElement("button");
-        delOwn.textContent = "Smazat";
-        delOwn.className = "btn secondary";
-        delOwn.onclick = () => remove(ref(db, "ads/" + ad.id));
-        controls.appendChild(delOwn);
+
+      if (!title || !desc) return alert("Vyplňte název a popis!");
+      if (title.length > 50) return alert("Název je příliš dlouhý!");
+      if (desc.length > 250) return alert("Popis je příliš dlouhý!");
+  
+      const lower = (title + " " + desc).toLowerCase();
+      if (BAD_WORDS.some(bad => lower.includes(bad))) {
+        return alert("Text obsahuje vulgarismus!");
       }
 
-      list.appendChild(div);
-    });
-  });
-}
+      const adsRef = ref(db, "ads");
+      const snap = await get(adsRef);
+      let ads = snap.val() || {};
 
+      const userAds = Object.values(ads).filter(a => a.author === userId);
+
+      if (userAds.length >= 3) return alert("Můžete mít maximálně 3 inzeráty.");
+
+      const formattedPrice = price ? parseFloat(price).toLocaleString('cs-CZ') : "";
+
+      const newAdRef = push(adsRef);
+      const now = new Date();
+      const dateStr = now.toLocaleDateString("cs-CZ") + " " + now.toLocaleTimeString("cs-CZ");
+
+      set(newAdRef, {
+        id: newAdRef.key,
+        title,
+        desc,
+        price: formattedPrice,
+        photo,
+        contact,
+        author: userId,
+        created: Date.now(),
+        createdAt: dateStr
+      });
+
+      $("#adTitle").value = "";
+      $("#adDesc").value = "";
+      $("#adPrice").value = "";
+      $("#adPhoto").value = "";
+      $("#adContact").value = "";
+    };
+
+    function renderAds() {
+      const adsRef = ref(db, "ads");
+      onValue(adsRef, snap => {
+        const list = $("#adsList");
+        list.innerHTML = "";
+        const ads = snap.val() || {};
+        const now = Date.now();
+        const TWO_DAYS = 1000 * 60 * 60 * 24 * 2;
+
+        Object.values(ads).forEach(ad => {
+          if (ad.created && now - ad.created > TWO_DAYS) {
+            if (currentUser && currentUser.uid === ADMIN_UID) {
+              remove(ref(db, "ads/" + ad.id)); // Admin může mazat všechny inzeráty
+            }
+            return;
+          }
+
+          const div = document.createElement("div");
+          div.className = "ad";
+          div.innerHTML = `
+            <img src="${ad.photo || ""}" alt=""/>
+            <div>
+              <h3>${ad.title}</h3>
+              <div class="price">${ad.price ? ad.price + " Kč" : ""}</div>
+              <div class="muted">${ad.desc}</div>
+              <div class="contact"><strong>Kontakt:</strong> ${ad.contact || "Kontakt není uveden"}</div>
+              <div class="controls"></div>
+            </div>
+            <div class="info">
+              <div>Autor: ${ad.author || getUserId()}</div> <!-- Zde přiřadíme aktuální ID uživatele -->
+              <div>Vloženo: ${ad.createdAt || ""}</div>
+            </div>
+          `;
+
+          const controls = div.querySelector(".controls");
+
+          const userId = getUserId(); // Získání uživatelského ID z localStorage
+          if (userId === ad.author) {  // Pokud je uživatel autor inzerátu
+            const del = document.createElement("button");
+            del.textContent = "Smazat";
+            del.className = "btn secondary";
+            del.onclick = () => remove(ref(db, "ads/" + ad.id)); // Odstraní inzerát z databáze
+            controls.appendChild(del);
+          }
+
+          list.appendChild(div);
+        });
+      });
+    }
   </script>
 </body>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Inzerce Online [474] RA | Všechna práva vyhrazena</p>
-    </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Inzerce Online [474] RA | Všechna práva vyhrazena</p>
+  </div>
 </html>
