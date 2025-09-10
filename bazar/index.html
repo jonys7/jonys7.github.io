@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Autobazar LuxuryCar</title>
+    
   <style>
     /* Základní reset a styly */
     * { box-sizing: border-box; }
@@ -375,7 +376,7 @@
          contact:{phone:"111-222",email:"liza.maurene@post.ic"},
         images:["https://i.imgur.com/sXIRkXb.png", ]
       },
-      {
+              {
         id:1,name:"Pontiac Grand Prix IV",
           manufacturer:"Unikátní úprava",
           year:1981,
@@ -711,63 +712,12 @@
         images:["https://i.imgur.com/xf3Knwp.png",
                "https://i.imgur.com/DkTgM9V.png"]
       },
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+ 
         
     ];
 
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+ 
       
     const manufacturerSelect = document.getElementById('manufacturer-select');
     const typeSelect = document.getElementById('type-select');
@@ -864,37 +814,61 @@ function filterAndSort(){
 }
 
 
-    function openModal(v) {
+ function openModal(v) {
   current = v;
   photoIndex = 0;
   modalTitle.textContent = `${v.name} (${v.year})`;
 
-  // Popis bude nad carouselem
-  modalDescription.innerHTML = `<p>${v.description}</p>`;
+  // Popis bude nad carouselem – bezpečně
+  modalDescription.innerHTML = "";
+  const descP = document.createElement("p");
+  descP.textContent = v.description;
+  modalDescription.appendChild(descP);
 
   updateCarousel();
-  modal.classList.add('show');
+  modal.classList.add("show");
   modalClose.focus();
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
 
-  // Odstraníme předchozí kontakt, aby se nekopíroval
-  const existingContact = modal.querySelector('.contact-section');
+  // Odstraníme předchozí kontakt
+  const existingContact = modal.querySelector(".contact-section");
   if (existingContact) {
     existingContact.remove();
   }
 
-  // Přidání kontaktu až pod carousel
-  const contactSection = document.createElement('div');
-  contactSection.classList.add('contact-section');
-  contactSection.innerHTML = `
-    <h3>Kontakt na prodejce</h3>
-    <div class="contact-info">
-      <p><span class="contact-label">📞 Telefon:</span> ${v.contact.phone}</a></p>
-      <p><span class="contact-label">✉️ Post:</span> ${v.contact.email}</a></p>
-    </div>
-  `;
-  modal.querySelector('.modal-content').appendChild(contactSection);
+  // Bezpečně vytvořený kontakt
+  const contactSection = document.createElement("div");
+  contactSection.classList.add("contact-section");
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Kontakt na prodejce";
+  contactSection.appendChild(heading);
+
+  const infoDiv = document.createElement("div");
+  infoDiv.classList.add("contact-info");
+
+  const phoneP = document.createElement("p");
+  const phoneLabel = document.createElement("span");
+  phoneLabel.classList.add("contact-label");
+  phoneLabel.textContent = "📞 Telefon:";
+  phoneP.appendChild(phoneLabel);
+  phoneP.append(` ${v.contact.phone}`);
+  infoDiv.appendChild(phoneP);
+
+  const emailP = document.createElement("p");
+const emailLabel = document.createElement("span");
+emailLabel.classList.add("contact-label");
+emailLabel.textContent = "✉️ Email:";
+emailP.appendChild(emailLabel);
+emailP.appendChild(document.createTextNode(` ${v.contact.email}`));
+
+infoDiv.appendChild(emailP);
+
+
+  contactSection.appendChild(infoDiv);
+  modal.querySelector(".modal-content").appendChild(contactSection);
 }
+
 
 
 
