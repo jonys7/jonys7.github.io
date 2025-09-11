@@ -621,6 +621,23 @@ button, a { transition: var(--transition); }
   color: #ff6b6b; /* výrazná červená */
   font-weight: bold;
 }
+@media screen and (max-width: 768px) {
+  .featured-car-wrapper {
+    flex-direction: column; /* seznam vozidel pod FAQ box */
+  }
+
+  .info-box {
+    position: relative; /* už není fixed */
+    top: auto;
+    left: auto;
+    width: 100%; /* zabere celou šířku kontejneru */
+    margin-bottom: 20px; /* mezera mezi boxem a seznamem vozidel */
+    padding: 20px;
+    max-height: none; /* necháme box plně viditelný */
+    overflow: visible;
+  }
+}
+
 
 
 /*-----------------------------------*\
