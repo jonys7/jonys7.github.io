@@ -428,7 +428,199 @@ button, a { transition: var(--transition); }
 }
 
 
+.info-box {
+  position: fixed; /* zůstane při scrollu */
+  top: 150px;
+  left: 20px;
+  width: 280px;
+  padding: 25px 20px;
+  background: linear-gradient(145deg, #ffffff, #f0f0f5);
+  border-radius: 15px;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  max-height: 80vh;
+  overflow-y: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+}
 
+/* Lehké „vznášení“ při hoveru */
+.info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+/* Nadpis */
+.info-box h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #333;
+  border-bottom: 2px solid #ff6b6b;
+  padding-bottom: 5px;
+}
+
+/* Odstavec */
+.info-box p {
+  margin: 10px 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Seznam */
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}.info-box {
+  position: fixed;
+  top: 150px;
+  left: 20px;
+  width: 280px;
+  padding: 25px 20px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 3px solid;
+  border-image-slice: 1;
+  border-width: 3px;
+  border-image-source: linear-gradient(45deg, #ff6b6b, #feca57, #1dd1a1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* „Floating“ efekt při scrollu */
+.info-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+/* Nadpis */
+.info-box h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+  border-bottom: 2px solid #ff6b6b;
+  padding-bottom: 5px;
+}
+
+/* Text */
+.info-box p {
+  margin: 12px 0;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Seznam */
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-box ul li {
+  margin-bottom: 10px;
+  padding-left: 25px;
+  position: relative;
+  font-weight: 500;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* Malé ikonky před položkami */
+.info-box ul li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+
+.info-box ul li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+  color: #444;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Malé ikonky před položkami */
+.info-box ul li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+.info-box {
+  position: fixed;
+  top: 150px;
+  left: 20px;
+  width: 280px;
+  padding: 25px 20px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 2px solid #dddddd; /* jemný, neutrální rámeček */
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  max-height: 80vh;
+  overflow-y: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* „Floating“ efekt při hoveru */
+.info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.2);
+}
+
+/* Nadpis */
+.info-box h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 5px;
+}
+
+/* Text */
+.info-box p {
+  margin: 12px 0;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Seznam */
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-box ul li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+  font-weight: 500;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* Barevné ikonky před položkami (✔) */
+.info-box ul li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: #ff6b6b; /* výrazná červená */
+  font-weight: bold;
+}
 
 
 /*-----------------------------------*\
