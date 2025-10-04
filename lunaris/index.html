@@ -1,212 +1,339 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+    
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Návod na hru</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-color: #1e293b;
-      --panel-bg: #ffffff;
-      --panel-border: #e2e8f0;
-      --accent: #3b82f6;
-      --text-dark: #1e293b;
-      --text-light: #f8fafc;
-      --text-muted: #64748b;
-      --hover: #f1f5f9;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-color);
-      color: var(--text-light);
-    }
-
-    .layout {
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .sidebar {
-      position: fixed;
-      top: 40px;
-      width: 220px;
-      height: calc(100vh - 80px);
-      background: var(--panel-bg);
-      border-radius: 16px;
-      padding: 24px;
-      overflow-y: auto;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--panel-border);
-      transition: all 0.3s ease;
-    }
-
-    .sidebar.left {
-      left: 120px;
-    }
-
-    .sidebar.right {
-      right: 120px;
-    }
-
-    .sidebar-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--panel-border);
-      padding-bottom: 6px;
-    }
-
-    .sidebar a {
-      display: block;
-      color: var(--text-dark);
-      text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .sidebar a:hover {
-      background-color: var(--hover);
-      transform: translateX(4px);
-    }
-
-    .main {
-      max-width: 800px;
-      width: 100%;
-      background: #fff;
-      padding: 48px;
-      border-radius: 20px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-      color: var(--text-dark);
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 32px;
-      margin-bottom: 14px;
-      color: var(--accent);
-    }
-
-    p, ul {
-      margin-bottom: 16px;
-      line-height: 1.7;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .guide-image {
-      width: 100%;
-      max-width: 700px;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      margin: 16px 0 28px 0;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Collapsible sekce - Prostě rady */
-    .collapsible {
-      background-color: var(--accent);
-      color: white;
-      cursor: pointer;
-      padding: 16px 20px;
-      width: 100%;
-      border: none;
-      border-radius: 12px;
-      text-align: left;
-      font-size: 1.1rem;
-      font-weight: 600;
-      outline: none;
-      transition: background-color 0.3s ease;
-      margin-top: 32px;
-      user-select: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .collapsible:hover {
-      background-color: #2563eb; /* trochu tmavší modrá */
-    }
-
-    .collapsible:after {
-      content: '\25bc'; /* šipka dolů */
-      font-size: 1rem;
-      transition: transform 0.3s ease;
-      margin-left: 12px;
-    }
-
-    .collapsible.active:after {
-      transform: rotate(180deg); /* otočí šipku nahoru */
-    }
-
-    .content-collapsible {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      pointer-events: none;
-      transition: max-height 0.4s ease, opacity 0.4s ease;
-      background: #f9fafb;
-      color: #1e293b;
-      border-radius: 0 0 12px 12px;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-      margin-bottom: 24px;
-      line-height: 1.6;
-    }
-
-    .collapsible.active + .content-collapsible {
-      max-height: 1000px; /* dostatečně velká hodnota */
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .content-collapsible img {
-  max-width: 100px;
-  max-height: 100px;
-  width: auto;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  display: block;
+  --bg-color: #0f172a;
+  --panel-bg: #f9fafb;
+  --panel-border: #e2e8f0;
+  --accent: #2563eb;
+  --text-dark: #111827;
+  --text-light: #f1f5f9;
+  --text-muted: #6b7280;
+  --hover-bg: #e0e7ff;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-color);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    /* Responsivita */
-    @media (max-width: 1100px) {
-      .sidebar {
-        display: none;
-      }
+.layout {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 20px;
+}
 
-      .layout {
-        padding: 20px;
-      }
+.sidebar {
+  position: fixed;
+  top: 40px;
+  width: 200px;
+  height: calc(100vh - 80px);
+  background: var(--panel-bg);
+  border-radius: 24px;
+  padding: 24px 20px;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  border: 1px solid var(--panel-border);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
 
-      .main {
-        width: 100%;
-        padding: 30px 20px;
-      }
-    }
+.sidebar.left {
+  left: 80px;
+}
+
+.sidebar.right {
+  right: 80px;
+}
+
+.sidebar-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 8px;
+}
+
+.sidebar a {
+  display: block;
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: inset 0 0 0 0 var(--accent);
+  position: relative;
+}
+
+.sidebar a::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 16px;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.sidebar a:hover {
+  background-color: var(--hover-bg);
+  color: var(--accent);
+  box-shadow: inset 100% 0 0 0 var(--accent);
+}
+
+.sidebar a:hover::after {
+  width: calc(100% - 32px);
+}
+
+.main {
+  max-width: 900px;
+  width: 100%;
+  background: #fff;
+  padding: 48px 40px;
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  color: var(--text-dark);
+  z-index: 10;
+  position: relative;
+}
+
+h1 {
+  font-size: 2.6rem;
+  color: var(--accent);
+  margin-bottom: 30px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 36px;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+p, ul {
+  margin-bottom: 18px;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: var(--text-dark);
+}
+
+ul {
+  padding-left: 24px;
+}
+
+.guide-image {
+  max-width: 720px;
+  border-radius: 24px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  margin: 20px auto 36px auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Collapsible */
+.collapsible {
+  background-color: var(--accent);
+  color: white;
+  cursor: pointer;
+  padding: 18px 24px;
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 700;
+  outline: none;
+  transition: background-color 0.3s ease;
+  margin-top: 36px;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+}
+
+.collapsible:hover {
+  background-color: #1e40af;
+}
+
+.collapsible:after {
+  content: '\25bc';
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+  margin-left: 14px;
+}
+
+.collapsible.active:after {
+  transform: rotate(180deg);
+}
+
+.content-collapsible {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  background: #f9fafb;
+  color: #1e293b;
+  border-radius: 0 0 16px 16px;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.12);
+  margin-bottom: 28px;
+  line-height: 1.7;
+  padding: 0 24px;
+}
+
+.collapsible.active + .content-collapsible {
+  max-height: 1000px;
+  opacity: 1;
+  pointer-events: auto;
+  padding-top: 20px;
+  padding-bottom: 24px;
+}
+
+/* Responsivita */
+@media (max-width: 1100px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .sidebar.left, .sidebar.right {
+    left: auto;
+    right: auto;
+  }
+
+  .sidebar a {
+    padding: 8px 12px;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .sidebar a:hover {
+    background-color: var(--accent);
+    color: white;
+    box-shadow: none;
+  }
+
+  .layout {
+    flex-direction: column;
+    padding: 20px 10px;
+  }
+
+  .main {
+    max-width: 100%;
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+}
+.like-widget-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0 48px 0;
+}
+
+.like-widget {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 8px 24px rgba(30, 41, 59, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.like-widget:hover {
+  box-shadow: 0 12px 28px rgba(30, 41, 59, 0.12);
+}
+
+#likeBtn {
+  background: linear-gradient(145deg, #ffffff, #f1f5f9);
+  border: 2px solid var(--panel-border);
+  padding: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 14px rgba(30, 41, 59, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#likeBtn:hover:not(:disabled) {
+  transform: scale(1.1);
+  background-color: #e2e8f0;
+}
+
+#likeBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#heartIcon {
+  width: 32px;
+  height: 32px;
+  stroke: var(--accent);
+  fill: none;
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+#heartIcon.liked {
+  fill: var(--accent);
+  stroke: #ffffff;
+  transform: scale(1.25);
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1.25);
+  }
+}
+
+#likeCount {
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 1.2rem;
+  min-width: 32px;
+  text-align: center;
+}
+
   </style>
 </head>
 <body>
@@ -225,6 +352,23 @@
 
   <div class="layout">
     <div class="main">
+        <div class="like-widget-wrapper">
+  <div class="like-widget">
+    <button id="likeBtn" aria-label="Like">
+      <svg id="heartIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
+                 C13.09 3.81 14.76 3 16.5 3
+                 19.58 3 22 5.42 22 8.5
+                 c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+        />
+      </svg>
+    </button>
+    <span id="likeCount">0</span>
+  </div>
+</div>
+
+
       <h1>Návod na hru</h1>
       <p>Vítej v herním průvodci! Tento návod ti pomůže pochopit základy a rychle se dostat do akce.
         Web pro vás vytvořil LeonyCZ.</p>
@@ -303,7 +447,7 @@
           <p><strong>Rada 11:</strong>Určitě si kup knížku Petskillbook Level 3(Double Hit) nasadíš si jí do peta , čím více procent tím lépe max je 25% ale určitě jsi chudý takže si kup třeba 11%.
           </p>
           <p><strong>Rada 12:</strong>Vylepši rukavice, kup si kameny do rukavic,
-              Room Stone, Reality Stone, Power Stone,nedropneš je zatím ale jsou levný, kameny si natoč yohara 30% , boss a metin 20%, pak je vlož do rukavice.
+              Room Stone, Reality Stone, Power Stone, točkynedropneš je zatím ale jsou levný, kameny si natoč yohara 30% , boss a metin 20%, pak je vvlož do rukavice.
           </p>
       </div>
 
@@ -316,6 +460,42 @@
   </div>
 
   <script>
+      // LIKE widget script (doplněk)
+const likeBtn = document.getElementById('likeBtn');
+const likeCount = document.getElementById('likeCount');
+const heartIcon = document.getElementById('heartIcon');
+
+const LIKE_TIMESTAMP_KEY = 'likeWidgetTimestamp';
+const LIKE_COUNT_KEY = 'likeWidgetCount';
+
+let count = parseInt(localStorage.getItem(LIKE_COUNT_KEY)) || 0;
+likeCount.textContent = count;
+
+function canLikeAgain() {
+  const last = parseInt(localStorage.getItem(LIKE_TIMESTAMP_KEY));
+  if (!last) return true;
+  return (Date.now() - last) > 24 * 60 * 60 * 1000;
+}
+
+function disableLike() {
+  likeBtn.disabled = true;
+  heartIcon.classList.add('liked');
+}
+
+if (!canLikeAgain()) {
+  disableLike();
+}
+
+likeBtn.addEventListener('click', () => {
+  if (!canLikeAgain()) return;
+  count++;
+  localStorage.setItem(LIKE_COUNT_KEY, count);
+  likeCount.textContent = count;
+  heartIcon.classList.add('liked');
+  localStorage.setItem(LIKE_TIMESTAMP_KEY, Date.now());
+  disableLike();
+});
+
     // Script pro rozbalení sbalení collapsible sekce pouze přidáním/odebráním třídy
     document.querySelectorAll('.collapsible').forEach(button => {
       button.addEventListener('click', () => {
@@ -323,6 +503,66 @@
       });
     });
   </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAReUl0xGwLnbbM6YvKMc5AqxWEUFPW__E",
+    authDomain: "lunaris-ee6cd.firebaseapp.com",
+    databaseURL: "https://lunaris-ee6cd-default-rtdb.firebaseio.com",
+    projectId: "lunaris-ee6cd",
+    storageBucket: "lunaris-ee6cd.appspot.com",  // opraveno
+    messagingSenderId: "172076062083",
+    appId: "1:172076062083:web:712f50b69ede49a660d2b6",
+    measurementId: "G-46RVD4X4B0"
+  };
+
+  // Inicializace Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const likeRef = ref(db, "likes/count");
+
+  const likeBtn = document.getElementById("likeBtn");
+  const likeCount = document.getElementById("likeCount");
+  const heartIcon = document.getElementById("heartIcon");
+
+  // Načítání lajků v reálném čase
+  onValue(likeRef, (snapshot) => {
+    const val = snapshot.val() || 0;
+    likeCount.textContent = val;
+  });
+
+  // Ochrana proti spamu – 1x za 24 hodin
+  const lastLike = localStorage.getItem("lastLikeTime");
+  if (lastLike && Date.now() - parseInt(lastLike) < 86400000) {
+    likeBtn.disabled = true;
+    heartIcon.classList.add("liked");
+  }
+
+  // Kliknutí na tlačítko
+  likeBtn.addEventListener("click", async () => {
+    likeBtn.disabled = true;
+    heartIcon.classList.add("liked");
+
+    // Přičti like do databáze
+    const snapshot = await get(likeRef);
+    const currentLikes = snapshot.val() || 0;
+    await set(likeRef, currentLikes + 1);
+
+    // Ulož čas posledního lajku
+    localStorage.setItem("lastLikeTime", Date.now());
+  });
+
+  // Collapsible sekce
+  document.querySelectorAll('.collapsible').forEach(button => {
+    button.addEventListener('click', () => {
+      button.classList.toggle('active');
+    });
+  });
+</script>
+
 
 </body>
 </html>
