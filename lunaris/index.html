@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Návod na hru</title>
+  <style>
+    :root {
+      --bg-color: #f5f7fa;
+      --sidebar-bg: #1f2937;
+      --sidebar-text: #ffffff;
+      --main-bg: #ffffff;
+      --main-text: #333333;
+      --accent: #3b82f6;
+      --link-hover: #60a5fa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      display: flex;
+      min-height: 100vh;
+      color: var(--main-text);
+    }
+
+    .sidebar {
+      width: 20%;
+      background-color: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar h2 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    .sidebar a {
+      color: var(--sidebar-text);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: var(--link-hover);
+      color: #fff;
+    }
+
+    .main {
+      flex-grow: 1;
+      background-color: var(--main-bg);
+      padding: 40px;
+      overflow-y: auto;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .main h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .main h2 {
+      font-size: 1.4rem;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    .main p, .main ul {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .main ul {
+      padding-left: 20px;
+    }
+
+    /* Responsivita */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 20px;
+        height: auto;
+      }
+
+      .main {
+        padding: 20px;
+      }
+
+      .sidebar h2 {
+        display: none;
+      }
+
+      .sidebar a {
+        padding: 10px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Levý sloupec – Twitch -->
+  <div class="sidebar">
+    <h2>Streamy na Twitchi</h2>
+    <a href="https://www.twitch.tv/shroud" target="_blank">Shroud</a>
+    <a href="https://www.twitch.tv/xqc" target="_blank">xQc</a>
+    <a href="https://www.twitch.tv/sodapoppin" target="_blank">Sodapoppin</a>
+  </div>
+
+  <!-- Hlavní obsah -->
+  <div class="main">
+    <h1>Návod na hru</h1>
+
+    <p>Vítej v herním průvodci! Tento návod ti pomůže pochopit základy a rychle se dostat do akce.</p>
+
+    <h2>1. Spuštění hry</h2>
+    <p>Stáhni hru z oficiálních stránek, nainstaluj ji a spusť. Při prvním spuštění si vytvoř účet nebo se přihlas.</p>
+
+    <h2>2. Ovládání</h2>
+    <ul>
+      <li><strong>WASD</strong> – pohyb</li>
+      <li><strong>Myš</strong> – míření a střelba</li>
+      <li><strong>Shift</strong> – sprint</li>
+      <li><strong>Mezerník</strong> – skok</li>
+    </ul>
+
+    <h2>3. Herní režimy</h2>
+    <p>Vyber si z několika herních módů jako:</p>
+    <ul>
+      <li>Deathmatch</li>
+      <li>Týmový boj</li>
+      <li>Battle Royale</li>
+    </ul>
+
+    <h2>4. Tipy pro začátečníky</h2>
+    <ul>
+      <li>Drž se spoluhráčů a komunikuj</li>
+      <li>Nesprintuj zbytečně – šetři energii</li>
+      <li>Používej sluchátka – slyšíš nepřátele</li>
+    </ul>
+
+    <p>Hodně štěstí a užij si hru!</p>
+  </div>
+
+  <!-- Pravý sloupec – YouTube -->
+  <div class="sidebar">
+    <h2>Videa na YouTube</h2>
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Jak začít hrát</a>
+    <a href="https://www.youtube.com/watch?v=abc123" target="_blank">10 tipů pro nováčky</a>
+    <a href="https://www.youtube.com/watch?v=xyz789" target="_blank">Profesionální gameplay</a>
+  </div>
+
+</body>
+</html>
