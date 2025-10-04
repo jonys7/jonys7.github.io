@@ -344,11 +344,34 @@ ul {
       <a href="https://www.twitch.tv/dragonffaust" target="_blank">🎮 DragonFFaust</a>
   </div>
 
-  <div class="sidebar right">
-    <div class="sidebar-title">YouTube videa</div>
-    <a href="https://www.youtube.com/watch?v=XQnuSzuqy7E&t=19s" target="_blank">📺 SYSTÉM KOSTÝMŮ, ACHIEVEMENTS, ITEM SHOP ITEMY</a>
-      <a href="https://www.youtube.com/watch?v=SSmo_dqHTew&t=1s" target="_blank">📺 MOUNT, PET, PASIVKY, ŠERPA, SKILLTREE, 6/7 A 8/9 BONUS A DALŠÍ</a>
-  </div>
+    <div class="sidebar right">
+  <div class="sidebar-title">YouTube videa</div>
+  <a href="#" onclick="showVideo('XQnuSzuqy7E')">📺 SYSTÉM KOSTÝMŮ, ACHIEVEMENTS, ITEM SHOP ITEMY</a>
+  <a href="#" onclick="showVideo('SSmo_dqHTew')">📺 MOUNT, PET, PASIVKY, ŠERPA, SKILLTREE, 6/7 A 8/9 BONUS A DALŠÍ</a>
+</div>
+
+<div id="videoPlayer" style="margin-top: 20px; text-align:center;">
+  <!-- sem se vloží iframe po kliknutí -->
+</div>
+
+<script>
+function showVideo(videoId) {
+  const playerDiv = document.getElementById('videoPlayer');
+  playerDiv.innerHTML = `
+    <iframe width="720" height="405" 
+      src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>`;
+}
+</script>
+
+
+<div id="videoPlayer" style="margin-top: 20px; text-align:center;">
+  <!-- sem se vloží iframe po kliknutí -->
+</div>
     
 
   <div class="layout">
