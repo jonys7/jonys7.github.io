@@ -2,17 +2,19 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Návod na hru</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-color: #f5f7fa;
-      --sidebar-bg: #1f2937;
-      --sidebar-text: #ffffff;
-      --main-bg: #ffffff;
-      --main-text: #333333;
+      --bg-color: #1e293b;
+      --panel-bg: #ffffff;
+      --panel-border: #e2e8f0;
       --accent: #3b82f6;
-      --link-hover: #60a5fa;
+      --text-dark: #1e293b;
+      --text-light: #f8fafc;
+      --text-muted: #64748b;
+      --hover: #f1f5f9;
     }
 
     * {
@@ -22,151 +24,305 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-light);
+    }
+
+    .layout {
       display: flex;
-      min-height: 100vh;
-      color: var(--main-text);
+      justify-content: center;
+      padding: 40px 20px;
     }
 
     .sidebar {
-      width: 20%;
-      background-color: var(--sidebar-bg);
-      color: var(--sidebar-text);
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      position: fixed;
+      top: 40px;
+      width: 220px;
+      height: calc(100vh - 80px);
+      background: var(--panel-bg);
+      border-radius: 16px;
+      padding: 24px;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--panel-border);
+      transition: all 0.3s ease;
     }
 
-    .sidebar h2 {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
+    .sidebar.left {
+      left: 120px;
+    }
+
+    .sidebar.right {
+      right: 120px;
+    }
+
+    .sidebar-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--panel-border);
+      padding-bottom: 6px;
     }
 
     .sidebar a {
-      color: var(--sidebar-text);
+      display: block;
+      color: var(--text-dark);
       text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      transition: background-color 0.3s, color 0.3s;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      transition: background 0.2s, transform 0.2s;
     }
 
     .sidebar a:hover {
-      background-color: var(--link-hover);
-      color: #fff;
+      background-color: var(--hover);
+      transform: translateX(4px);
     }
 
     .main {
-      flex-grow: 1;
-      background-color: var(--main-bg);
-      padding: 40px;
-      overflow-y: auto;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+      max-width: 800px;
+      width: 100%;
+      background: #fff;
+      padding: 48px;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+      color: var(--text-dark);
     }
 
-    .main h1 {
-      font-size: 2rem;
+    h1 {
+      font-size: 2.2rem;
       color: var(--accent);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
-    .main h2 {
+    h2 {
       font-size: 1.4rem;
-      margin-top: 25px;
-      margin-bottom: 10px;
+      margin-top: 32px;
+      margin-bottom: 14px;
+      color: var(--accent);
     }
 
-    .main p, .main ul {
-      margin-bottom: 15px;
-      line-height: 1.6;
+    p, ul {
+      margin-bottom: 16px;
+      line-height: 1.7;
     }
 
-    .main ul {
+    ul {
       padding-left: 20px;
     }
 
+    .guide-image {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      margin: 16px 0 28px 0;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Collapsible sekce - Prostě rady */
+    .collapsible {
+      background-color: var(--accent);
+      color: white;
+      cursor: pointer;
+      padding: 16px 20px;
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 600;
+      outline: none;
+      transition: background-color 0.3s ease;
+      margin-top: 32px;
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .collapsible:hover {
+      background-color: #2563eb; /* trochu tmavší modrá */
+    }
+
+    .collapsible:after {
+      content: '\25bc'; /* šipka dolů */
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+      margin-left: 12px;
+    }
+
+    .collapsible.active:after {
+      transform: rotate(180deg); /* otočí šipku nahoru */
+    }
+
+    .content-collapsible {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      background: #f9fafb;
+      color: #1e293b;
+      border-radius: 0 0 12px 12px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .collapsible.active + .content-collapsible {
+      max-height: 1000px; /* dostatečně velká hodnota */
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .content-collapsible img {
+  max-width: 100px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+
     /* Responsivita */
-    @media (max-width: 900px) {
-      body {
-        flex-direction: column;
-      }
-
+    @media (max-width: 1100px) {
       .sidebar {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 20px;
-        height: auto;
-      }
-
-      .main {
-        padding: 20px;
-      }
-
-      .sidebar h2 {
         display: none;
       }
 
-      .sidebar a {
-        padding: 10px;
-        font-size: 0.95rem;
+      .layout {
+        padding: 20px;
+      }
+
+      .main {
+        width: 100%;
+        padding: 30px 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Levý sloupec – Twitch -->
-  <div class="sidebar">
-    <h2>Streamy na Twitchi</h2>
-    <a href="https://www.twitch.tv/shroud" target="_blank">Shroud</a>
-    <a href="https://www.twitch.tv/xqc" target="_blank">xQc</a>
-    <a href="https://www.twitch.tv/sodapoppin" target="_blank">Sodapoppin</a>
+  <div class="sidebar left">
+    <div class="sidebar-title">Twitch Streamy</div>
+    <a href="https://www.twitch.tv/officialflowyy" target="_blank">🎮 OfficialFlowyy</a>
+      <a href="https://www.twitch.tv/dragonffaust" target="_blank">🎮 DragonFFaust</a>
   </div>
 
-  <!-- Hlavní obsah -->
-  <div class="main">
-    <h1>Návod na hru</h1>
-
-    <p>Vítej v herním průvodci! Tento návod ti pomůže pochopit základy a rychle se dostat do akce.</p>
-
-    <h2>1. Spuštění hry</h2>
-    <p>Stáhni hru z oficiálních stránek, nainstaluj ji a spusť. Při prvním spuštění si vytvoř účet nebo se přihlas.</p>
-
-    <h2>2. Ovládání</h2>
-    <ul>
-      <li><strong>WASD</strong> – pohyb</li>
-      <li><strong>Myš</strong> – míření a střelba</li>
-      <li><strong>Shift</strong> – sprint</li>
-      <li><strong>Mezerník</strong> – skok</li>
-    </ul>
-
-    <h2>3. Herní režimy</h2>
-    <p>Vyber si z několika herních módů jako:</p>
-    <ul>
-      <li>Deathmatch</li>
-      <li>Týmový boj</li>
-      <li>Battle Royale</li>
-    </ul>
-
-    <h2>4. Tipy pro začátečníky</h2>
-    <ul>
-      <li>Drž se spoluhráčů a komunikuj</li>
-      <li>Nesprintuj zbytečně – šetři energii</li>
-      <li>Používej sluchátka – slyšíš nepřátele</li>
-    </ul>
-
-    <p>Hodně štěstí a užij si hru!</p>
+  <div class="sidebar right">
+    <div class="sidebar-title">YouTube videa</div>
+    <a href="https://www.youtube.com/watch?v=XQnuSzuqy7E&t=19s" target="_blank">📺 SYSTÉM KOSTÝMŮ, ACHIEVEMENTS, ITEM SHOP ITEMY</a>
+      <a href="https://www.youtube.com/watch?v=SSmo_dqHTew&t=1s" target="_blank">📺 MOUNT, PET, PASIVKY, ŠERPA, SKILLTREE, 6/7 A 8/9 BONUS A DALŠÍ</a>
   </div>
 
-  <!-- Pravý sloupec – YouTube -->
-  <div class="sidebar">
-    <h2>Videa na YouTube</h2>
-    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Jak začít hrát</a>
-    <a href="https://www.youtube.com/watch?v=abc123" target="_blank">10 tipů pro nováčky</a>
-    <a href="https://www.youtube.com/watch?v=xyz789" target="_blank">Profesionální gameplay</a>
+  <div class="layout">
+    <div class="main">
+      <h1>Návod na hru</h1>
+      <p>Vítej v herním průvodci! Tento návod ti pomůže pochopit základy a rychle se dostat do akce.
+        Web pro vás vytvořil LeonyCZ.</p>
+<img src="https://i.imgur.com/SEycfNq.jpeg" alt="Úvodní obrázek"
+     style="max-width: 400px; max-height: 400px; width: 100%; height: auto;
+            border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            margin: 0 auto 24px auto; display: block;">
+
+
+      <!-- Collapsible sekce -->
+      <button type="button" class="collapsible">Základy</button>
+      <div class="content-collapsible">
+        <p><strong>Rada 1:</strong> Sekáš metin 2 minuty? Tak ho nesekej..</p>
+        <p><strong>Rada 2:</strong> Dungy i metiny musíš dávat tak aby ti to bylo příjemné.</p>
+        <p><strong>Rada 3:</strong> Pokud chodíš dung dvě minuty nebo dvě minuty ničíš metin nedělej to...</p>
+        <p><strong>Rada 4:</strong> Sleduj streamy a videa (v levém a pravém sloupci) – získáš spoustu tipů od profesionálů.</p>
+      </div>
+        
+        <button type="button" class="collapsible">Jak udělám level C1?</button>
+      <div class="content-collapsible">
+        <p><strong>Rada 1:</strong> V první mapě (teleport prsten máš v invu- Farmmaps- Piratbay (Lv.5)) dropuješ lahvičky s expy, celkem potřebuješ 150 lahviček, tj. 150 level.</p>
+        <p><strong>Rada 2:</strong> Následně klikneš vlevo dole na GUIDELINE.</p>
+          <img src="https://i.imgur.com/4YRcCOM.png" alt="Tipy a rady" />
+        <p><strong>Rada 3:</strong>Splníš co je požadováno. Dungy jsou pod klávesou F9.</p>
+        <p><strong>Rada 4:</strong> Po dokončení dostaneš lahvičku a talisman, klikneš na lahvičku a jsi C1.</p>
+           <p><strong>Rada 5:</strong>V každý mapě děláš 10 levelů, v jakémkoliv levelu můžeš chodit dungy i dropovat v jakékoliv mapě, level ti zvedá DMG.</p>
+      </div>
+        
+        <button type="button" class="collapsible">level C1 - C5?</button>
+      <div class="content-collapsible">
+        <p><strong>Rada 1:</strong> Dělejte si strom F12, dokud můžete, strom neuděláš hned, podívejte se na video.</p>
+        <p><strong>Rada 2:</strong>Zase pokračuj podle Guideline (je to základní průvodce hrou)</p>
+          <img src="https://i.imgur.com/4YRcCOM.png" alt="Tipy a rady" />
+        <p><strong>Rada 3:</strong>Splníš co je požadováno, teď expíš v druhý mapě.
+          </p>
+        <p><strong>Rada 4:</strong>F11 není tak důležitý zatím (podle mě)</p>
+           <p><strong>Rada 5:</strong>Kupte si kameny +5 do zbraně a brnění + rosy + dělej už biologa, který je u minimapy.
+          dole vpravo je remote shop
+          <img src="https://i.imgur.com/0R7uYuj.png" alt="Tipy a rady" />
+          General Store- Stones (kameny +5)<br>
+          General Store- Exchange- Shop (Biolog)<br>
+               Dew Crafter - Tau (base) zde koupíš základní rosy, dvojkový rosy a trojkový rosy děláš až později.</p>
+          <p><strong>Rada 6:</strong>Už ti padají i upky takže vylepšuj věci.
+          </p>
+          <p><strong>Rada 7:</strong>F8 máš pěkný odměny, jedničku si splň
+          </p>
+          <p><strong>Rada 8:</strong>Už jsi dostal i talisman, nezapomínej ho postupem hry vylepšovat.
+          </p>
+          <p><strong>Rada 9:</strong>Pokud máš možnost, najdi si cech, dává ti bonusy.
+          </p>
+      </div>
+        
+        <button type="button" class="collapsible">C5-C10</button>
+      <div class="content-collapsible">
+        <p><strong>Rada 1:</strong> Ve střetím a čtvrtém dungu už ti určitě padl prsten, celkem je tu 7 prstenů. Takže si je vylepši. (ty co máš nebo si kup od lidí, jsou levný)</p>
+        <p><strong>Rada 2:</strong>Dropni Legendary mounta v dungu nebo si ho kup od lidí,taky levný. Mount jde vylepšovat až na +10 přes magičák (Magical Metal (Mount)) ten ti padá v dungu. (Nejspíše to ještě nedáš) </p>
+        <p><strong>Rada 3:</strong> Kup si opasek (ANO je pvp tak nebreč a kup ho)<br>Remote Shop- General store - Exchange Shop, (Dark Dragon Belt+0) nezapomeň si ho vylepšovat, upky zase v dungu jak jinak. Po překování z něj bude i PVM!!</p>
+        <p><strong>Rada 4:</strong> Ve třetím dungu padá Potion of monster ( elík co ti přídá 25% monstra (jde vložit do křídel, mount kostým a pet kostým)
+          Koupit si je můžeš v IS tak jako ten elixír a nebo ve hře<br>
+          Remote Shop a v Cosmetic Store si najdi Wings (to jsou křídla) a Pet/Mount (nejrychlejší Mount je Fluffy) 
+          <strong>Tohle jsem dělal až později protože ten elík mi nepadl tak jsem si je ve hře koupil kus za 275kkk nebo v IS za 5k coinu.</strong></p>
+          <p><strong>Rada 5:</strong>Hlavně se podívej na ty videa, máš nějaký kostým bedny z metinu nebo z dungu? Vlož si kostým do kostýmu (návod je ve videu) a pomaličku začni smeltovat.
+          </p>
+          <p><strong>Rada 6:</strong>Třetí a čtvrtý dung už ti padají knížky na pasivky zatím ty základní celkem jsou tři úrovně ale to určitě znáš
+              Dej "C" , Skills a dole vidíš Passive Skills.
+          </p>
+          <p><strong>Rada 7:</strong>Udělej F8, druhý okno, první dva úkoly jsou Uppky co potřebuješ na ty lepší rosy, rosy už víš kde koupíš takže si kup ty druhý lepší.
+          </p>
+          <p><strong>Rada 8:</strong>Jak vidíš v F8 dostaneš tam točky na 8/9 bonus a na mounta, takže přidej 8/9 bonus a natoč si základ, taktéž začni řešit toho mounta. (Návod máš zase ve videu)
+          </p>
+          <p><strong>Rada 9:Pátý a šestý dung ti padají upky na opasek, upky na vylepšení mounta,bonusy do mounta, přidání a točení 8/9 bonus a ovoce na titul, titul si nasadíš v "C"  a pod jménem je ikonka Title GUI.</strong>
+          </p>
+          <p><strong>Rada 10:</strong>Překovej si zbraň na hadí, dropni si Legendary Switcher (Dung: Blade of the Forgotten, Doomed Samurai Gate) tím si do zbraně vložíš a taktéž i točíš průmku, budeš rád za 30% ale chceš 45%+ max je 50%.
+              Taky ti tam padají knížky na pasivky, takže zase vylepši pasivky.
+          </p>
+          <p><strong>Rada 11:</strong>Určitě si kup knížku Petskillbook Level 3(Double Hit) nasadíš si jí do peta , čím více procent tím lépe max je 25% ale určitě jsi chudý takže si kup třeba 11%.
+          </p>
+          <p><strong>Rada 12:</strong>Vylepši rukavice, kup si kameny do rukavic,
+              Room Stone, Reality Stone, Power Stone,nedropneš je zatím ale jsou levný, kameny si natoč yohara 30% , boss a metin 20%, pak je vlož do rukavice.
+          </p>
+      </div>
+
+      <p>Hodně štěstí a užij si hru!</p>
+
+      <p style="margin-top: 100vh; font-style: italic; color: var(--text-muted);">
+        Poděkovat mi můžete do PMka pá a pusu.
+      </p>
+    </div>
   </div>
+
+  <script>
+    // Script pro rozbalení sbalení collapsible sekce pouze přidáním/odebráním třídy
+    document.querySelectorAll('.collapsible').forEach(button => {
+      button.addEventListener('click', () => {
+        button.classList.toggle('active');
+      });
+    });
+  </script>
 
 </body>
 </html>
