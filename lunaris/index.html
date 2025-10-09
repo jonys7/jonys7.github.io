@@ -499,6 +499,23 @@ ul {
   min-width: 24px;
   text-align: center;
 }
+      .locked {
+  opacity: 0.5;
+  pointer-events: none; /* zakáže klikání na tlačítko */
+  user-select: none; /* zakáže výběr textu */
+  position: relative;
+}
+
+.locked::after {
+  content: "Pro zobrazení této sekce dej like ❤️";
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 0.9em;
+  color: red;
+  font-weight: bold;
+}
+
 
   </style>
 </head>
@@ -638,8 +655,8 @@ function showVideo(videoId) {
           </p>
       </div>
         
-        <button type="button" class="collapsible">C5-C10</button>
-      <div class="content-collapsible">
+        <button type="button" class="collapsible locked">C5 - C10</button>
+<div class="content-collapsible">
         <p><strong>Rada 1:</strong> Ve střetím a čtvrtém dungu už ti určitě padl prsten, celkem je tu 7 prstenů. Takže si je vylepši. (ty co máš nebo si kup od lidí, jsou levný)</p>
         <p><strong>Rada 2:</strong>Dropni Legendary mounta v dungu nebo si ho kup od lidí,taky levný. Mount jde vylepšovat až na +10 přes magičák (Magical Metal (Mount)) ten ti padá v dungu. (Nejspíše to ještě nedáš) </p>
         <p><strong>Rada 3:</strong> Kup si opasek (ANO je pvp tak nebreč a kup ho)<br>Remote Shop- General store - Exchange Shop, (Dark Dragon Belt+0) nezapomeň si ho vylepšovat, upky zase v dungu jak jinak. Po překování z něj bude i PVM!!</p>
@@ -695,6 +712,16 @@ coll.forEach(button => {
 const likeBtn = document.getElementById('likeBtn');
 const likeCount = document.getElementById('likeCount');
 const heartIcon = document.getElementById('heartIcon');
+const lockedSections = document.querySelectorAll('.collapsible.locked');
+
+function unlockSections() {
+  lockedSections.forEach(btn => {
+    btn.classList.remove('locked');
+    btn.style.opacity = '';
+    btn.style.pointerEvents = '';
+    btn.style.userSelect = '';
+  });
+}
 
 const LIKE_TIMESTAMP_KEY = 'likeWidgetTimestamp';
 const LIKE_COUNT_KEY = 'likeWidgetCount';
@@ -733,6 +760,7 @@ likeBtn.addEventListener('click', () => {
         button.classList.toggle('active');
       });
     });
+
   </script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
@@ -767,24 +795,29 @@ likeBtn.addEventListener('click', () => {
 
   // Ochrana proti spamu – 1x za 24 hodin
   const lastLike = localStorage.getItem("lastLikeTime");
-  if (lastLike && Date.now() - parseInt(lastLike) < 86400000) {
-    likeBtn.disabled = true;
-    heartIcon.classList.add("liked");
-  }
+if (lastLike && Date.now() - parseInt(lastLike) < 86400000) {
+  likeBtn.disabled = true;
+  heartIcon.classList.add("liked");
+  unlockSections();  
+}
+
 
   // Kliknutí na tlačítko
   likeBtn.addEventListener("click", async () => {
-    likeBtn.disabled = true;
-    heartIcon.classList.add("liked");
+  likeBtn.disabled = true;
+  heartIcon.classList.add("liked");
 
-    // Přičti like do databáze
-    const snapshot = await get(likeRef);
-    const currentLikes = snapshot.val() || 0;
-    await set(likeRef, currentLikes + 1);
+  // Přičti like do databáze
+  const snapshot = await get(likeRef);
+  const currentLikes = snapshot.val() || 0;
+  await set(likeRef, currentLikes + 1);
 
-    // Ulož čas posledního lajku
-    localStorage.setItem("lastLikeTime", Date.now());
-  });
+  // Ulož čas posledního lajku
+  localStorage.setItem("lastLikeTime", Date.now());
+
+  unlockSections(); // odemknout sekce po like
+});
+
 
   // Collapsible sekce
   document.querySelectorAll('.collapsible').forEach(button => {
