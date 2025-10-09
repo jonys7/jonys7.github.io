@@ -521,9 +521,71 @@ ul {
   pointer-events: none;
   user-select: none;
 }
+ .inventory-section p {
+  text-align: center;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+}
+
+.inventory {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
+}
 
 
+.item-slot {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #888;
+  background: #222;
+  position: relative;
+  cursor: pointer;
+}
 
+.item-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#tooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  max-width: 220px;
+  z-index: 9999;
+  display: none;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.item-slot {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  cursor: pointer;
+  margin: 5px;
+  user-select: none;
+  background-color: #222;
+  color: white;
+  position: relative;
+}
+
+.item-slot:hover {
+  background-color: #333;
+}
+      .content-collapsible p {
+    text-align: center;
+  }
 
   </style>
 </head>
@@ -558,7 +620,6 @@ function showVideo(videoId) {
     </iframe>`;
 }
 </script>
-
 
 <div id="videoPlayer" style="margin-top: 20px; text-align:center;">
   <!-- sem se vloží iframe po kliknutí -->
@@ -692,6 +753,36 @@ function showVideo(videoId) {
               Room Stone, Reality Stone, Power Stone, točky nedropneš zatím ale jsou levný, kameny si natoč yohara 30% , boss a metin 20%, pak je vlož do rukavice.
           </p>
       </div>
+         <button type="button" class="collapsible locked">Co točit do mounta + 7/8 bonusy.</button>
+<div class="content-collapsible">
+  <div class="inventory-section">
+    <p>Názorná ukázka</p>
+    <div class="inventory">
+      <div class="item-slot" data-item="mount">
+        <span class="icon">🐎</span>
+      </div>
+      <div class="item-slot" data-item="weapon">
+        <span class="icon">⚔️</span>
+      </div>
+      <div class="item-slot" data-item="armor">
+        <span class="icon">🧥</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="inventory-section">
+    <p>Přehled bonusů co nejvíc dává DMG</p>
+    <div class="inventory">
+      <div class="item-slot" data-item="top">
+        <span class="icon">⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="tooltip" class="tooltip"></div>
+</div>
+
+
       <p>Hodně štěstí a užij si hru!</p>
 
       <p style="margin-top: 100vh; font-style: italic; color: var(--text-muted);">
@@ -835,6 +926,35 @@ if (lastLike && Date.now() - parseInt(lastLike) < 86400000) {
   });
 </script>
 
+<script>
+  const bonuses = {
+  armor: '💀 Silný proti nemrtvým 15%<br>🪨 Silný proti metinům 15%',
+  weapon: '👹 Silný proti yohara 15%<br>🪨 Silný proti nemrtvým 15%',
+  mount: '👹 Silný proti yohara (max)<br>💀 Silný proti nemrtvým (max)',
+  top: '💀 Silný proti nemrtvým (dává nejvíc)<br>👹 Silný proti yohara (druhý top bonus)<br>🪨Silný proti metinům (třetí top bonus)'
+};
+
+
+const tooltip = document.getElementById('tooltip');
+const slots = document.querySelectorAll('.item-slot');
+
+slots.forEach(slot => {
+  slot.addEventListener('mousemove', (e) => {
+    const item = slot.dataset.item;
+    const bonusText = bonuses[item] || 'Žádné bonusy';
+
+    tooltip.innerHTML = bonusText;
+    tooltip.style.left = `${e.clientX + 10}px`;  // menší offset
+    tooltip.style.top = `${e.clientY + 10}px`;
+    tooltip.style.display = 'block';
+  });
+
+  slot.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+  });
+});
+
+</script>
 
 </body>
 </html>
