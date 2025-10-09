@@ -499,27 +499,29 @@ ul {
   min-width: 24px;
   text-align: center;
 }
-.locked {
-  /* Místo opacity, ztlumíme jen barvu textu, aby byl stále čitelný */
-  color: #666; /* tmavě šedá, čitelnější než průhlednost */
-  
+      .locked {
+  opacity: 0.5;
   pointer-events: none; /* zakáže klikání na tlačítko */
   user-select: none; /* zakáže výběr textu */
   position: relative;
-  background-color: #f9f9f9; /* světlejší pozadí, aby bylo poznat, že je zamčené */
-  border: 1px solid #ccc; /* lehký rámeček */
 }
 
 .locked::after {
   content: "Pro zobrazení této sekce dej like ❤️";
   position: absolute;
-  bottom: -20px; /* posunul jsem trochu dolů, aby text nezasahoval do tlačítka */
-  right: 0;
-  font-size: 0.9em;
-  color: red;
-  font-weight: bold;
-  white-space: nowrap;
+  bottom: 5px;
+  right: 10px;
+  font-size: 1em;
+  color: #ff0000; /* čistě červená */
+  font-weight: 900;
+  background-color: rgba(135, 206, 250, 0.8); /* lightblue s průhledností */
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  pointer-events: none;
+  user-select: none;
 }
+
 
 
 
