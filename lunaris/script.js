@@ -8,13 +8,14 @@ const bonuses = {
 const tooltip = document.getElementById('tooltip');
 const slots = document.querySelectorAll('.item-slot');
 
+// Tooltip zobrazení
 slots.forEach(slot => {
   slot.addEventListener('mousemove', (e) => {
     const item = slot.dataset.item;
     const bonusText = bonuses[item] || 'Žádné bonusy';
 
     tooltip.innerHTML = bonusText;
-    tooltip.style.left = `${e.clientX + 10}px`;  // menší offset
+    tooltip.style.left = `${e.clientX + 10}px`;
     tooltip.style.top = `${e.clientY + 10}px`;
     tooltip.style.display = 'block';
   });
@@ -30,6 +31,7 @@ const likeCount = document.getElementById('likeCount');
 const heartIcon = document.getElementById('heartIcon');
 const lockedSections = document.querySelectorAll('.collapsible.locked');
 
+// Funkce pro odemknutí sekcí
 function unlockSections() {
   lockedSections.forEach(btn => {
     btn.classList.remove('locked');
@@ -39,32 +41,33 @@ function unlockSections() {
   });
 }
 
+// LIKE timestamp a count z localStorage
 const LIKE_TIMESTAMP_KEY = 'likeWidgetTimestamp';
 const LIKE_COUNT_KEY = 'likeWidgetCount';
 
 let count = parseInt(localStorage.getItem(LIKE_COUNT_KEY)) || 0;
 likeCount.textContent = count;
 
+// Funkce pro kontrolu, zda můžeš znovu kliknout na LIKE
 function canLikeAgain() {
   const last = parseInt(localStorage.getItem(LIKE_TIMESTAMP_KEY));
   if (!last) return true;
-  return (Date.now() - last) > 24 * 60 * 60 * 1000;
+  return (Date.now() - last) > 24 * 60 * 60 * 1000; // 24 hodin
 }
 
+// Funkce pro deaktivaci LIKE tlačítka
 function disableLike() {
   likeBtn.disabled = true;
   heartIcon.classList.add('liked');
 }
 
-if (!canLikeAgain()) {
-  disableLike();
-}
-
+// Zkontroluj, zda můžeš znovu dát LIKE při načítání stránky
 if (!canLikeAgain()) {
   disableLike();
   unlockSections(); // Odemkne sekce i při načtení, pokud už je like v localStorage
 }
 
+// Event pro LIKE tlačítko
 likeBtn.addEventListener('click', () => {
   if (!canLikeAgain()) return;
   count++;
@@ -77,16 +80,8 @@ likeBtn.addEventListener('click', () => {
   unlockSections(); // Odemkne sekce po kliknutí na like
 });
 
-
-// Script pro rozbalení/sbalení collapsible sekce přidáním/odebráním třídy
-document.querySelectorAll('.collapsible').forEach(button => {
-  button.addEventListener('click', () => {
-    button.classList.toggle('active');
-  });
-});
-
-const coll = document.querySelectorAll(".collapsible");
-coll.forEach(button => {
+// Rozbalování a sbalování sekcí
+document.querySelectorAll(".collapsible").forEach(button => {
   button.addEventListener("click", () => {
     button.classList.toggle("active");
     const content = button.nextElementSibling;
@@ -98,8 +93,10 @@ coll.forEach(button => {
   });
 });
 
+// Funkce pro zobrazení videa
 function showVideo(videoId) {
   const playerDiv = document.getElementById('videoPlayer');
+  playerDiv.innerHTML = ''; // Odstraní jakýkoli existující obsah
   playerDiv.innerHTML = `
     <iframe width="720" height="405" 
       src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
