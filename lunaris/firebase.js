@@ -1,62 +1,107 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-  // Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyAReUl0xGwLnbbM6YvKMc5AqxWEUFPW__E",
-    authDomain: "lunaris-ee6cd.firebaseapp.com",
-    databaseURL: "https://lunaris-ee6cd-default-rtdb.firebaseio.com",
-    projectId: "lunaris-ee6cd",
-    storageBucket: "lunaris-ee6cd.appspot.com",  // opraveno
-    messagingSenderId: "172076062083",
-    appId: "1:172076062083:web:712f50b69ede49a660d2b6",
-    measurementId: "G-46RVD4X4B0"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyDVXRhH34kfhTgL3JD0DXIsy6PxLqKZUPg",
+  authDomain: "lunaris-a9430.firebaseapp.com",
+  databaseURL: "https://lunaris-a9430-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "lunaris-a9430",
+  storageBucket: "lunaris-a9430.appspot.com",
+  messagingSenderId: "189163517365",
+  appId: "1:189163517365:web:dd2e1401a3baa6026015fc",
+  measurementId: "G-EB4488LZJV"
+};
 
-  // Inicializace Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+
+const likeBtn = document.getElementById("likeBtn");
+const likeCount = document.getElementById("likeCount");
+const heartIcon = document.getElementById("heartIcon");
+
+let currentUser = null;
+
+signInAnonymously(auth)
+  .catch((error) => {
+    console.error("Chyba při anonymním přihlášení:", error);
+  });
+
+// Po přihlášení nastav currentUser, zkontroluj like status a odemkni sekce, pokud uživatel liknul
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
+    const liked = await checkUserLikeStatus(user.uid);
+    subscribeToLikes();
+
+    if (liked) {
+      unlockSections();
+    }
+  } else {
+    currentUser = null;
+  }
+});
+
+function subscribeToLikes() {
   const likeRef = ref(db, "likes/count");
-
-  const likeBtn = document.getElementById("likeBtn");
-  const likeCount = document.getElementById("likeCount");
-  const heartIcon = document.getElementById("heartIcon");
-
-  // Načítání lajků v reálném čase
   onValue(likeRef, (snapshot) => {
     const val = snapshot.val() || 0;
     likeCount.textContent = val;
+    console.log("Aktuální počet lajků: ", val);
   });
-
-  // Ochrana proti spamu – 1x za 24 hodin
-  const lastLike = localStorage.getItem("lastLikeTime");
-if (lastLike && Date.now() - parseInt(lastLike) < 86400000) {
-  likeBtn.disabled = true;
-  heartIcon.classList.add("liked");
-  unlockSections();  
 }
 
+// Zkontroluj, jestli už uživatel liknul
+async function checkUserLikeStatus(uid) {
+  const userLikeRef = ref(db, `likes/users/${uid}`);
+  const snapshot = await get(userLikeRef);
+  if (snapshot.exists() && snapshot.val().value === true) {
+    disableLike();
+    return true;
+  }
+  return false;
+}
 
-  // Kliknutí na tlačítko
-  likeBtn.addEventListener("click", async () => {
+function disableLike() {
   likeBtn.disabled = true;
-  heartIcon.classList.add("liked");
+  heartIcon.style.fill = "#e0245e"; // červená
+}
 
-  // Přičti like do databáze
-  const snapshot = await get(likeRef);
-  const currentLikes = snapshot.val() || 0;
-  await set(likeRef, currentLikes + 1);
-
-  // Ulož čas posledního lajku
-  localStorage.setItem("lastLikeTime", Date.now());
-
-  unlockSections(); // odemknout sekce po like
-});
-
-
-  // Collapsible sekce
-  document.querySelectorAll('.collapsible').forEach(button => {
-    button.addEventListener('click', () => {
-      button.classList.toggle('active');
-    });
+// Odemkni zamčené sekce
+function unlockSections() {
+  const lockedSections = document.querySelectorAll(".locked");
+  lockedSections.forEach(section => {
+    section.classList.remove("locked");
   });
+  console.log("Sekce byly odemčeny.");
+}
+
+likeBtn.addEventListener("click", async () => {
+  if (!currentUser) {
+    alert("Není přihlášen uživatel!");
+    return;
+  }
+  likeBtn.disabled = true;
+  heartIcon.style.fill = "#e0245e";
+
+  const userLikeRef = ref(db, `likes/users/${currentUser.uid}`);
+  const userSnapshot = await get(userLikeRef);
+  if (userSnapshot.exists() && userSnapshot.val().value === true) {
+    // Už uživatel liknul
+    return;
+  }
+
+  try {
+    const likeCountRef = ref(db, "likes/count");
+    const snapshot = await get(likeCountRef);
+    const currentLikes = snapshot.val() || 0;
+    await set(likeCountRef, currentLikes + 1);
+    await set(userLikeRef, { value: true, timestamp: Date.now() });  // Uloží objekt s časem
+    disableLike();
+    unlockSections(); // odemkni sekce po like
+    console.log("Like byl úspěšně uložen.");
+  } catch (error) {
+    console.error("Chyba při ukládání lajku do databáze:", error);
+  }
+});

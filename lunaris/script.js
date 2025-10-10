@@ -5,7 +5,6 @@ const bonuses = {
   top: '💀 Silný proti nemrtvým (dává nejvíc)<br>👹 Silný proti yohara (druhý top bonus)<br>🪨Silný proti metinům (třetí top bonus)'
 };
 
-
 const tooltip = document.getElementById('tooltip');
 const slots = document.querySelectorAll('.item-slot');
 
@@ -24,7 +23,8 @@ slots.forEach(slot => {
     tooltip.style.display = 'none';
   });
 });
- // LIKE widget script (doplněk)
+
+// LIKE widget script (doplněk)
 const likeBtn = document.getElementById('likeBtn');
 const likeCount = document.getElementById('likeCount');
 const heartIcon = document.getElementById('heartIcon');
@@ -60,6 +60,11 @@ if (!canLikeAgain()) {
   disableLike();
 }
 
+if (!canLikeAgain()) {
+  disableLike();
+  unlockSections(); // Odemkne sekce i při načtení, pokud už je like v localStorage
+}
+
 likeBtn.addEventListener('click', () => {
   if (!canLikeAgain()) return;
   count++;
@@ -68,14 +73,18 @@ likeBtn.addEventListener('click', () => {
   heartIcon.classList.add('liked');
   localStorage.setItem(LIKE_TIMESTAMP_KEY, Date.now());
   disableLike();
+
+  unlockSections(); // Odemkne sekce po kliknutí na like
 });
 
-    // Script pro rozbalení sbalení collapsible sekce pouze přidáním/odebráním třídy
-    document.querySelectorAll('.collapsible').forEach(button => {
-      button.addEventListener('click', () => {
-        button.classList.toggle('active');
-      });
-    });
+
+// Script pro rozbalení/sbalení collapsible sekce přidáním/odebráním třídy
+document.querySelectorAll('.collapsible').forEach(button => {
+  button.addEventListener('click', () => {
+    button.classList.toggle('active');
+  });
+});
+
 const coll = document.querySelectorAll(".collapsible");
 coll.forEach(button => {
   button.addEventListener("click", () => {
@@ -88,6 +97,7 @@ coll.forEach(button => {
     }
   });
 });
+
 function showVideo(videoId) {
   const playerDiv = document.getElementById('videoPlayer');
   playerDiv.innerHTML = `
