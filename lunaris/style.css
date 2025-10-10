@@ -571,3 +571,69 @@ ul {
       .content-collapsible p {
     text-align: center;
   }
+.wrapper {
+  display: flex;
+  justify-content: center; /* horizontálně na střed */
+  align-items: center;     /* vertikálně na střed */
+  height: 100vh;           /* výška viewportu */
+  padding: 20px;           /* volitelné, aby to nebylo úplně u okrajů */
+  box-sizing: border-box;
+}
+.pet-container {
+  background-color: #23345f;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  max-width: 420px;
+  width: 100%;
+  padding: 25px 30px;
+  text-align: center;
+}
+
+.pet-container img {
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid #2f456d;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-section h3 {
+  color: #7db4ff;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.info-section p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 12px 0;
+  color: #c1c9d9;
+}
+
+.highlight {
+  color: #ffd966;
+  font-weight: 700;
+}
+
+strong {
+  color: #ffd966;
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+  color: #a3afcc;
+}
+
+a {
+  color: #8acaff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
