@@ -28,10 +28,10 @@ signInAnonymously(auth)
     console.error("Chyba při anonymním přihlášení:", error);
   });
 
-// Po přihlášení nastav currentUser, zkontroluj like status a odemkni sekce, pokud uživatel liknul
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     currentUser = user;
+    console.log("Uživatel přihlášen:", user.uid);
     const liked = await checkUserLikeStatus(user.uid);
     subscribeToLikes();
 
@@ -40,6 +40,7 @@ onAuthStateChanged(auth, async (user) => {
     }
   } else {
     currentUser = null;
+    console.log("Uživatel není přihlášen.");
   }
 });
 
@@ -52,7 +53,6 @@ function subscribeToLikes() {
   });
 }
 
-// Zkontroluj, jestli už uživatel liknul
 async function checkUserLikeStatus(uid) {
   const userLikeRef = ref(db, `likes/users/${uid}`);
   const snapshot = await get(userLikeRef);
@@ -68,7 +68,6 @@ function disableLike() {
   heartIcon.style.fill = "#e0245e"; // červená
 }
 
-// Odemkni zamčené sekce
 function unlockSections() {
   const lockedSections = document.querySelectorAll(".locked");
   lockedSections.forEach(section => {
@@ -82,13 +81,16 @@ likeBtn.addEventListener("click", async () => {
     alert("Není přihlášen uživatel!");
     return;
   }
+  
+  console.log("Zápis do like, uživatel:", currentUser.uid);
+
   likeBtn.disabled = true;
   heartIcon.style.fill = "#e0245e";
 
   const userLikeRef = ref(db, `likes/users/${currentUser.uid}`);
   const userSnapshot = await get(userLikeRef);
   if (userSnapshot.exists() && userSnapshot.val().value === true) {
-    // Už uživatel liknul
+    console.log("Uživatel již liknul.");
     return;
   }
 
@@ -96,11 +98,15 @@ likeBtn.addEventListener("click", async () => {
     const likeCountRef = ref(db, "likes/count");
     const snapshot = await get(likeCountRef);
     const currentLikes = snapshot.val() || 0;
+
+    console.log("Počet lajků před přičtením:", currentLikes);
     await set(likeCountRef, currentLikes + 1);
-    await set(userLikeRef, { value: true, timestamp: Date.now() });  // Uloží objekt s časem
-    disableLike();
-    unlockSections(); // odemkni sekce po like
+    console.log("Počet lajků byl úspěšně aktualizován na:", currentLikes + 1);
+    
+    await set(userLikeRef, { value: true, timestamp: Date.now() });
     console.log("Like byl úspěšně uložen.");
+    disableLike();
+    unlockSections(); // Odemkni sekce po like
   } catch (error) {
     console.error("Chyba při ukládání lajku do databáze:", error);
   }
