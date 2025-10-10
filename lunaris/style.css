@@ -618,7 +618,7 @@ ul {
   font-weight: 700;
 }
 
-strong {
+.pet-container strong {
   color: #ffd966;
   font-weight: 700;
 }
@@ -636,4 +636,145 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+.custom-rank-box {
+  background-color: #2a3550;
+  border-radius: 16px;
+  padding: 30px 40px;
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.custom-rank-box h2 {
+  color: #8acaff;
+  font-size: 24px;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+.custom-rank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.custom-rank .flag {
+  width: 32px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.custom-rank .level {
+  color: #ff4d4d; /* červená */
+  font-weight: bold;
+}
+
+
+.custom-rank .title {
+  color: #ff66cc; /* růžová */
+  font-weight: bold;
+}
+
+.custom-rank .name {
+  color: #ffd700; /* žlutá */
+  font-weight: bold;
+}
+
+.rank-info {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #d4d9e3;
+}
+.rank-wrapper {
+  background-color: #23345f;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  max-width: 420px;
+  width: 100%;
+  padding: 20px 30px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.rank-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.flag-uk {
+  width: 32px;
+  height: 20px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.lvl {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.red {
+  color: #ff4c4c;
+}
+
+.nemesis {
+  color: #000000;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.title {
+  color: #ff69b4;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.pink {
+  color: #ff69b4;
+}
+
+.username {
+  color: #ffd966;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.yellow {
+  color: #ffd966;
+}
+
+.rank-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #c1c9d9;
+  text-align: center;
+}
+
+.rank-text em {
+  font-style: italic;
+  color: #a3afcc;
+}
+
+.rank-text kbd {
+  background-color: #2f456d;
+  color: #8acaff;
+  padding: 3px 7px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: monospace;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
