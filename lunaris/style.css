@@ -808,3 +808,50 @@ a:hover {
 .sidebar.right {
   margin-top: 20px;
 }
+.content-collapsible h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #34495e;
+  font-weight: 700;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+
+/* Odsazení odstavců */
+.content-collapsible p {
+  margin: 12px 0;
+}
+
+/* Styl pro seznamy */
+.content-collapsible ul {
+  padding-left: 20px;
+  margin: 10px 0 15px 0;
+  list-style-type: disc;
+  color: #34495e;
+  font-weight: 500;
+}
+
+/* Zvýraznění kláves */
+kbd {
+  background-color: #34495e;
+  color: #ecf0f1;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Segoe UI Mono', Consolas, monospace;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Oddělovač (hr) */
+.content-collapsible hr {
+  border: none;
+  border-top: 2px solid #3498db;
+  margin: 25px 0;
+}
+
+/* Případný efekt otevření/uzavření (pokud máš JS na to) */
+.content-collapsible.collapsed {
+  display: none;
+}
