@@ -29,15 +29,15 @@ slots.forEach(slot => {
 const likeBtn = document.getElementById('likeBtn');
 const likeCount = document.getElementById('likeCount');
 const heartIcon = document.getElementById('heartIcon');
-const lockedSections = document.querySelectorAll('.collapsible.locked');
+const lockedSections = document.querySelectorAll('.collapsible.locked');  // Vybereme všechny sekce s class="locked"
 
 // Funkce pro odemknutí sekcí
 function unlockSections() {
   lockedSections.forEach(btn => {
-    btn.classList.remove('locked');
-    btn.style.opacity = '';
-    btn.style.pointerEvents = '';
-    btn.style.userSelect = '';
+    btn.classList.remove('locked'); // Odstraní třídu "locked"
+    btn.style.opacity = '1';  // Zajistí, že sekce bude viditelná
+    btn.style.pointerEvents = 'auto'; // Umožní kliknutí
+    btn.style.userSelect = 'auto'; // Umožní výběr textu
   });
 }
 

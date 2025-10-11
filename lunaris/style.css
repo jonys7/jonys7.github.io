@@ -327,7 +327,9 @@ ul {
   align-items: center;
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
 }
-
+.collapsible.active {
+  background-color: #2c3e50; /* Světlejší tmavá pro otevřenou sekci */
+}
 .collapsible:hover {
   background-color: #1e40af;
 }
