@@ -301,4 +301,30 @@
 <script type="module" src="firebase.js"></script>
 
 </body>
+    <footer style="padding: 15px 10px; text-align: center; margin-top: 20px; color: #fff;">
+  <p style="color: #fff; max-width: 600px; margin: 0 auto; font-size: 13px; line-height: 1.4;">
+    &copy; 2025 Lunaris návod na hru. V souladu s platnými zákony a ochranou soukromí.
+    <br>
+    <a href="#" id="privacy-link" style="color: #4da6ff; text-decoration: underline; cursor: pointer;">Zásady ochrany osobních údajů</a>
+  </p>
+  <div id="privacy-policy" style="display:none; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; color: #fff; font-size: 13px; text-align: left;">
+    <h3 style="color: #fff; margin-bottom: 8px;">Zásady ochrany osobních údajů</h3>
+    <p style="color: #fff; margin-bottom: 8px;">
+      Tento web sbírá anonymní údaje o počtu "lajků" pomocí Firebase, aby mohl zlepšovat uživatelský zážitek. Žádné osobní údaje nejsou ukládány ani sdíleny.
+    </p>
+    <p style="color: #fff;">
+      Používáním tohoto webu souhlasíte se sběrem anonymních dat popsaných výše.
+    </p>
+  </div>
+</footer>
+
+<script>
+  const privacyLink = document.getElementById('privacy-link');
+  const privacyPolicy = document.getElementById('privacy-policy');
+  privacyLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    privacyPolicy.style.display = privacyPolicy.style.display === 'none' ? 'block' : 'none';
+  });
+</script>
+
 </html>
