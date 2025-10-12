@@ -486,28 +486,26 @@ ul {
   min-width: 24px;
   text-align: center;
 }
-      .locked {
+ .locked {
   opacity: 0.5;
-  pointer-events: none; /* zakáže klikání na tlačítko */
-  user-select: none; /* zakáže výběr textu */
+  filter: grayscale(60%);
   position: relative;
+  pointer-events: none;
 }
 
 .locked::after {
-  content: "Pro zobrazení této sekce dej like ❤️";
+  content: "🔒 Odemkne se po like";
   position: absolute;
-  bottom: 5px;
-  right: 10px;
-  font-size: 1em;
-  color: #ff0000; /* čistě červená */
-  font-weight: 900;
-  background-color: rgba(135, 206, 250, 0.8); /* lightblue s průhledností */
-  padding: 2px 6px;
-  border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.3);
-  pointer-events: none;
-  user-select: none;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: #f87171;
+  background: rgba(255,255,255,0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
 }
+
  .inventory-section p {
   text-align: center;
   font-weight: bold;
