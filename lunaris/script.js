@@ -1,12 +1,20 @@
 const bonuses = {
-  armor: '💀 Silný proti nemrtvým 15%<br>🪨 Silný proti metinům 15%',
-  weapon: '👹 Silný proti yohara 15%<br>🪨 Silný proti nemrtvým 15%',
-  mount: '💀 Silný proti nemrtvým (max)<br>🪨 Silný proti metinům (max)',
-  top: '💀 Silný proti nemrtvým (dává nejvíc)<br>👹 Silný proti yohara (druhý top bonus)<br>🪨Silný proti metinům (třetí top bonus)'
+  armor: '🧥 <strong>Brnění (alternativní volba):</strong><br>💀 Silný proti nemrtvým 15%<br>🪨 Silný proti metinům 15%',
+  weapon: '⚔️ <strong>Zbraň (nejlepší volba):</strong><br>👹 Silný proti yohara 15%<br>🪨 Silný proti nemrtvým 15%',
+  mount: '🐎 <strong>Mount:</strong><br>💀 Silný proti nemrtvým (max)<br>🪨 Silný proti metinům (max)<br>🐉 Silný proti příšerám (max)',
+  top: '⭐ <strong>TOP bonusy (nejvíc DMG):</strong><br><ol style="margin:6px 0 0 18px; padding:0; color:#fff;"><li style="margin-bottom:3px;"><span style="color:#3aff3a;">💀 Silný proti nemrtvým</span> — <strong>dává nejvíc</strong></li><li style="margin-bottom:3px;"><span style="color:#ffd93a;">👹 Silný proti yohara</span> — <em>druhý top bonus</em></li><li style="margin-bottom:3px;"><span style="color:#3a9fff;">🪨 Silný proti metinům</span> — <em>třetí top bonus</em></li><li><span style="color:#ff6f61;">👾 Silný proti příšerám</span> — <em>nejméně DMG</em></li></ol>'
+
 };
 
 const tooltip = document.getElementById('tooltip');
 const slots = document.querySelectorAll('.item-slot');
+slots.forEach(slot => {
+  const item = slot.dataset.item;
+  if (item === 'weapon') slot.classList.add('best');
+  if (item === 'armor') slot.classList.add('alt');
+  if (item === 'mount') slot.classList.add('mount');
+});
+
 
 // Tooltip zobrazení
 slots.forEach(slot => {
