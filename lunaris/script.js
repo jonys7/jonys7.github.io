@@ -33,49 +33,42 @@ slots.forEach(slot => {
   });
 });
 
-// LIKE widget script (doplněk)
 const likeBtn = document.getElementById('likeBtn');
 const likeCount = document.getElementById('likeCount');
 const heartIcon = document.getElementById('heartIcon');
-const lockedSections = document.querySelectorAll('.collapsible.locked');  // Vybereme všechny sekce s class="locked"
+const lockedSections = document.querySelectorAll('.collapsible.locked'); 
 
-// Funkce pro odemknutí sekcí
 function unlockSections() {
   lockedSections.forEach(btn => {
-    btn.classList.remove('locked'); // Odstraní třídu "locked"
-    btn.style.opacity = '1';  // Zajistí, že sekce bude viditelná
-    btn.style.pointerEvents = 'auto'; // Umožní kliknutí
-    btn.style.userSelect = 'auto'; // Umožní výběr textu
+    btn.classList.remove('locked'); 
+    btn.style.opacity = '1';  
+    btn.style.pointerEvents = 'auto'; 
+    btn.style.userSelect = 'auto'; 
   });
 }
 
-// LIKE timestamp a count z localStorage
 const LIKE_TIMESTAMP_KEY = 'likeWidgetTimestamp';
 const LIKE_COUNT_KEY = 'likeWidgetCount';
 
 let count = parseInt(localStorage.getItem(LIKE_COUNT_KEY)) || 0;
 likeCount.textContent = count;
 
-// Funkce pro kontrolu, zda můžeš znovu kliknout na LIKE
 function canLikeAgain() {
   const last = parseInt(localStorage.getItem(LIKE_TIMESTAMP_KEY));
   if (!last) return true;
   return (Date.now() - last) > 24 * 60 * 60 * 1000; // 24 hodin
 }
 
-// Funkce pro deaktivaci LIKE tlačítka
 function disableLike() {
   likeBtn.disabled = true;
   heartIcon.classList.add('liked');
 }
 
-// Zkontroluj, zda můžeš znovu dát LIKE při načítání stránky
 if (!canLikeAgain()) {
   disableLike();
-  unlockSections(); // Odemkne sekce i při načtení, pokud už je like v localStorage
+  unlockSections(); 
 }
 
-// Event pro LIKE tlačítko
 likeBtn.addEventListener('click', () => {
   if (!canLikeAgain()) return;
   count++;
@@ -85,10 +78,9 @@ likeBtn.addEventListener('click', () => {
   localStorage.setItem(LIKE_TIMESTAMP_KEY, Date.now());
   disableLike();
 
-  unlockSections(); // Odemkne sekce po kliknutí na like
+  unlockSections(); 
 });
 
-// Rozbalování a sbalování sekcí
 document.querySelectorAll(".collapsible").forEach(button => {
   button.addEventListener("click", () => {
     button.classList.toggle("active");
@@ -101,10 +93,9 @@ document.querySelectorAll(".collapsible").forEach(button => {
   });
 });
 
-// Funkce pro zobrazení videa
 function showVideo(videoId) {
   const playerDiv = document.getElementById('videoPlayer');
-  playerDiv.innerHTML = ''; // Odstraní jakýkoli existující obsah
+  playerDiv.innerHTML = ''; 
   playerDiv.innerHTML = `
     <iframe width="720" height="405" 
       src="https://www.youtube.com/embed/${videoId}?autoplay=1" 

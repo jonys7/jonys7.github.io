@@ -558,7 +558,6 @@ ul {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* 🟢 Nejlepší volba (zbraň) */
 .item-slot.best {
   border-color: #3aff3a;
   box-shadow: 0 0 10px rgba(58, 255, 58, 0.6);
@@ -576,7 +575,6 @@ ul {
   border-radius: 4px;
 }
 
-/* 🟡 Alternativní volba (brnění) */
 .item-slot.alt {
   border-color: #ffd93a;
   box-shadow: 0 0 10px rgba(255, 217, 58, 0.5);
@@ -594,7 +592,6 @@ ul {
   border-radius: 4px;
 }
 
-/* 🔵 Informativní (mount) */
 .item-slot.mount {
   border-color: #3a9fff;
   box-shadow: 0 0 10px rgba(58, 159, 255, 0.4);
@@ -617,10 +614,10 @@ ul {
   }
 .wrapper {
   display: flex;
-  justify-content: center; /* horizontálně na střed */
-  align-items: center;     /* vertikálně na střed */
-  height: 100vh;           /* výška viewportu */
-  padding: 20px;           /* volitelné, aby to nebylo úplně u okrajů */
+  justify-content: center; 
+  align-items: center;     
+  height: 100vh;          
+  padding: 20px;          
   box-sizing: border-box;
 }
 .pet-container {
@@ -716,18 +713,18 @@ a:hover {
 }
 
 .custom-rank .level {
-  color: #ff4d4d; /* červená */
+  color: #ff4d4d;
   font-weight: bold;
 }
 
 
 .custom-rank .title {
-  color: #ff66cc; /* růžová */
+  color: #ff66cc;
   font-weight: bold;
 }
 
 .custom-rank .name {
-  color: #ffd700; /* žlutá */
+  color: #ffd700; 
   font-weight: bold;
 }
 
