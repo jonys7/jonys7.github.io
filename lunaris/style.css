@@ -494,7 +494,6 @@ ul {
 }
 
 .locked::after {
-  content: "🔒 Odemkne se po like";
   position: absolute;
   right: 18px;
   top: 50%;
