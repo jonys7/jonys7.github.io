@@ -1037,7 +1037,7 @@ a.ended-event .ended-label {
   line-height: 1.6;
   font-size: 15px;
   color: #ffffff;
-  background-color: #111122; /* tmavší, oddělené pozadí */
+  background-color: #111122; 
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.5);
   text-shadow: 0 1px 2px rgba(0,0,0,0.7); /* zvýraznění textu */
@@ -1065,7 +1065,7 @@ a.ended-event .ended-label {
 }
 
 .cap-tip span {
-  color: #ffffff; /* text uvnitř */
+  color: #ffffff;
 }
 
 
@@ -1092,5 +1092,43 @@ a.ended-event .ended-label {
     padding: 10px;
   }
 }
+.collapsible.locked,
+.content-collapsible.locked {
+  position: relative;
+  overflow: hidden;
+}
+.collapsible.locked::before,
+.content-collapsible.locked::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.85) 35%, rgba(0, 0, 0, 0.6) 100%);
+  z-index: 4;
+  border-radius: 10px;
+}
+.collapsible.locked::after,
+.content-collapsible.locked::after {
+  content: "🔒 Sekce se odemkne po ❤️";
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  color: #ff7b7b;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: right;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  background: rgba(20, 20, 20, 0.7);
+  padding: 10px 20px;
+  border-radius: 10px;
+  z-index: 5;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
 
-
+.collapsible.locked:hover::after,
+.content-collapsible.locked:hover::after {
+  color: #ff9999;
+  background: rgba(30, 30, 30, 0.85);
+  transition: 0.3s ease;
+}
