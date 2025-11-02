@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Metin — Úkolníček</title>
+  <style>
+    :root{
+      --bg-1: #1a1c22;
+      --bg-2: #23262f;
+      --card: #2e323c;
+      --muted: #a0aec0;
+      --accent-1: #7c3aed;
+      --accent-2: #06b6d4;
+      --accent-grad: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      --success: #10b981;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:linear-gradient(180deg,var(--bg-2),var(--bg-1)); color:#f1f5f9;
+      display:flex; justify-content:center; align-items:flex-start; padding:40px; gap:30px; min-height:100vh;
+    }
+    .sidebar{
+      width:450px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:15px;
+    }
+    .image-box{
+      width:450px; height:450px; background:#2e323c; border:2px dashed #555; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#a0aec0; overflow:hidden;
+    }
+    .image-box img{width:100%; height:100%; object-fit:cover;}
+    .sidebar input[type=file]{display:none;}
+    .upload-label{background:var(--accent-grad); padding:10px 20px; border-radius:10px; color:white; cursor:pointer; font-weight:600;}
+
+    .main{
+      display:flex; flex-direction:column; gap:30px; width:100%; max-width:700px;
+    }
+
+    .wrap{
+      width:100%;
+      background:var(--card);
+      padding:20px;
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.3);
+      border:1px solid #3b3f47;
+    }
+
+    header{display:flex; flex-direction:column; gap:6px; margin-bottom:20px; border-bottom:1px solid #3b3f47; padding-bottom:10px}
+    header h1{font-size:22px; margin:0; color:white}
+    header p{margin:0; color:var(--muted); font-size:13px}
+
+    .new-task{display:flex; gap:10px; margin-bottom:14px}
+    .new-task input[type=text]{flex:1; padding:10px 12px; border-radius:10px; border:1px solid #3b3f47; background:#1e2128; color:#f8fafc}
+    .btn{padding:10px 14px; background:var(--accent-grad); color:white; border-radius:10px; cursor:pointer; border:none; font-weight:600}
+
+    .stats{display:flex; justify-content:space-between; margin-bottom:10px; color:var(--muted); font-size:14px}
+
+    ul.tasks{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px}
+    li.task{display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:10px; background:#383d47; border:1px solid #444b55; transition:background 0.3s ease}
+    li.task.done{background:#24403b;}
+    .chk{width:22px; height:22px; border-radius:6px; background:#2b2f38; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid #555; transition:all 0.3s ease}
+    .chk.checked{background:var(--accent-grad); color:white; box-shadow:0 0 10px rgba(124,58,237,0.3)}
+    .title{font-weight:600; font-size:15px}
+
+    .del-btn{background:transparent; border:none; color:#cbd5e1; cursor:pointer; font-size:16px; padding:4px; border-radius:6px}
+    .del-btn:hover{color:#ef4444;}
+
+    footer{margin-top:18px; color:var(--muted); font-size:13px; text-align:center; border-top:1px solid #3b3f47; padding-top:10px}
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="image-box" id="imageBox">Klikni na tlačítko níže pro přidání obrázku</div>
+    <label for="imgInput" class="upload-label">📸 Přidat obrázek</label>
+    <input type="file" id="imgInput" accept="image/*">
+  </div>
+
+  <div class="main">
+    <div class="wrap">
+      <header>
+        <h1>Metin — Úkolníček</h1>
+        <p>Odškrtni si, co máš hotovo — evoluce peta, knížky, věci +9, překovat brnko, kompletní alchymie.</p>
+      </header>
+
+      <main>
+        <div class="new-task">
+          <input id="taskInput" type="text" placeholder="Přidat úkol..." />
+          <button class="btn" id="addBtn">Přidat</button>
+        </div>
+        <div class="stats">
+          <span id="totalTasks">Úkolů: 0</span>
+          <span id="doneTasks">Splněno: 0</span>
+        </div>
+        <ul class="tasks" id="tasksList"></ul>
+      </main>
+    </div>
+
+    <div class="wrap">
+      <header>
+        <h1>Úkolníček — LVL 105</h1>
+        <p>Úkoly, které si chci nechat na později.</p>
+      </header>
+
+      <main>
+        <div class="new-task">
+          <input id="taskInput2" type="text" placeholder="Přidat úkol..." />
+          <button class="btn" id="addBtn2">Přidat</button>
+        </div>
+        <div class="stats">
+          <span id="totalTasks2">Úkolů: 0</span>
+          <span id="doneTasks2">Splněno: 0</span>
+        </div>
+        <ul class="tasks" id="tasksList2"></ul>
+      </main>
+
+      <footer>
+        <p>Verze 1.6 — Ukládá se do prohlížeče</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Obrázek upload
+    const imgInput = document.getElementById('imgInput');
+    const imageBox = document.getElementById('imageBox');
+
+    imgInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        imageBox.innerHTML = `<img src="${ev.target.result}" alt="Nahraný obrázek">`;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Úkolníčky funkce
+    function initChecklist(prefix, defaultTasks) {
+      const STORAGE_KEY = 'metin-ukolnicek-' + prefix;
+      const taskInput = document.getElementById('taskInput' + (prefix==='main'?'':'2'));
+      const addBtn = document.getElementById('addBtn' + (prefix==='main'?'':'2'));
+      const tasksList = document.getElementById('tasksList' + (prefix==='main'?'':'2'));
+      const totalTasksEl = document.getElementById('totalTasks' + (prefix==='main'?'':'2'));
+      const doneTasksEl = document.getElementById('doneTasks' + (prefix==='main'?'':'2'));
+
+      let tasks = load();
+      render();
+
+      addBtn.addEventListener('click', ()=>{ addTaskFromInput(); });
+      taskInput.addEventListener('keydown', e=>{ if(e.key==='Enter') addTaskFromInput(); });
+
+      function addTaskFromInput(){
+        const v = taskInput.value.trim();
+        if(!v) return;
+        addTask(v);
+        taskInput.value='';
+      }
+
+      function addTask(title){
+        tasks.unshift({id: uid(), title, done:false});
+        save(); render();
+      }
+
+      function render(){
+        tasksList.innerHTML = '';
+        tasks.forEach(t=>{
+          const li = document.createElement('li');
+          li.className='task' + (t.done? ' done':'');
+          const left = document.createElement('div');
+          left.style.display='flex';
+          left.style.alignItems='center';
+          left.style.gap='10px';
+
+          const chk = document.createElement('div');
+          chk.className='chk' + (t.done?' checked':'');
+          chk.innerHTML = t.done?'✓':'';
+          chk.addEventListener('click', ()=>{ t.done=!t.done; save(); render(); });
+
+          const titleEl = document.createElement('div');
+          titleEl.className='title';
+          titleEl.textContent = t.title;
+
+          const delBtn = document.createElement('button');
+          delBtn.className='del-btn';
+          delBtn.textContent='✖';
+          delBtn.title='Odstranit úkol';
+          delBtn.addEventListener('click', ()=>{ if(confirm('Smazat úkol?')) { tasks = tasks.filter(x=>x.id!==t.id); save(); render(); } });
+
+          left.appendChild(chk);
+          left.appendChild(titleEl);
+          li.appendChild(left);
+          li.appendChild(delBtn);
+          tasksList.appendChild(li);
+        });
+
+        const total = tasks.length;
+        const done = tasks.filter(t=>t.done).length;
+        totalTasksEl.textContent = 'Úkolů: ' + total;
+        doneTasksEl.textContent = 'Splněno: ' + done;
+      }
+
+      function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); }
+      function load(){ try{ const j = JSON.parse(localStorage.getItem(STORAGE_KEY)); if(!Array.isArray(j)) return defaultTasks; return j; }catch(e){ return defaultTasks; } }
+    }
+
+    function uid(){ return 't_'+Math.random().toString(36).slice(2,9); }
+
+    initChecklist('main', [
+      {id: uid(), title: 'Evoluce peta', done:false},
+      {id: uid(), title: 'Knížky do peta', done:false},
+      {id: uid(), title: 'Věci +9', done:false},
+      {id: uid(), title: 'Překovat brnko', done:false},
+      {id: uid(), title: 'Kompletní alchymie', done:false},
+      {id: uid(), title: 'Krystal energie', done:false}
+    ]);
+
+    initChecklist('lvl105', [
+      {id: uid(), title: 'Talík překovat', done:false},
+      {id: uid(), title: 'Aura', done:false},
+      {id: uid(), title: 'Pasivka', done:false},
+      {id: uid(), title: 'Rosy 105 LVL', done:false},
+      {id: uid(), title: 'IS věci', done:false},
+      {id: uid(), title: 'Průmka ve zbrani 57+', done:false},
+      {id: uid(), title: 'Kameny +5', done:false}
+    ]);
+  </script>
+</body>
+</html>
