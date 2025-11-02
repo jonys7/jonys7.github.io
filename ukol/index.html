@@ -34,19 +34,16 @@
     .image-box img{width:100%; height:100%; object-fit:cover;}
     .sidebar input[type=file]{display:none;}
     .upload-label{background:var(--accent-grad); padding:10px 20px; border-radius:10px; color:white; cursor:pointer; font-weight:600;}
+    .dmg-box{width:100%; background:var(--card); border-radius:16px; padding:20px; box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+    .dmg-box h2{margin:0 0 10px 0; font-size:18px;}
+    .dmg-list{list-style:none; padding:0; margin-top:10px; display:flex; flex-direction:column; gap:8px;}
+    .dmg-item{display:flex; justify-content:space-between; align-items:center; background:#383d47; border-radius:10px; padding:8px 12px;}
+    .dmg-item span{font-size:14px;}
+    .dmg-item button{background:transparent; border:none; color:#ef4444; cursor:pointer;}
 
-    .main{
-      display:flex; flex-direction:column; gap:30px; width:100%; max-width:700px;
-    }
+    .main{display:flex; flex-direction:column; gap:30px; width:100%; max-width:700px;}
 
-    .wrap{
-      width:100%;
-      background:var(--card);
-      padding:20px;
-      border-radius:16px;
-      box-shadow:0 8px 24px rgba(0,0,0,0.3);
-      border:1px solid #3b3f47;
-    }
+    .wrap{width:100%; background:var(--card); padding:20px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.3); border:1px solid #3b3f47;}
 
     header{display:flex; flex-direction:column; gap:6px; margin-bottom:20px; border-bottom:1px solid #3b3f47; padding-bottom:10px}
     header h1{font-size:22px; margin:0; color:white}
@@ -69,6 +66,8 @@
     .del-btn:hover{color:#ef4444;}
 
     footer{margin-top:18px; color:var(--muted); font-size:13px; text-align:center; border-top:1px solid #3b3f47; padding-top:10px}
+    #historyModal{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center;}
+    #historyContent{background:#2e323c; padding:20px; border-radius:16px; max-width:600px; width:90%; color:white;}
   </style>
 </head>
 <body>
@@ -76,13 +75,22 @@
     <div class="image-box" id="imageBox">Klikni na tlačítko níže pro přidání obrázku</div>
     <label for="imgInput" class="upload-label">📸 Přidat obrázek</label>
     <input type="file" id="imgInput" accept="image/*">
+
+    <div class="dmg-box">
+      <h2>📊 DMG Log</h2>
+      <div class="new-task">
+        <input id="dmgInput" type="text" placeholder="Zadej DMG..." />
+        <button class="btn" id="addDmgBtn">Přidat</button>
+      </div>
+      <ul class="dmg-list" id="dmgList"></ul>
+    </div>
   </div>
 
   <div class="main">
     <div class="wrap">
       <header>
         <h1>Metin — Úkolníček</h1>
-        <p>Odškrtni si, co máš hotovo — evoluce peta, knížky, věci +9, překovat brnko, kompletní alchymie.</p>
+        <button class="btn" id="showHistory">📜 Historie</button>
       </header>
 
       <main>
@@ -101,7 +109,6 @@
     <div class="wrap">
       <header>
         <h1>Úkolníček — LVL 105</h1>
-        <p>Úkoly, které si chci nechat na později.</p>
       </header>
 
       <main>
@@ -117,13 +124,34 @@
       </main>
 
       <footer>
-        <p>Verze 1.6 — Ukládá se do prohlížeče</p>
+        <p>Verze 1.7 — Ukládá se do prohlížeče</p>
       </footer>
     </div>
   </div>
 
+  <div id="historyModal">
+    <div id="historyContent">
+      <h2>📜 Historie splněných úkolů</h2>
+      <ul id="historyList"></ul>
+      <button class="btn" id="closeHistory">Zavřít</button>
+    </div>
+  </div>
+
   <script>
-    // Obrázek upload
+    const historyKey = 'metin-ukolnicek-historie';
+    let historyData = JSON.parse(localStorage.getItem(historyKey) || '[]');
+
+    const showHistoryBtn = document.getElementById('showHistory');
+    const historyModal = document.getElementById('historyModal');
+    const historyList = document.getElementById('historyList');
+    const closeHistory = document.getElementById('closeHistory');
+
+    showHistoryBtn.addEventListener('click',()=>{
+      historyModal.style.display='flex';
+      historyList.innerHTML = historyData.map(h=>`<li>${h.task} — ${h.date}</li>`).join('');
+    });
+    closeHistory.addEventListener('click',()=>{historyModal.style.display='none';});
+
     const imgInput = document.getElementById('imgInput');
     const imageBox = document.getElementById('imageBox');
 
@@ -137,7 +165,6 @@
       reader.readAsDataURL(file);
     });
 
-    // Úkolníčky funkce
     function initChecklist(prefix, defaultTasks) {
       const STORAGE_KEY = 'metin-ukolnicek-' + prefix;
       const taskInput = document.getElementById('taskInput' + (prefix==='main'?'':'2'));
@@ -177,7 +204,11 @@
           const chk = document.createElement('div');
           chk.className='chk' + (t.done?' checked':'');
           chk.innerHTML = t.done?'✓':'';
-          chk.addEventListener('click', ()=>{ t.done=!t.done; save(); render(); });
+          chk.addEventListener('click', ()=>{ 
+            t.done=!t.done; 
+            if(t.done){historyData.push({task:t.title,date:new Date().toLocaleString()}); localStorage.setItem(historyKey, JSON.stringify(historyData));}
+            save(); render(); 
+          });
 
           const titleEl = document.createElement('div');
           titleEl.className='title';
@@ -226,6 +257,33 @@
       {id: uid(), title: 'Průmka ve zbrani 57+', done:false},
       {id: uid(), title: 'Kameny +5', done:false}
     ]);
+
+    // DMG log
+    const dmgKey = 'metin-dmg-log';
+    let dmgData = JSON.parse(localStorage.getItem(dmgKey) || '[]');
+    const dmgList = document.getElementById('dmgList');
+    const addDmgBtn = document.getElementById('addDmgBtn');
+    const dmgInput = document.getElementById('dmgInput');
+
+    function renderDmg(){
+      dmgList.innerHTML = dmgData.map((d,i)=>`<li class='dmg-item'><span>${d.value} — ${d.date}</span><button onclick='removeDmg(${i})'>✖</button></li>`).join('');
+    }
+    function addDmg(){
+      const val = dmgInput.value.trim();
+      if(!val) return;
+      dmgData.unshift({value:val,date:new Date().toLocaleString()});
+      dmgInput.value='';
+      localStorage.setItem(dmgKey,JSON.stringify(dmgData));
+      renderDmg();
+    }
+    function removeDmg(i){
+      dmgData.splice(i,1);
+      localStorage.setItem(dmgKey,JSON.stringify(dmgData));
+      renderDmg();
+    }
+    addDmgBtn.addEventListener('click', addDmg);
+    dmgInput.addEventListener('keydown', e=>{if(e.key==='Enter') addDmg();});
+    renderDmg();
   </script>
 </body>
 </html>
