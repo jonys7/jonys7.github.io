@@ -1,241 +1,257 @@
 <!doctype html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Metin — Úkolníček</title>
-  <style>
-    :root{
-      --bg-1: #1a1c22;
-      --bg-2: #23262f;
-      --card: #2e323c;
-      --muted: #a0aec0;
-      --accent-1: #7c3aed;
-      --accent-2: #06b6d4;
-      --accent-grad: linear-gradient(90deg,var(--accent-1),var(--accent-2));
-      --success: #10b981;
-      font-family: 'Inter', system-ui, sans-serif;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:linear-gradient(180deg,var(--bg-2),var(--bg-1)); color:#f1f5f9;
-      display:flex; justify-content:center; align-items:flex-start; padding:40px; gap:30px; min-height:100vh;
-    }
-    .sidebar{
-      width:450px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:15px;
-    }
-    .image-box{
-      width:450px; height:450px; background:#2e323c; border:2px dashed #555; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#a0aec0; overflow:hidden;
-    }
-    .image-box img{width:100%; height:100%; object-fit:cover;}
-    .sidebar input[type=file]{display:none;}
-    .upload-label{background:var(--accent-grad); padding:10px 20px; border-radius:10px; color:white; cursor:pointer; font-weight:600;}
-    .dmg-box{width:100%; background:var(--card); border-radius:16px; padding:20px; box-shadow:0 8px 24px rgba(0,0,0,0.3);}
-    .dmg-box h2{margin:0 0 10px 0; font-size:22px; text-align:center; background:var(--accent-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; display:flex; align-items:center; justify-content:center; gap:8px;}
-    .new-task{display:flex; gap:10px; margin-bottom:14px}
-    .new-task input[type=text]{flex:1; padding:10px 12px; border-radius:10px; border:1px solid #3b3f47; background:#1e2128; color:#f8fafc; font-size:15px;}
-    .btn{padding:10px 14px; background:var(--accent-grad); color:white; border-radius:10px; cursor:pointer; border:none; font-weight:600}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Metin — Úkolníček</title>
+<style>
+:root{
+  --bg-1:#1a1c22;--bg-2:#23262f;--card:#2e323c;--muted:#a0aec0;
+  --accent-1:#7c3aed;--accent-2:#06b6d4;
+  --accent-grad:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  --success:#10b981; font-family:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:linear-gradient(180deg,var(--bg-2),var(--bg-1)); color:#f1f5f9;
+  display:flex; justify-content:center; align-items:flex-start; padding:40px; gap:30px; min-height:100vh;
+}
+.sidebar{width:450px; display:flex; flex-direction:column; align-items:center; gap:15px;}
+.image-box{width:450px; height:450px; background:#2e323c; border:2px dashed #555; border-radius:16px; display:flex; align-items:center; justify-content:center; color:#a0aec0; overflow:hidden;}
+.image-box img{width:100%; height:100%; object-fit:cover;}
+.sidebar input[type=file]{display:none;}
+.upload-label{background:var(--accent-grad); padding:10px 20px; border-radius:10px; color:white; cursor:pointer; font-weight:600;}
+.dmg-box{width:100%; background:var(--card); border-radius:16px; padding:20px; box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+.dmg-box h2{margin:0 0 10px 0; font-size:22px; text-align:center; background:var(--accent-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; display:flex; align-items:center; justify-content:center; gap:8px;}
+.new-task{display:flex; gap:10px; margin-bottom:14px}
+.new-task input[type=text]{flex:1; padding:10px 12px; border-radius:10px; border:1px solid #3b3f47; background:#1e2128; color:#f8fafc; font-size:15px;}
+.btn{padding:10px 14px; background:var(--accent-grad); color:white; border-radius:10px; cursor:pointer; border:none; font-weight:600}
 
-    .dmg-list{list-style:none; padding:0; margin-top:10px; display:flex; flex-direction:column; gap:10px;}
-    .dmg-item{display:flex; justify-content:space-between; align-items:center; background:#383d47; border-radius:12px; padding:14px 18px; box-shadow:0 4px 12px rgba(0,0,0,0.4);}
-    .dmg-item span{font-size:20px; font-weight:700; color:#e2e8f0; display:flex; flex-direction:column;}
-    .dmg-item small{color:#a0aec0; font-size:13px; margin-top:4px;}
-    .dmg-item button{background:transparent; border:none; color:#ef4444; cursor:pointer; font-size:18px; transition:transform 0.2s;}
-    .dmg-item button:hover{transform:scale(1.2);}
+.dmg-list{list-style:none; padding:0; margin-top:10px; display:flex; flex-direction:column; gap:10px;}
+.dmg-item{display:flex; justify-content:space-between; align-items:center; background:#383d47; border-radius:12px; padding:14px 18px; box-shadow:0 4px 12px rgba(0,0,0,0.4);}
+.dmg-item span{font-size:20px; font-weight:700; color:#e2e8f0; display:flex; flex-direction:column;}
+.dmg-item small{color:#a0aec0; font-size:13px; margin-top:4px;}
+.dmg-item button{background:transparent; border:none; color:#ef4444; cursor:pointer; font-size:18px; transition:transform 0.2s;}
+.dmg-item button:hover{transform:scale(1.2);}
 
-    .main{display:flex; flex-direction:column; gap:30px; width:100%; max-width:700px;}
+.main{display:flex; flex-direction:column; gap:30px; width:100%; max-width:700px;}
 
-    .wrap{width:100%; background:var(--card); padding:20px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.3); border:1px solid #3b3f47;}
+.wrap{width:100%; background:var(--card); padding:20px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.3); border:1px solid #3b3f47;}
 
-    header{display:flex; flex-direction:column; gap:6px; margin-bottom:20px; border-bottom:1px solid #3b3f47; padding-bottom:10px}
-    header h1{font-size:22px; margin:0; color:white}
-    header p{margin:0; color:var(--muted); font-size:13px}
+header{display:flex; flex-direction:column; gap:6px; margin-bottom:20px; border-bottom:1px solid #3b3f47; padding-bottom:10px}
+header h1{font-size:22px; margin:0; color:white}
+header p{margin:0; color:var(--muted); font-size:13px}
 
-    .stats{display:flex; justify-content:space-between; margin-bottom:10px; color:var(--muted); font-size:14px}
+.stats{display:flex; justify-content:space-between; margin-bottom:10px; color:var(--muted); font-size:14px}
 
-    ul.tasks{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px}
-    li.task{display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:10px; background:#383d47; border:1px solid #444b55; transition:background 0.3s ease}
-    li.task.done{background:#24403b;}
-    .chk{width:22px; height:22px; border-radius:6px; background:#2b2f38; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid #555; transition:all 0.3s ease}
-    .chk.checked{background:var(--accent-grad); color:white; box-shadow:0 0 10px rgba(124,58,237,0.3)}
-    .title{font-weight:600; font-size:15px}
+ul.tasks{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px}
+li.task{display:flex; justify-content:space-between; align-items:center; padding:10px; border-radius:10px; background:#383d47; border:1px solid #444b55; transition:background 0.3s ease}
+li.task.done{background:#24403b;}
+.chk{width:22px; height:22px; border-radius:6px; background:#2b2f38; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid #555; transition:all 0.3s ease}
+.chk.checked{background:var(--accent-grad); color:white; box-shadow:0 0 10px rgba(124,58,237,0.3)}
+.title{font-weight:600; font-size:15px}
 
-    .del-btn{background:transparent; border:none; color:#cbd5e1; cursor:pointer; font-size:16px; padding:4px; border-radius:6px}
-    .del-btn:hover{color:#ef4444;}
+.del-btn{background:transparent; border:none; color:#cbd5e1; cursor:pointer; font-size:16px; padding:4px; border-radius:6px}
+.del-btn:hover{color:#ef4444;}
 
-    #historyModal{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center;}
-    #historyContent{background:#2e323c; padding:20px; border-radius:16px; max-width:600px; width:90%; color:white;}
-  </style>
+#historyModal{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center;}
+#historyContent{background:#2e323c; padding:20px; border-radius:16px; max-width:600px; width:90%; color:white;}
+</style>
 </head>
 <body>
-  <div class="sidebar">
-    <div class="image-box" id="imageBox">Klikni na tlačítko níže pro přidání obrázku</div>
-    <label for="imgInput" class="upload-label">📸 Přidat obrázek</label>
-    <input type="file" id="imgInput" accept="image/*">
+<div class="sidebar">
+  <div class="image-box" id="imageBox">Klikni na tlačítko níže pro přidání obrázku</div>
+  <label for="imgInput" class="upload-label">📸 Přidat obrázek</label>
+  <input type="file" id="imgInput" accept="image/*">
 
-    <div class="dmg-box">
-      <h2>⚔️ DMG Log</h2>
+  <div class="dmg-box">
+    <h2>⚔️ DMG Log</h2>
+    <div class="new-task">
+      <input id="dmgInput" type="text" placeholder="Zadej DMG..." />
+      <button class="btn" id="addDmgBtn">Přidat</button>
+    </div>
+    <ul class="dmg-list" id="dmgList"></ul>
+  </div>
+</div>
+
+<div class="main">
+  <div class="wrap">
+    <header>
+      <h1>Metin — Úkolníček</h1>
+      <button class="btn" id="showHistory">📜 Historie</button>
+    </header>
+    <main>
       <div class="new-task">
-        <input id="dmgInput" type="text" placeholder="Zadej DMG..." />
-        <button class="btn" id="addDmgBtn">Přidat</button>
+        <input id="taskInput" type="text" placeholder="Přidat úkol..." />
+        <button class="btn" id="addBtn">Přidat</button>
       </div>
-      <ul class="dmg-list" id="dmgList"></ul>
-    </div>
+      <div class="stats">
+        <span id="totalTasks">Úkolů: 0</span>
+        <span id="doneTasks">Splněno: 0</span>
+      </div>
+      <ul class="tasks" id="tasksList"></ul>
+    </main>
   </div>
 
-  <div class="main">
-    <div class="wrap">
-      <header>
-        <h1>Metin — Úkolníček</h1>
-        <button class="btn" id="showHistory">📜 Historie</button>
-      </header>
-      <main>
-        <div class="new-task">
-          <input id="taskInput" type="text" placeholder="Přidat úkol..." />
-          <button class="btn" id="addBtn">Přidat</button>
-        </div>
-        <div class="stats">
-          <span id="totalTasks">Úkolů: 0</span>
-          <span id="doneTasks">Splněno: 0</span>
-        </div>
-        <ul class="tasks" id="tasksList"></ul>
-      </main>
-    </div>
-
-    <div class="wrap">
-      <header>
-        <h1>Úkolníček — LVL 105</h1>
-      </header>
-      <main>
-        <div class="new-task">
-          <input id="taskInput2" type="text" placeholder="Přidat úkol..." />
-          <button class="btn" id="addBtn2">Přidat</button>
-        </div>
-        <div class="stats">
-          <span id="totalTasks2">Úkolů: 0</span>
-          <span id="doneTasks2">Splněno: 0</span>
-        </div>
-        <ul class="tasks" id="tasksList2"></ul>
-      </main>
-    </div>
+  <div class="wrap">
+    <header>
+      <h1>Úkolníček — LVL 105</h1>
+    </header>
+    <main>
+      <div class="new-task">
+        <input id="taskInput2" type="text" placeholder="Přidat úkol..." />
+        <button class="btn" id="addBtn2">Přidat</button>
+      </div>
+      <div class="stats">
+        <span id="totalTasks2">Úkolů: 0</span>
+        <span id="doneTasks2">Splněno: 0</span>
+      </div>
+      <ul class="tasks" id="tasksList2"></ul>
+    </main>
   </div>
+</div>
 
-  <div id="historyModal">
-    <div id="historyContent">
-      <h2>📜 Historie splněných úkolů</h2>
-      <ul id="historyList"></ul>
-      <button class="btn" id="closeHistory">Zavřít</button>
-    </div>
+<div id="historyModal">
+  <div id="historyContent">
+    <h2>📜 Historie splněných úkolů</h2>
+    <ul id="historyList"></ul>
+    <button class="btn" id="closeHistory">Zavřít</button>
   </div>
+</div>
 
-  <script>
-    const historyKey = 'metin-ukolnicek-historie';
-    let historyData = JSON.parse(localStorage.getItem(historyKey) || '[]');
+<!-- Alarm Sidebar -->
+<div class="alarm-sidebar" style="position:fixed; top:40px; right:20px; width:200px; background:#2e323c; padding:15px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.3);">
+  <h3 style="margin:0 0 10px 0; text-align:center; background:var(--accent-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">⏰ Alarm</h3>
+  <button class="btn" id="toggleAlarm">Zapnout / Vypnout</button>
+  <label for="volumeControl" style="margin-top:10px; display:block;">🔊 Hlasitost</label>
+  <input type="range" id="volumeControl" min="0" max="1" step="0.01">
+  <button class="btn" id="previewSound" style="margin-top:10px;">▶️ Přehrát alarm</button>
+</div>
 
-    document.getElementById('showHistory').addEventListener('click',()=>{
-      document.getElementById('historyModal').style.display='flex';
-      document.getElementById('historyList').innerHTML = historyData.map(h=>`<li>${h.task} — ${h.date}</li>`).join('');
+<script>
+// --- Historie ---
+const historyKey='metin-ukolnicek-historie';
+let historyData=JSON.parse(localStorage.getItem(historyKey)||'[]');
+document.getElementById('showHistory').addEventListener('click',()=>{
+  document.getElementById('historyModal').style.display='flex';
+  document.getElementById('historyList').innerHTML = historyData.map(h=>`<li>${h.task} — ${h.date}</li>`).join('');
+});
+document.getElementById('closeHistory').addEventListener('click',()=>{document.getElementById('historyModal').style.display='none';});
+
+// --- Obrázek ---
+const imgInput=document.getElementById('imgInput');
+const imageBox=document.getElementById('imageBox');
+const imgKey='metin-image';
+const savedImg=localStorage.getItem(imgKey);
+if(savedImg){imageBox.innerHTML=`<img src="${savedImg}" alt="Nahraný obrázek">`;}
+imgInput.addEventListener('change',(e)=>{
+  const file=e.target.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=(ev)=>{
+    const dataUrl=ev.target.result;
+    imageBox.innerHTML=`<img src="${dataUrl}" alt="Nahraný obrázek">`;
+    localStorage.setItem(imgKey,dataUrl);
+  };
+  reader.readAsDataURL(file);
+});
+
+// --- Checklist ---
+function formatNumber(num){return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+function initChecklist(prefix,defaultTasks){
+  const STORAGE_KEY='metin-ukolnicek-'+prefix;
+  const taskInput=document.getElementById('taskInput'+(prefix==='main'?'':'2'));
+  const addBtn=document.getElementById('addBtn'+(prefix==='main'?'':'2'));
+  const tasksList=document.getElementById('tasksList'+(prefix==='main'?'':'2'));
+  const totalTasksEl=document.getElementById('totalTasks'+(prefix==='main'?'':'2'));
+  const doneTasksEl=document.getElementById('doneTasks'+(prefix==='main'?'':'2'));
+  let tasks=load(); render();
+  addBtn.addEventListener('click',()=>addTaskFromInput());
+  taskInput.addEventListener('keydown',e=>{if(e.key==='Enter') addTaskFromInput();});
+  function addTaskFromInput(){const v=taskInput.value.trim();if(!v) return; addTask(v); taskInput.value='';}
+  function addTask(title){tasks.unshift({id:uid(),title,done:false}); save(); render();}
+  function render(){
+    tasksList.innerHTML='';
+    tasks.forEach(t=>{
+      const li=document.createElement('li'); li.className='task'+(t.done?' done':'');
+      const left=document.createElement('div'); left.style.display='flex'; left.style.alignItems='center'; left.style.gap='10px';
+      const chk=document.createElement('div'); chk.className='chk'+(t.done?' checked':''); chk.innerHTML=t.done?'✓':'';
+      chk.addEventListener('click',()=>{t.done=!t.done;if(t.done){historyData.push({task:t.title,date:new Date().toLocaleString()});localStorage.setItem(historyKey,JSON.stringify(historyData));}save();render();});
+      const titleEl=document.createElement('div'); titleEl.className='title'; titleEl.textContent=t.title;
+      const delBtn=document.createElement('button'); delBtn.className='del-btn'; delBtn.textContent='✖'; delBtn.title='Odstranit úkol'; delBtn.addEventListener('click',()=>{tasks=tasks.filter(x=>x.id!==t.id);save();render();});
+      left.appendChild(chk); left.appendChild(titleEl); li.appendChild(left); li.appendChild(delBtn); tasksList.appendChild(li);
     });
-    document.getElementById('closeHistory').addEventListener('click',()=>{
-      document.getElementById('historyModal').style.display='none';
-    });
+    totalTasksEl.textContent='Úkolů: '+tasks.length;
+    doneTasksEl.textContent='Splněno: '+tasks.filter(t=>t.done).length;
+  }
+  function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));}
+  function load(){try{const j=JSON.parse(localStorage.getItem(STORAGE_KEY));if(!Array.isArray(j))return defaultTasks;return j;}catch(e){return defaultTasks;}}
+}
+function uid(){return 't_'+Math.random().toString(36).slice(2,9);}
+initChecklist('main',[]);
+initChecklist('lvl105',[]);
 
-    const imgInput = document.getElementById('imgInput');
-    const imageBox = document.getElementById('imageBox');
-    imgInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => { imageBox.innerHTML = `<img src="${ev.target.result}" alt="Nahraný obrázek">`; };
-      reader.readAsDataURL(file);
-    });
+// --- DMG log ---
+const dmgKey='metin-dmg-log';
+let dmgData=JSON.parse(localStorage.getItem(dmgKey)||'[]');
+const dmgList=document.getElementById('dmgList');
+const addDmgBtn=document.getElementById('addDmgBtn');
+const dmgInput=document.getElementById('dmgInput');
+function renderDmg(){dmgList.innerHTML=dmgData.map((d,i)=>`<li class='dmg-item'><span>${d.value}<small>${d.date}</small></span><button onclick='removeDmg(${i})'>✖</button></li>`).join('');}
+function addDmg(){const val=dmgInput.value.trim();if(!val) return; const formatted=formatNumber(val.replace(/\D/g,'')); dmgData.unshift({value:formatted,date:new Date().toLocaleString()}); dmgInput.value=''; localStorage.setItem(dmgKey,JSON.stringify(dmgData)); renderDmg();}
+function removeDmg(i){dmgData.splice(i,1); localStorage.setItem(dmgKey,JSON.stringify(dmgData)); renderDmg();}
+addDmgBtn.addEventListener('click',addDmg);
+dmgInput.addEventListener('keydown',e=>{if(e.key==='Enter') addDmg();});
+renderDmg();
 
-    function formatNumber(num){return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');}
+// --- Alarm ---
+let alarmEnabled = localStorage.getItem('metin-alarm-enabled') === 'false' ? false : true;
+let alarmVolume = parseFloat(localStorage.getItem('metin-alarm-volume')) || 0.5;
 
-    function initChecklist(prefix, defaultTasks) {
-      const STORAGE_KEY = 'metin-ukolnicek-' + prefix;
-      const taskInput = document.getElementById('taskInput' + (prefix==='main'?'':'2'));
-      const addBtn = document.getElementById('addBtn' + (prefix==='main'?'':'2'));
-      const tasksList = document.getElementById('tasksList' + (prefix==='main'?'':'2'));
-      const totalTasksEl = document.getElementById('totalTasks' + (prefix==='main'?'':'2'));
-      const doneTasksEl = document.getElementById('doneTasks' + (prefix==='main'?'':'2'));
+const alarmAudio = new Audio('https://freesound.org/data/previews/316/316847_4939433-lq.mp3');
+alarmAudio.volume = alarmVolume;
 
-      let tasks = load(); render();
+const toggleBtn = document.getElementById('toggleAlarm');
+function updateAlarmButton(){
+  toggleBtn.textContent = alarmEnabled ? '⏰ ON' : '⏰ OFF';
+  toggleBtn.style.backgroundColor = alarmEnabled ? '#10b981' : '#ef4444';
+}
+toggleBtn.addEventListener('click',()=>{
+  alarmEnabled = !alarmEnabled;
+  localStorage.setItem('metin-alarm-enabled', alarmEnabled);
+  updateAlarmButton();
+});
+updateAlarmButton();
 
-      addBtn.addEventListener('click', ()=> addTaskFromInput());
-      taskInput.addEventListener('keydown', e=>{ if(e.key==='Enter') addTaskFromInput(); });
+// Volume control
+const volumeControl=document.getElementById('volumeControl');
+volumeControl.value = alarmVolume;
+volumeControl.addEventListener('input',()=>{
+  alarmVolume=parseFloat(volumeControl.value);
+  localStorage.setItem('metin-alarm-volume', alarmVolume);
+  alarmAudio.volume = alarmVolume;
+});
 
-      function addTaskFromInput(){
-        const v = taskInput.value.trim(); if(!v) return; addTask(v); taskInput.value='';
-      }
-      function addTask(title){ tasks.unshift({id:uid(), title, done:false}); save(); render(); }
+// Preview
+document.getElementById('previewSound').addEventListener('click',()=>{
+  alarmAudio.currentTime=0;
+  alarmAudio.play().catch(()=>{});
+});
 
-      function render(){
-        tasksList.innerHTML='';
-        tasks.forEach(t=>{
-          const li=document.createElement('li'); li.className='task'+(t.done?' done':'');
-          const left=document.createElement('div'); left.style.display='flex'; left.style.alignItems='center'; left.style.gap='10px';
-          const chk=document.createElement('div'); chk.className='chk'+(t.done?' checked':''); chk.innerHTML=t.done?'✓':'';
-          chk.addEventListener('click',()=>{t.done=!t.done;if(t.done){historyData.push({task:t.title,date:new Date().toLocaleString()});localStorage.setItem(historyKey,JSON.stringify(historyData));}save();render();});
-          const titleEl=document.createElement('div'); titleEl.className='title'; titleEl.textContent=t.title;
-          const delBtn=document.createElement('button'); delBtn.className='del-btn'; delBtn.textContent='✖'; delBtn.title='Odstranit úkol'; delBtn.addEventListener('click',()=>{if(confirm('Smazat úkol?')){tasks=tasks.filter(x=>x.id!==t.id);save();render();}});
-          left.appendChild(chk); left.appendChild(titleEl); li.appendChild(left); li.appendChild(delBtn); tasksList.appendChild(li);
-        });
-        totalTasksEl.textContent='Úkolů: '+tasks.length;
-        doneTasksEl.textContent='Splněno: '+tasks.filter(t=>t.done).length;
-      }
-      function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));}
-      function load(){try{const j=JSON.parse(localStorage.getItem(STORAGE_KEY));if(!Array.isArray(j))return defaultTasks;return j;}catch(e){return defaultTasks;}}
-    }
-
-    function uid(){return 't_'+Math.random().toString(36).slice(2,9);}
-
-    initChecklist('main', [
-      {id: uid(), title: 'Evoluce peta', done:false},
-      {id: uid(), title: 'Knížky do peta', done:false},
-      {id: uid(), title: 'Věci +9', done:false},
-      {id: uid(), title: 'Překovat brnko', done:false},
-      {id: uid(), title: 'Kompletní alchymie', done:false},
-      {id: uid(), title: 'Krystal energie', done:false}
-    ]);
-
-    initChecklist('lvl105', [
-      {id: uid(), title: 'Talík překovat', done:false},
-      {id: uid(), title: 'Aura', done:false},
-      {id: uid(), title: 'Pasivka', done:false},
-      {id: uid(), title: 'Rosy 105 LVL', done:false},
-      {id: uid(), title: 'IS věci', done:false},
-      {id: uid(), title: 'Průmka ve zbrani 57+', done:false},
-      {id: uid(), title: 'Kameny +5', done:false}
-    ]);
-
-    // DMG log
-    const dmgKey='metin-dmg-log';
-    let dmgData=JSON.parse(localStorage.getItem(dmgKey)||'[]');
-    const dmgList=document.getElementById('dmgList');
-    const addDmgBtn=document.getElementById('addDmgBtn');
-    const dmgInput=document.getElementById('dmgInput');
-
-    function renderDmg(){
-      dmgList.innerHTML=dmgData.map((d,i)=>`<li class='dmg-item'><span>${d.value}<small>${d.date}</small></span><button onclick='removeDmg(${i})'>✖</button></li>`).join('');
-    }
-    function addDmg(){
-      const val=dmgInput.value.trim();
-      if(!val) return;
-      const formatted=formatNumber(val.replace(/\D/g,''));
-      dmgData.unshift({value:formatted,date:new Date().toLocaleString()});
-      dmgInput.value='';
-      localStorage.setItem(dmgKey,JSON.stringify(dmgData));
-      renderDmg();
-    }
-    function removeDmg(i){dmgData.splice(i,1);localStorage.setItem(dmgKey,JSON.stringify(dmgData));renderDmg();}
-    addDmgBtn.addEventListener('click',addDmg);
-    dmgInput.addEventListener('keydown',e=>{if(e.key==='Enter')addDmg();});
-    renderDmg();
-  </script>
+// Alarm check
+let lastAlarmMinute=null;
+function checkAlarm(){
+  if(!alarmEnabled) return;
+  const now = new Date();
+  const min = now.getMinutes();
+  const sec = now.getSeconds();
+  if((min===27||min===57)&&sec===30&&lastAlarmMinute!==min){
+    lastAlarmMinute=min;
+    alarmAudio.currentTime=0;
+    alarmAudio.play().catch(()=>{});
+  }
+}
+setInterval(checkAlarm,1000);
+</script>
 </body>
 </html>
