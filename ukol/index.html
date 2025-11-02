@@ -35,11 +35,17 @@
     .sidebar input[type=file]{display:none;}
     .upload-label{background:var(--accent-grad); padding:10px 20px; border-radius:10px; color:white; cursor:pointer; font-weight:600;}
     .dmg-box{width:100%; background:var(--card); border-radius:16px; padding:20px; box-shadow:0 8px 24px rgba(0,0,0,0.3);}
-    .dmg-box h2{margin:0 0 10px 0; font-size:18px;}
-    .dmg-list{list-style:none; padding:0; margin-top:10px; display:flex; flex-direction:column; gap:8px;}
-    .dmg-item{display:flex; justify-content:space-between; align-items:center; background:#383d47; border-radius:10px; padding:8px 12px;}
-    .dmg-item span{font-size:14px;}
-    .dmg-item button{background:transparent; border:none; color:#ef4444; cursor:pointer;}
+    .dmg-box h2{margin:0 0 10px 0; font-size:22px; text-align:center; background:var(--accent-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; display:flex; align-items:center; justify-content:center; gap:8px;}
+    .new-task{display:flex; gap:10px; margin-bottom:14px}
+    .new-task input[type=text]{flex:1; padding:10px 12px; border-radius:10px; border:1px solid #3b3f47; background:#1e2128; color:#f8fafc; font-size:15px;}
+    .btn{padding:10px 14px; background:var(--accent-grad); color:white; border-radius:10px; cursor:pointer; border:none; font-weight:600}
+
+    .dmg-list{list-style:none; padding:0; margin-top:10px; display:flex; flex-direction:column; gap:10px;}
+    .dmg-item{display:flex; justify-content:space-between; align-items:center; background:#383d47; border-radius:12px; padding:14px 18px; box-shadow:0 4px 12px rgba(0,0,0,0.4);}
+    .dmg-item span{font-size:20px; font-weight:700; color:#e2e8f0; display:flex; flex-direction:column;}
+    .dmg-item small{color:#a0aec0; font-size:13px; margin-top:4px;}
+    .dmg-item button{background:transparent; border:none; color:#ef4444; cursor:pointer; font-size:18px; transition:transform 0.2s;}
+    .dmg-item button:hover{transform:scale(1.2);}
 
     .main{display:flex; flex-direction:column; gap:30px; width:100%; max-width:700px;}
 
@@ -48,10 +54,6 @@
     header{display:flex; flex-direction:column; gap:6px; margin-bottom:20px; border-bottom:1px solid #3b3f47; padding-bottom:10px}
     header h1{font-size:22px; margin:0; color:white}
     header p{margin:0; color:var(--muted); font-size:13px}
-
-    .new-task{display:flex; gap:10px; margin-bottom:14px}
-    .new-task input[type=text]{flex:1; padding:10px 12px; border-radius:10px; border:1px solid #3b3f47; background:#1e2128; color:#f8fafc}
-    .btn{padding:10px 14px; background:var(--accent-grad); color:white; border-radius:10px; cursor:pointer; border:none; font-weight:600}
 
     .stats{display:flex; justify-content:space-between; margin-bottom:10px; color:var(--muted); font-size:14px}
 
@@ -65,7 +67,6 @@
     .del-btn{background:transparent; border:none; color:#cbd5e1; cursor:pointer; font-size:16px; padding:4px; border-radius:6px}
     .del-btn:hover{color:#ef4444;}
 
-    footer{margin-top:18px; color:var(--muted); font-size:13px; text-align:center; border-top:1px solid #3b3f47; padding-top:10px}
     #historyModal{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center;}
     #historyContent{background:#2e323c; padding:20px; border-radius:16px; max-width:600px; width:90%; color:white;}
   </style>
@@ -77,7 +78,7 @@
     <input type="file" id="imgInput" accept="image/*">
 
     <div class="dmg-box">
-      <h2>📊 DMG Log</h2>
+      <h2>⚔️ DMG Log</h2>
       <div class="new-task">
         <input id="dmgInput" type="text" placeholder="Zadej DMG..." />
         <button class="btn" id="addDmgBtn">Přidat</button>
@@ -92,7 +93,6 @@
         <h1>Metin — Úkolníček</h1>
         <button class="btn" id="showHistory">📜 Historie</button>
       </header>
-
       <main>
         <div class="new-task">
           <input id="taskInput" type="text" placeholder="Přidat úkol..." />
@@ -110,7 +110,6 @@
       <header>
         <h1>Úkolníček — LVL 105</h1>
       </header>
-
       <main>
         <div class="new-task">
           <input id="taskInput2" type="text" placeholder="Přidat úkol..." />
@@ -122,10 +121,6 @@
         </div>
         <ul class="tasks" id="tasksList2"></ul>
       </main>
-
-      <footer>
-        <p>Verze 1.7 — Ukládá se do prohlížeče</p>
-      </footer>
     </div>
   </div>
 
@@ -141,29 +136,25 @@
     const historyKey = 'metin-ukolnicek-historie';
     let historyData = JSON.parse(localStorage.getItem(historyKey) || '[]');
 
-    const showHistoryBtn = document.getElementById('showHistory');
-    const historyModal = document.getElementById('historyModal');
-    const historyList = document.getElementById('historyList');
-    const closeHistory = document.getElementById('closeHistory');
-
-    showHistoryBtn.addEventListener('click',()=>{
-      historyModal.style.display='flex';
-      historyList.innerHTML = historyData.map(h=>`<li>${h.task} — ${h.date}</li>`).join('');
+    document.getElementById('showHistory').addEventListener('click',()=>{
+      document.getElementById('historyModal').style.display='flex';
+      document.getElementById('historyList').innerHTML = historyData.map(h=>`<li>${h.task} — ${h.date}</li>`).join('');
     });
-    closeHistory.addEventListener('click',()=>{historyModal.style.display='none';});
+    document.getElementById('closeHistory').addEventListener('click',()=>{
+      document.getElementById('historyModal').style.display='none';
+    });
 
     const imgInput = document.getElementById('imgInput');
     const imageBox = document.getElementById('imageBox');
-
     imgInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (ev) => {
-        imageBox.innerHTML = `<img src="${ev.target.result}" alt="Nahraný obrázek">`;
-      };
+      reader.onload = (ev) => { imageBox.innerHTML = `<img src="${ev.target.result}" alt="Nahraný obrázek">`; };
       reader.readAsDataURL(file);
     });
+
+    function formatNumber(num){return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');}
 
     function initChecklist(prefix, defaultTasks) {
       const STORAGE_KEY = 'metin-ukolnicek-' + prefix;
@@ -173,71 +164,35 @@
       const totalTasksEl = document.getElementById('totalTasks' + (prefix==='main'?'':'2'));
       const doneTasksEl = document.getElementById('doneTasks' + (prefix==='main'?'':'2'));
 
-      let tasks = load();
-      render();
+      let tasks = load(); render();
 
-      addBtn.addEventListener('click', ()=>{ addTaskFromInput(); });
+      addBtn.addEventListener('click', ()=> addTaskFromInput());
       taskInput.addEventListener('keydown', e=>{ if(e.key==='Enter') addTaskFromInput(); });
 
       function addTaskFromInput(){
-        const v = taskInput.value.trim();
-        if(!v) return;
-        addTask(v);
-        taskInput.value='';
+        const v = taskInput.value.trim(); if(!v) return; addTask(v); taskInput.value='';
       }
-
-      function addTask(title){
-        tasks.unshift({id: uid(), title, done:false});
-        save(); render();
-      }
+      function addTask(title){ tasks.unshift({id:uid(), title, done:false}); save(); render(); }
 
       function render(){
-        tasksList.innerHTML = '';
+        tasksList.innerHTML='';
         tasks.forEach(t=>{
-          const li = document.createElement('li');
-          li.className='task' + (t.done? ' done':'');
-          const left = document.createElement('div');
-          left.style.display='flex';
-          left.style.alignItems='center';
-          left.style.gap='10px';
-
-          const chk = document.createElement('div');
-          chk.className='chk' + (t.done?' checked':'');
-          chk.innerHTML = t.done?'✓':'';
-          chk.addEventListener('click', ()=>{ 
-            t.done=!t.done; 
-            if(t.done){historyData.push({task:t.title,date:new Date().toLocaleString()}); localStorage.setItem(historyKey, JSON.stringify(historyData));}
-            save(); render(); 
-          });
-
-          const titleEl = document.createElement('div');
-          titleEl.className='title';
-          titleEl.textContent = t.title;
-
-          const delBtn = document.createElement('button');
-          delBtn.className='del-btn';
-          delBtn.textContent='✖';
-          delBtn.title='Odstranit úkol';
-          delBtn.addEventListener('click', ()=>{ if(confirm('Smazat úkol?')) { tasks = tasks.filter(x=>x.id!==t.id); save(); render(); } });
-
-          left.appendChild(chk);
-          left.appendChild(titleEl);
-          li.appendChild(left);
-          li.appendChild(delBtn);
-          tasksList.appendChild(li);
+          const li=document.createElement('li'); li.className='task'+(t.done?' done':'');
+          const left=document.createElement('div'); left.style.display='flex'; left.style.alignItems='center'; left.style.gap='10px';
+          const chk=document.createElement('div'); chk.className='chk'+(t.done?' checked':''); chk.innerHTML=t.done?'✓':'';
+          chk.addEventListener('click',()=>{t.done=!t.done;if(t.done){historyData.push({task:t.title,date:new Date().toLocaleString()});localStorage.setItem(historyKey,JSON.stringify(historyData));}save();render();});
+          const titleEl=document.createElement('div'); titleEl.className='title'; titleEl.textContent=t.title;
+          const delBtn=document.createElement('button'); delBtn.className='del-btn'; delBtn.textContent='✖'; delBtn.title='Odstranit úkol'; delBtn.addEventListener('click',()=>{if(confirm('Smazat úkol?')){tasks=tasks.filter(x=>x.id!==t.id);save();render();}});
+          left.appendChild(chk); left.appendChild(titleEl); li.appendChild(left); li.appendChild(delBtn); tasksList.appendChild(li);
         });
-
-        const total = tasks.length;
-        const done = tasks.filter(t=>t.done).length;
-        totalTasksEl.textContent = 'Úkolů: ' + total;
-        doneTasksEl.textContent = 'Splněno: ' + done;
+        totalTasksEl.textContent='Úkolů: '+tasks.length;
+        doneTasksEl.textContent='Splněno: '+tasks.filter(t=>t.done).length;
       }
-
-      function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); }
-      function load(){ try{ const j = JSON.parse(localStorage.getItem(STORAGE_KEY)); if(!Array.isArray(j)) return defaultTasks; return j; }catch(e){ return defaultTasks; } }
+      function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));}
+      function load(){try{const j=JSON.parse(localStorage.getItem(STORAGE_KEY));if(!Array.isArray(j))return defaultTasks;return j;}catch(e){return defaultTasks;}}
     }
 
-    function uid(){ return 't_'+Math.random().toString(36).slice(2,9); }
+    function uid(){return 't_'+Math.random().toString(36).slice(2,9);}
 
     initChecklist('main', [
       {id: uid(), title: 'Evoluce peta', done:false},
@@ -259,30 +214,27 @@
     ]);
 
     // DMG log
-    const dmgKey = 'metin-dmg-log';
-    let dmgData = JSON.parse(localStorage.getItem(dmgKey) || '[]');
-    const dmgList = document.getElementById('dmgList');
-    const addDmgBtn = document.getElementById('addDmgBtn');
-    const dmgInput = document.getElementById('dmgInput');
+    const dmgKey='metin-dmg-log';
+    let dmgData=JSON.parse(localStorage.getItem(dmgKey)||'[]');
+    const dmgList=document.getElementById('dmgList');
+    const addDmgBtn=document.getElementById('addDmgBtn');
+    const dmgInput=document.getElementById('dmgInput');
 
     function renderDmg(){
-      dmgList.innerHTML = dmgData.map((d,i)=>`<li class='dmg-item'><span>${d.value} — ${d.date}</span><button onclick='removeDmg(${i})'>✖</button></li>`).join('');
+      dmgList.innerHTML=dmgData.map((d,i)=>`<li class='dmg-item'><span>${d.value}<small>${d.date}</small></span><button onclick='removeDmg(${i})'>✖</button></li>`).join('');
     }
     function addDmg(){
-      const val = dmgInput.value.trim();
+      const val=dmgInput.value.trim();
       if(!val) return;
-      dmgData.unshift({value:val,date:new Date().toLocaleString()});
+      const formatted=formatNumber(val.replace(/\D/g,''));
+      dmgData.unshift({value:formatted,date:new Date().toLocaleString()});
       dmgInput.value='';
       localStorage.setItem(dmgKey,JSON.stringify(dmgData));
       renderDmg();
     }
-    function removeDmg(i){
-      dmgData.splice(i,1);
-      localStorage.setItem(dmgKey,JSON.stringify(dmgData));
-      renderDmg();
-    }
-    addDmgBtn.addEventListener('click', addDmg);
-    dmgInput.addEventListener('keydown', e=>{if(e.key==='Enter') addDmg();});
+    function removeDmg(i){dmgData.splice(i,1);localStorage.setItem(dmgKey,JSON.stringify(dmgData));renderDmg();}
+    addDmgBtn.addEventListener('click',addDmg);
+    dmgInput.addEventListener('keydown',e=>{if(e.key==='Enter')addDmg();});
     renderDmg();
   </script>
 </body>
