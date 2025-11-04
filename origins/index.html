@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Metin — Sdílený Úkolníček</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sidebar">
+    <div class="image-box" id="imageBox">Klikni na tlačítko níže pro přidání obrázku</div>
+    <label for="imgInput" class="upload-label">📸 Přidat obrázek</label>
+    <input type="file" id="imgInput" accept="image/*">
+  </div>
+
+  <div class="main">
+    <!-- Přihlášení jména -->
+    <div class="wrap" id="loginWrap">
+      <header><h1>Přihlaš se</h1></header>
+      <main>
+        <input type="text" id="username" placeholder="Zadej své jméno">
+        <button class="btn" id="loginBtn">Přihlásit</button>
+      </main>
+    </div>
+
+    <div id="taskWrap" style="display:none;">
+      <div class="wrap level-wrap" id="level0_75">
+        <header><h2>Level 0-75</h2></header>
+        <main>
+          <div class="new-task">
+            <input type="text" placeholder="Přidat úkol..." class="taskInput">
+            <button class="btn addBtn">Přidat</button>
+          </div>
+          <div class="stats"><span class="total">Úkolů: 0</span> | <span class="done">Splněno: 0</span></div>
+          <ul class="tasks"></ul>
+        </main>
+      </div>
+
+      <div class="wrap level-wrap" id="level75_90">
+        <header><h2>Level 75-90</h2></header>
+        <main>
+          <div class="new-task">
+            <input type="text" placeholder="Přidat úkol..." class="taskInput">
+            <button class="btn addBtn">Přidat</button>
+          </div>
+          <div class="stats"><span class="total">Úkolů: 0</span> | <span class="done">Splněno: 0</span></div>
+          <ul class="tasks"></ul>
+        </main>
+      </div>
+
+      <div class="wrap level-wrap" id="level90_105">
+        <header><h2>Level 90-105</h2></header>
+        <main>
+          <div class="new-task">
+            <input type="text" placeholder="Přidat úkol..." class="taskInput">
+            <button class="btn addBtn">Přidat</button>
+          </div>
+          <div class="stats"><span class="total">Úkolů: 0</span> | <span class="done">Splněno: 0</span></div>
+          <ul class="tasks"></ul>
+        </main>
+      </div>
+
+      <div class="wrap level-wrap" id="level105_120">
+        <header><h2>Level 105-120</h2></header>
+        <main>
+          <div class="new-task">
+            <input type="text" placeholder="Přidat úkol..." class="taskInput">
+            <button class="btn addBtn">Přidat</button>
+          </div>
+          <div class="stats"><span class="total">Úkolů: 0</span> | <span class="done">Splněno: 0</span></div>
+          <ul class="tasks"></ul>
+        </main>
+      </div>
+    </div>
+  </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getDatabase, ref, push, set, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC3PaMUuGwWJIS6bPIMBTcNGoVoOCRKbXE",
+  authDomain: "origins-72614.firebaseapp.com",
+  databaseURL: "https://origins-72614-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "origins-72614",
+  storageBucket: "origins-72614.appspot.com",
+  messagingSenderId: "75762974683",
+  appId: "1:75762974683:web:c3932393231b4526c6f1fe",
+  measurementId: "G-SLWP5G89BP"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let currentUser = "";
+
+// --- Přihlášení a localStorage ---
+document.getElementById("loginBtn").addEventListener("click", () => {
+  const name = document.getElementById("username").value.trim();
+  if(!name) return alert("Zadej své jméno!");
+  currentUser = name;
+  localStorage.setItem("metinUserName", currentUser);
+
+  document.getElementById("loginWrap").style.display = "none";
+  document.getElementById("taskWrap").style.display = "block";
+  initLevelSections();
+});
+
+// Auto přihlášení
+window.addEventListener("load", () => {
+  const savedName = localStorage.getItem("metinUserName");
+  if(savedName){
+    currentUser = savedName;
+    document.getElementById("loginWrap").style.display = "none";
+    document.getElementById("taskWrap").style.display = "block";
+    initLevelSections();
+  }
+});
+
+// --- Sdílený obrázek ---
+const imgInput = document.getElementById("imgInput");
+const imageBox = document.getElementById("imageBox");
+const imgRef = ref(db, "sharedImage");
+onValue(imgRef, snapshot => {
+  const dataUrl = snapshot.val();
+  if(dataUrl) imageBox.innerHTML = `<img src="${dataUrl}" alt="Sdílený obrázek">`;
+});
+imgInput.addEventListener("change", e => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => set(imgRef, ev.target.result);
+  reader.readAsDataURL(file);
+});
+
+// --- Level sekce ---
+function initLevelSections(){
+  const levels = ["level0_75","level75_90","level90_105","level105_120"];
+  levels.forEach(lvl => {
+    const section = document.getElementById(lvl);
+    const input = section.querySelector(".taskInput");
+    const btn = section.querySelector(".addBtn");
+    const list = section.querySelector(".tasks");
+    const totalEl = section.querySelector(".total");
+    const doneEl = section.querySelector(".done");
+
+    btn.addEventListener("click", () => {
+      const title = input.value.trim();
+      if(!title) return;
+      const taskRef = push(ref(db, "tasks"));
+      set(taskRef, { title, level: lvl, author: currentUser });
+      input.value = "";
+    });
+
+    onValue(ref(db, "tasks"), snapshot => {
+      list.innerHTML = "";
+      let total=0, doneCount=0;
+      snapshot.forEach(child => {
+        const task = child.val();
+        if(task.level !== lvl) return;
+
+        const li = document.createElement("li");
+        const userDone = task.doneUsers || {};
+        const isDone = userDone[currentUser] || false;
+
+        li.className = "task" + (isDone ? " done" : "");
+        li.innerHTML = `
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div class="chk ${isDone ? "checked" : ""}">${isDone ? "✓" : ""}</div>
+            <div class="title">${task.title}<br><small>Autor: ${task.author}${task.doneUsers ? " | Splnili: "+Object.keys(task.doneUsers).join(", ") : ""}</small></div>
+          </div>
+          <button class="del-btn">✖</button>
+        `;
+
+        li.querySelector(".chk").addEventListener("click", () => {
+          const updates = {};
+          updates[`tasks/${child.key}/doneUsers/${currentUser}`] = !isDone;
+          update(ref(db), updates);
+        });
+
+        li.querySelector(".del-btn").addEventListener("click", () => remove(ref(db, "tasks/"+child.key)));
+        list.appendChild(li);
+
+        total++;
+        doneCount += Object.keys(userDone).length;
+      });
+      totalEl.textContent = "Úkolů: "+total;
+      doneEl.textContent = "Splněno: "+doneCount;
+    });
+  });
+}
+</script>
+</body>
+</html>
