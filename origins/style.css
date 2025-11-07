@@ -16,24 +16,23 @@ body{
   background:linear-gradient(180deg,var(--bg-2),var(--bg-1));
   color:#f1f5f9;
   display:flex;
-  justify-content:center;  /* ✅ úkolníček doprostřed vodorovně */
+  justify-content:center;
   align-items:flex-start;
   padding:40px;
   gap:30px;
   min-height:100vh;
 }
 
-/* MAPA / SIDEBAR */
 .sidebar {
   width:450px;
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:15px;
-  position: fixed; /* ✅ fixní */
-  top: 35%;        /* ✅ zarovnání na střed vertikálně */
-  left: 40px;      /* vlevo */
-  transform: translateY(-50%); /* vycentrování na střed vertikálně */
+  position: fixed;
+  top: 40%; /* posun výš */
+  left: 40px;
+  transform: translateY(-50%);
 }
 
 .image-box {
@@ -63,7 +62,6 @@ body{
   font-weight:600;
 }
 
-/* ÚKOLNÍČEK */
 .main {
   display:flex;
   flex-direction:column;
@@ -71,7 +69,7 @@ body{
   width:100%;
   max-width:700px;
   margin-left:auto;
-  margin-right:auto; /* ✅ vystředění úkolníčku */
+  margin-right:auto;
 }
 
 .wrap{
@@ -151,3 +149,53 @@ li.task.done{background:#24403b;}
 .title{font-weight:600; font-size:15px;}
 .del-btn{background:transparent; border:none; color:#cbd5e1; cursor:pointer; font-size:16px; padding:4px; border-radius:6px;}
 .del-btn:hover{color:#ef4444;}
+
+/* kulička s počtem lidí */
+.done-badge {
+  background: var(--accent-grad);
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 8px rgba(124,58,237,0.4);
+}
+
+.done-badge:hover {
+  transform: scale(1.1);
+}
+.tooltip-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.tooltip-container .tooltip {
+  visibility: hidden;
+  width: max-content;
+  max-width: 200px;
+  background-color: rgba(0,0,0,0.85);
+  color: #fff;
+  text-align: left;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  position: absolute;
+  z-index: 10;
+  bottom: 120%; /* nad kuličkou */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}

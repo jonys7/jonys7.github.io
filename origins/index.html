@@ -154,7 +154,8 @@ function initLevelSections(){
 
     onValue(ref(db, "tasks"), snapshot => {
       list.innerHTML = "";
-      let total=0, doneCount=0;
+      let total = 0, doneCount = 0;
+
       snapshot.forEach(child => {
         const task = child.val();
         if(task.level !== lvl) return;
@@ -163,13 +164,22 @@ function initLevelSections(){
         const userDone = task.doneUsers || {};
         const isDone = userDone[currentUser] || false;
 
+        const doneUsersList = Object.keys(userDone);
+        const doneCountNum = doneUsersList.length;
+
         li.className = "task" + (isDone ? " done" : "");
         li.innerHTML = `
           <div style="display:flex;gap:10px;align-items:center;">
             <div class="chk ${isDone ? "checked" : ""}">${isDone ? "✓" : ""}</div>
-            <div class="title">${task.title}<br><small>Autor: ${task.author}${task.doneUsers ? " | Splnili: "+Object.keys(task.doneUsers).join(", ") : ""}</small></div>
+            <div class="title">${task.title}<br><small>Autor: ${task.author}</small></div>
           </div>
-          <button class="del-btn">✖</button>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="done-badge tooltip-container">
+  ${doneCountNum}
+  <span class="tooltip">${doneCountNum > 0 ? doneUsersList.join(', ') : 'Nikdo zatím ne'}</span>
+</div>
+            <button class="del-btn">✖</button>
+          </div>
         `;
 
         li.querySelector(".chk").addEventListener("click", () => {
@@ -178,17 +188,22 @@ function initLevelSections(){
           update(ref(db), updates);
         });
 
-        li.querySelector(".del-btn").addEventListener("click", () => remove(ref(db, "tasks/"+child.key)));
+        li.querySelector(".del-btn").addEventListener("click", () => 
+          remove(ref(db, "tasks/"+child.key))
+        );
+
         list.appendChild(li);
 
         total++;
-        doneCount += Object.keys(userDone).length;
+        doneCount += doneCountNum;
       });
-      totalEl.textContent = "Úkolů: "+total;
-      doneEl.textContent = "Splněno: "+doneCount;
+
+      totalEl.textContent = "Úkolů: " + total;
+      doneEl.textContent = "Splněno: " + doneCount;
     });
   });
 }
 </script>
+
 </body>
 </html>
