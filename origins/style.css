@@ -16,19 +16,24 @@ body{
   background:linear-gradient(180deg,var(--bg-2),var(--bg-1));
   color:#f1f5f9;
   display:flex;
-  justify-content:center;
+  justify-content:center;  /* ✅ úkolníček doprostřed vodorovně */
   align-items:flex-start;
   padding:40px;
   gap:30px;
   min-height:100vh;
 }
 
+/* MAPA / SIDEBAR */
 .sidebar {
   width:450px;
   display:flex;
   flex-direction:column;
   align-items:center;
   gap:15px;
+  position: fixed; /* ✅ fixní */
+  top: 35%;        /* ✅ zarovnání na střed vertikálně */
+  left: 40px;      /* vlevo */
+  transform: translateY(-50%); /* vycentrování na střed vertikálně */
 }
 
 .image-box {
@@ -58,12 +63,15 @@ body{
   font-weight:600;
 }
 
+/* ÚKOLNÍČEK */
 .main {
   display:flex;
   flex-direction:column;
   gap:20px;
   width:100%;
   max-width:700px;
+  margin-left:auto;
+  margin-right:auto; /* ✅ vystředění úkolníčku */
 }
 
 .wrap{
@@ -73,7 +81,7 @@ body{
   border-radius:16px;
   box-shadow:0 8px 24px rgba(0,0,0,0.3);
   border:1px solid #3b3f47;
-  margin-bottom:20px; /* mezera mezi Level sekcemi */
+  margin-bottom:20px;
 }
 
 header{
