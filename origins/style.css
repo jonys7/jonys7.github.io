@@ -223,7 +223,7 @@ li.task.done{background:#24403b;}
   #mapWrap {
   position: fixed;
   top: 40px;
-  right: 150px; /* původně 40px */
+   right: calc(21% - 350px); /* původně 40px */
   width: 450px;
   ...
 }
