@@ -91,7 +91,7 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getDatabase, ref, push, set, onValue, remove } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+import { getDatabase, ref, push, set, onValue, remove, update } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC3PaMUuGwWJIS6bPIMBTcNGoVoOCRKbXE",
@@ -186,11 +186,17 @@ function initLevelSections(){
           <div class="done-badge tooltip-container">${doneCountNum}<span class="tooltip">${doneCountNum>0?doneUsersList.join(', '):'Nikdo zatím ne'}</span></div>
           <button class="del-btn">✖</button>
         </div>`;
-        li.querySelector(".chk").addEventListener("click", ()=>{
-          const updates={};
-          updates[`tasks/${child.key}/doneUsers/${currentUser}`]=!isDone;
-          update(ref(db), updates);
-        });
+        li.querySelector(".chk").addEventListener("click", () => {
+  const taskRef = ref(db, `tasks/${child.key}/doneUsers/${currentUser}`);
+  if (isDone) {
+    // pokud je odkliknuté -> smažeme z doneUsers
+    remove(taskRef);
+  } else {
+    // pokud je kliknuto -> přidáme do doneUsers
+    set(taskRef, true);
+  }
+});
+
         li.querySelector(".del-btn").addEventListener("click", ()=> remove(ref(db,"tasks/"+child.key)));
         list.appendChild(li);
         total++; doneCount+=doneCountNum;
