@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#28121c">
+  <meta name="description" content="Dívčí spolek Midnight Cats. Poznej náš spolek a prohlédni si fotky z našich akcí.">
+  <title>Midnight Cats | Dívčí spolek</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body id="nahoru">
+  <a class="skip" href="#obsah">Přeskočit na obsah</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#nahoru">Midnight Cats</a>
+      <nav aria-label="Hlavní navigace">
+        <a href="#galerie">Fotogalerie</a>
+        <a href="#akce">Akce</a>
+        <a href="#pravidla">Pravidla</a>
+        <a href="#clenstvi">Členství</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+  <main id="obsah">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Dívčí spolek</p>
+          <h1>Midnight <em>Cats</em></h1>
+          <p>Spolek pro holky, které chtějí poznat nové kamarádky, trávit spolu čas a mít se na koho obrátit.</p>
+          <div class="hero-actions">
+            <a class="button" href="#galerie">Prohlédnout fotky</a>
+            <a class="hero-link" href="#clenstvi">Jak se přidat</a>
+          </div>
+        </div>
+        <img class="crest" src="assets/midnight-cats.png" width="250" height="150" alt="Logo Midnight Cats">
+      </div>
+    </section>
+
+    <section class="wrap section gallery" id="galerie" aria-labelledby="galerie-title">
+      <h2 id="galerie-title">Fotogalerie</h2>
+      <p class="visually-hidden" id="galerie-stav" role="status"></p>
+      <div class="photos">
+        <figure>
+          <figcaption><time datetime="2024">2024</time><h3>Happy Halloween párty</h3><p>Společná fotka z večírku Midnight Cats.</p></figcaption>
+          <a class="photo" href="assets/halloween-2024.png" aria-label="Zvětšit fotografii z Halloween párty">
+            <img class="halloween" src="assets/halloween-2024.png" width="2548" height="1317" loading="lazy" alt="Společná fotografie hostů v sále na Halloween párty">
+            <span class="photo-action" aria-hidden="true">Zvětšit fotku</span>
+          </a>
+        </figure>
+        <figure>
+          <figcaption><h3>Sídlo spolku</h3><p>Pohled na vilu Midnight Cats.</p></figcaption>
+          <a class="photo" href="assets/sidlo-midnight-cats.png" aria-label="Zvětšit fotografii sídla">
+            <img src="assets/sidlo-midnight-cats.png" width="2129" height="739" loading="lazy" alt="Vila spolku s krytou terasou a terakotovou střechou">
+            <span class="photo-action" aria-hidden="true">Zvětšit fotku</span>
+          </a>
+        </figure>
+      </div>
+    </section>
+
+    <section class="events-band" id="akce" aria-labelledby="akce-title">
+      <div class="wrap section events-layout">
+        <div>
+          <h2 id="akce-title">Nadcházející akce</h2>
+          <p>Až naplánujeme další akci, najdeš tu pozvánku.</p>
+        </div>
+        <img class="event-poster" src="assets/plakat-akce.png" width="1536" height="1024"
+             loading="lazy" alt="Midnight Cats: Aktuálně nic nepořádáme.">
+      </div>
+    </section>
+
+    <section class="rules-band" id="pravidla" aria-labelledby="pravidla-title">
+      <div class="wrap section split">
+        <div>
+          <h2 id="pravidla-title">Pravidla spolku</h2>
+          <blockquote>„Přísahám na svou duši a na kočičí uši, že budu dodržovat zásady spolku.“</blockquote>
+        </div>
+        <ol class="rules">
+          <li>Přidat se může každá holka, která má o členství zájem.</li>
+          <li>Kočky pomáhají lidem, kdykoli mohou.</li>
+          <li>Kočky při sobě stojí, chrání se a nabídnou si pomoc.</li>
+          <li>Spory řešíme nejdřív mezi sebou. Když se nedohodneme, požádáme spolek o pomoc.</li>
+          <li>Respektujeme věci ostatních Koček.</li>
+          <li>Respektujeme vztahy ostatních Koček a jejich hranice.</li>
+          <li>Kočky nepáchají zločiny. A když ano, tak nic závažného.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="wrap section split" id="clenstvi">
+      <h2>Členství</h2>
+      <div class="membership">
+        <p>Jestli se chceš přidat, napiš nám a něco málo nám o sobě pověz. Můžeš nás nejdřív poznat jako čekatelka a rozhodnout se, až budeš připravená.</p>
+        <a class="text-link" href="#kontakt">Ozvat se spolku</a>
+      </div>
+    </section>
+
+    <section class="contact" id="kontakt">
+      <div class="wrap contact-inner">
+        <div><h2>Kontakt</h2><p id="adresa">spolek@cats.ic</p></div>
+        <div>
+          <button class="button" id="kopirovat" type="button" hidden>Zkopírovat adresu</button>
+          <p id="stav" class="status" role="status"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Provozovatel webu <strong>Midnight Cats</strong></p>
+      <a href="#nahoru">Zpět nahoru</a>
+    </div>
+  </footer>
+  <dialog id="nahled" aria-labelledby="popisek">
+    <div class="viewer-bar">
+      <p id="popisek" aria-live="polite"></p>
+      <form method="dialog"><button class="viewer-button" type="submit" autofocus>Zavřít</button></form>
+    </div>
+    <div class="viewer-image"><img alt=""></div>
+    <div class="viewer-bar viewer-controls">
+      <button class="viewer-button" id="predchozi" type="button">Předchozí</button>
+      <span id="pocet"></span>
+      <button class="viewer-button" id="dalsi" type="button">Další</button>
+    </div>
+  </dialog>
+</body>
+</html>
