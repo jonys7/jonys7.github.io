@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Vanguard GPS lokátor. Montáž u vás, poloha vozidel v reálném čase a množstevní sleva pro vozové parky.">
+<title>Vanguard — GPS lokátory pro vozidla</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="styles.css">
+<script defer src="./script.js?v=2"></script>
+</head>
+<body>
+<a class="skip" href="#obsah">Přejít na obsah</a>
+<header class="wrap top">
+<a class="brand" href="#obsah"><img class="mark" src="logo.png" width="45" height="32" alt=""> VANGUARD</a>
+<nav aria-label="Hlavní navigace"><a href="#postup">Jak to funguje</a><a href="#flotila">Pro koho</a><a class="nav-price" href="#cena">Ceník</a><a href="#kontakt">Kontakt</a></nav>
+</header>
+<main id="obsah">
+<section class="wrap hero" aria-labelledby="titulek">
+<div class="intro">
+<p class="eyebrow"><span></span> GPS LOKÁTOR PRO VOZIDLA</p>
+<h1 id="titulek">Vaše vozidla.<br><em>Na jedné mapě.</em></h1>
+<p class="lead">Přijedeme, namontujeme lokátor a společně nastavíme přístup. Polohu jednoho auta i celé flotily pak uvidíte v reálném čase.</p>
+<div class="actions"><a class="button" href="#cena">Zobrazit ceník</a><a class="button secondary" href="#postup">Jak probíhá montáž</a></div>
+</div>
+<div class="demo" aria-label="Interaktivní ukázka mapy">
+<div class="demo-head"><strong>Přehled vozidel</strong><span>UKÁZKA MAPY</span></div>
+<canvas id="mapa" width="660" height="400" aria-hidden="true"></canvas>
+<div class="demo-foot"><div class="vehicles" aria-label="Výběr vozidla"><button type="button" data-vehicle="0" aria-pressed="true">Vůz 01</button><button type="button" data-vehicle="1" aria-pressed="false">Vůz 02</button><button type="button" data-vehicle="2" aria-pressed="false">Vůz 03</button></div><span id="map-state" role="status">Vůz 01 · v pohybu</span></div>
+</div>
+</section>
+<section class="wrap section" id="postup">
+<p class="eyebrow"><span></span> OD MONTÁŽE K MAPĚ</p>
+<h2>Jak to funguje</h2>
+<div class="steps">
+<article><span class="step" aria-hidden="true">01</span><h3>Přijedeme a namontujeme</h3><p>Domluvíme se na místě a termínu. Přijedeme k vám a namontujeme GPS lokátor do vozidla.</p></article>
+<article><span class="step" aria-hidden="true">02</span><h3>Nastavíme společné heslo</h3><p>Při předání společně zaregistrujeme heslo pro přístup k mapě vašich vozidel.</p></article>
+<article><span class="step" aria-hidden="true">03</span><h3>Sledujete polohu</h3><p>Na mapě v reálném čase zjistíte, kde je vaše vozidlo nebo kde se nachází celá vaše flotila.</p></article>
+</div>
+</section>
+<section class="wrap section offer" id="cena">
+<div id="flotila">
+<p class="eyebrow"><span></span> PRO OSOBNÍ I FIREMNÍ VOZIDLA</p>
+<h2>Přehled o každém<br>vozidle.</h2>
+<p class="lead">Zkontrolujte polohu svého auta nebo sledujte všechna firemní vozidla na jedné mapě. Při plánování zakázek hned vidíte, který vůz je nejblíž.</p>
+</div>
+<div class="pricing">
+<p class="eyebrow">CENÍK</p>
+<h3>GPS lokátor Vanguard</h3>
+<p class="amount">200&nbsp;000 <small>/ kus</small></p>
+<div class="quantity">
+<label for="pocet">Počet lokátorů</label>
+<div class="counter"><button id="minus" type="button" aria-label="Odebrat kus">−</button><input id="pocet" type="number" value="1" min="1" max="999" required inputmode="numeric"><button id="plus" type="button" aria-label="Přidat kus">+</button></div>
+</div>
+<div id="quote" class="quote" role="status" data-rate="0">
+  <p id="quote-label">Celková cena</p>
+  <p id="quote-total">200&nbsp;000</p>
+  <p id="quote-saving" hidden></p>
+</div>
+<p class="discount">Nejvyšší dosažená sleva platí na všechny kusy v objednávce.</p>
+<ul class="tiers" aria-label="Množstevní slevy">
+  <li data-rate="5">3–5 kusů <strong>−5 %</strong></li>
+  <li data-rate="10">6–9 kusů <strong>−10 %</strong></li>
+  <li data-rate="15">10 a více <strong>−15 %</strong></li>
+</ul>
+<div class="discount-code">
+  <div>
+    <strong>Jak uplatnit slevu</strong>
+    <p>Při předání nám řekněte toto heslo.</p>
+  </div>
+  <code>VNG01</code>
+</div>
+</div>
+</section>
+<section class="wrap section" id="kontakt" aria-labelledby="kontakt-nadpis">
+  <p class="eyebrow"><span></span> VANGUARD</p>
+  <h2 id="kontakt-nadpis">Kontakt</h2>
+  <p class="lead">Ozvěte se nám kvůli objednávce, termínu montáže nebo dotazu k lokátoru.</p>
+  <div class="contact-grid">
+    <article class="contact-card">
+      <h3>Telefon</h3>
+      <p class="contact-value">111-222</p>
+      <p class="contact-note">Liza Maurene</p>
+    </article>
+    <article class="contact-card">
+      <h3>Iris</h3>
+      <p class="contact-value">@vanguard</p>
+    </article>
+    <article class="contact-card">
+      <h3>Post.ic</h3>
+      <p class="contact-value">info@vanguard.ic</p>
+    </article>
+  </div>
+</section>
+</main>
+<footer class="wrap footer"><a class="brand" href="#obsah"><img class="mark" src="logo.png" width="45" height="32" alt=""> VANGUARD</a><span>Provozovatel webu <strong>Vanguard</strong></span></footer>
+</body>
+</html>
+
+
+
+
+
