@@ -79,3 +79,11 @@ canvas{display:block;width:100%;height:auto;background:#1a201b;border-block:1px 
 .discount-code{display:flex;align-items:center;justify-content:space-between;gap:.65rem 1rem;flex-wrap:wrap;margin-top:1rem;padding:.75rem 1rem;border:1px dashed #70864a;border-radius:.55rem;background:#1d2617}
 .discount-code p{margin:0;color:var(--muted);font-size:.9rem}
 .discount-code code{padding:.3rem .65rem;border-radius:.35rem;background:var(--accent);color:#151a10;font-size:1.05rem;font-weight:850;letter-spacing:.12em}
+
+.contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.75rem}
+.contact-card{padding:1.25rem 1.4rem;border:1px solid var(--line);border-radius:.8rem;background:linear-gradient(145deg,#242d1e,var(--panel) 75%)}
+.contact-card h3{margin:0 0 .55rem;color:var(--muted);font-size:.9rem}
+.contact-value{margin:0;color:var(--accent);font-size:clamp(1.25rem,2.4vw,1.8rem);font-weight:800;line-height:1.25;overflow-wrap:anywhere}
+.contact-note{margin:.45rem 0 0;color:var(--muted);overflow-wrap:anywhere}
+.contact-note span{display:block}
+@media(max-width:640px){.contact-grid{grid-template-columns:1fr}}

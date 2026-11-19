@@ -14,8 +14,8 @@ const format = new Intl.NumberFormat("cs-CZ");
 
 function updateQuote() {
   const count = quantity.valueAsNumber;
-  minus.disabled = !quantity.validity.valid || count <= 1;
-  plus.disabled = !quantity.validity.valid || count >= maximum;
+  minus.disabled = quantity.validity.valid && count <= 1;
+  plus.disabled = quantity.validity.valid && count >= maximum;
   const valid = quantity.validity.valid;
   const rate = valid ? (count >= 10 ? 15 : count >= 6 ? 10 : count >= 3 ? 5 : 0) : 0;
   const subtotal = valid ? count * unitPrice : 0;
@@ -39,11 +39,13 @@ function updateQuote() {
 
 quantity.addEventListener("input", updateQuote);
 minus.addEventListener("click", () => {
-  quantity.stepDown();
+  if (quantity.validity.valid) quantity.stepDown();
+  else quantity.value = String(quantity.min);
   updateQuote();
 });
 plus.addEventListener("click", () => {
-  quantity.stepUp();
+  if (quantity.validity.valid) quantity.stepUp();
+  else quantity.value = String(quantity.min);
   updateQuote();
 });
 updateQuote();
@@ -132,5 +134,6 @@ for (const button of selectors) {
   });
 }
 drawMap(0);
+
 
 
