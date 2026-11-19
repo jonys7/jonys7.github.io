@@ -52,88 +52,114 @@ updateQuote();
 
 const canvas = document.querySelector("#mapa");
 const map = canvas.getContext("2d");
-const vehicles = [
-  { x: 319, y: 188, name: "Vůz 01", status: "v pohybu" },
-  { x: 490, y: 122, name: "Vůz 02", status: "zaparkovaný" },
-  { x: 445, y: 302, name: "Vůz 03", status: "v pohybu" }
-];
-const routes = [
-  [[-20, 340], [154, 282], [240, 203], [319, 188], [420, 107], [490, 122], [680, 65]],
-  [[140, -20], [178, 86], [240, 203], [280, 310], [320, 420]],
-  [[425, -20], [420, 107], [395, 196], [445, 302], [512, 420]],
-  [[-20, 135], [178, 86], [250, 104], [395, 196], [544, 184], [680, 225]],
-  [[-20, 389], [129, 340], [280, 310], [445, 302], [680, 280]],
-  [[595, -20], [550, 59], [490, 122], [544, 184], [572, 285], [604, 420]]
+const toggle = document.querySelector("#map-toggle");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const route = [[117, 114], [260, 114], [350, 180], [492, 180], [492, 300], [229, 300], [117, 224], [117, 114]];
+const roads = [
+  ...[57, 114, 180, 224, 300, 355].map(y => [[0, y], [570, y]]),
+  ...[55, 117, 229, 350, 421, 492, 553].map(x => [[x, 0], [x, 400]]),
+  route
 ];
 
-function trace(points, color, width) {
-  map.beginPath();
-  map.moveTo(...points[0]);
-  for (const point of points.slice(1)) map.lineTo(...point);
-  map.strokeStyle = color;
-  map.lineWidth = width;
-  map.stroke();
+function trace(context, points, color, width) {
+  context.beginPath();
+  context.moveTo(...points[0]);
+  for (const point of points.slice(1)) context.lineTo(...point);
+  context.strokeStyle = color;
+  context.lineWidth = width;
+  context.stroke();
 }
 
-function drawMap(active) {
-  if (!map) return;
-  map.fillStyle = "#181e19";
-  map.fillRect(0, 0, canvas.width, canvas.height);
-  map.save();
-  map.translate(315, 205);
-  map.rotate(-0.26);
-  for (let row = -10; row <= 10; row++) {
-    for (let column = -12; column <= 12; column++) {
-      map.fillStyle = (row + column) % 3 === 0 ? "#2b3628" : "#242d25";
-      map.fillRect(column * 35, row * 29, 29, 23);
+function startMap() {
+  const background = document.createElement("canvas");
+  background.width = canvas.width;
+  background.height = canvas.height;
+  const city = background.getContext("2d");
+  city.fillStyle = "#858973";
+  city.fillRect(0, 0, 660, 400);
+  const blocks = ["#a39b83", "#a9a28e", "#8e977a", "#968d7c"];
+  for (let row = 0; row < 12; row++) {
+    for (let col = 0; col < 19; col++) {
+      city.fillStyle = blocks[(row * 7 + col * 13 + row * col) % blocks.length];
+      city.fillRect(col * 35 + 2, row * 34 + 2, 30, 29);
     }
   }
-  map.restore();
-  map.lineJoin = "round";
-  trace([[30, -20], [80, 95], [67, 182], [104, 252], [129, 340], [115, 420]], "#263c3a", 32);
-  for (const route of routes) trace(route, "#151b16", 14);
-  for (const route of routes) trace(route, "#4a5545", 4);
-  trace([[154, 282], [240, 203], [319, 188], [420, 107], [490, 122]], "#a1bd64", 3);
+  city.lineJoin = "round";
+  for (const road of roads) trace(city, road, "#7d7c70", 12);
+  for (const road of roads) trace(city, road, "#c8c2ac", 7);
+  trace(city, route, "#e2d9bc", 7);
 
-  for (const [index, vehicle] of vehicles.entries()) {
-    const selected = index === active;
-    const color = selected ? "#d0ff60" : "#c4ccba";
-    map.beginPath();
-    map.arc(vehicle.x, vehicle.y, selected ? 15 : 9, 0, 2 * Math.PI);
-    map.fillStyle = selected ? "#42552b" : "#20291f";
-    map.fill();
-    map.strokeStyle = color;
-    map.lineWidth = 2;
-    map.stroke();
-    map.beginPath();
-    map.arc(vehicle.x, vehicle.y, selected ? 5 : 3, 0, 2 * Math.PI);
-    map.fillStyle = color;
-    map.fill();
-    if (selected) {
-      map.fillStyle = "#141913";
-      map.fillRect(vehicle.x + 20, vehicle.y - 15, 80, 30);
-      map.fillStyle = color;
-      map.font = "bold 15px system-ui";
-      map.textBaseline = "middle";
-      map.fillText(vehicle.name, vehicle.x + 30, vehicle.y);
-    }
-  }
-}
+  city.fillStyle = "#486b70";
+  city.beginPath();
+  city.moveTo(604, 0);
+  city.bezierCurveTo(568, 129, 618, 287, 556, 400);
+  city.lineTo(660, 400);
+  city.lineTo(660, 0);
+  city.closePath();
+  city.fill();
 
-const mapState = document.querySelector("#map-state");
-const selectors = document.querySelectorAll("[data-vehicle]");
-for (const button of selectors) {
-  button.addEventListener("click", () => {
-    const index = Number(button.dataset.vehicle);
-    const vehicle = vehicles[index];
-    for (const option of selectors) {
-      option.setAttribute("aria-pressed", String(option === button));
-    }
-    mapState.textContent = vehicle.name + " · " + vehicle.status;
-    drawMap(index);
+  let length = 0;
+  const segments = route.slice(1).map(([x, y], index) => {
+    const [fromX, fromY] = route[index];
+    const distance = Math.hypot(x - fromX, y - fromY);
+    const segment = { fromX, fromY, x, y, start: length, distance };
+    length += distance;
+    return segment;
   });
-}
-drawMap(0);
+  let position = 0;
+  let frame;
+  let previous;
 
+  const plates = ["VNG-101", "VNG-202", "VNG-303", "VNG-404"];
+
+  function drawMarker(position, plate) {
+    const segment = segments.find(part => position < part.start + part.distance);
+    const fraction = (position - segment.start) / segment.distance;
+    const x = segment.fromX + (segment.x - segment.fromX) * fraction;
+    const y = segment.fromY + (segment.y - segment.fromY) * fraction;
+    map.fillStyle = "#282410";
+    map.fillRect(x - 8, y - 8, 16, 16);
+    map.fillStyle = "#ffdf37";
+    map.fillRect(x - 6, y - 6, 12, 12);
+    map.font = "bold 20px system-ui";
+    map.textBaseline = "middle";
+    map.lineJoin = "round";
+    map.lineWidth = 5;
+    map.strokeStyle = "#24210d";
+    map.strokeText(plate, x + 13, y);
+    map.fillText(plate, x + 13, y);
+  }
+
+  function draw() {
+    map.drawImage(background, 0, 0);
+    plates.forEach((plate, index) => {
+      const offset = index * length / plates.length;
+      drawMarker((position + offset) % length, plate);
+    });
+  }
+
+  function animate(time) {
+    if (previous !== undefined) position = (position + Math.min(time - previous, 50) * 0.048) % length;
+    previous = time;
+    draw();
+    frame = requestAnimationFrame(animate);
+  }
+
+  function setPlaying(playing) {
+    cancelAnimationFrame(frame);
+    frame = undefined;
+    previous = undefined;
+    if (playing) frame = requestAnimationFrame(animate);
+    toggle.textContent = playing ? "Pozastavit jízdu" : "Spustit jízdu";
+  }
+
+  toggle.disabled = false;
+  toggle.addEventListener("click", () => setPlaying(frame === undefined));
+  reducedMotion.addEventListener("change", event => { if (event.matches) setPlaying(false); });
+  draw();
+  setPlaying(!reducedMotion.matches);
+}
+
+if (map) startMap();
 
 
